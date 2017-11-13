@@ -1,0 +1,10 @@
+Tech assist aantekeningen:
+Helper.py veranderen naar classes
+Hill climber
+
+
+Infra --> mappen scructuur, github etc
+Data --> classes, werkt de map
+Algorithme
+Experimentatie
+
