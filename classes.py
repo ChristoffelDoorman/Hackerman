@@ -1,7 +1,6 @@
 
 
 
-
 class house:
 
 	length = 12
@@ -11,6 +10,10 @@ class house:
 
 	def __init__(self, x, y):
 		self.location = (x, y)
+		self.left = x
+		self.right = x + width
+		self.bottom = y
+		self.top = y + length
 
 	def score(self, distanceNeighbour):
 		self.freeSpace = distanceNeighbour
