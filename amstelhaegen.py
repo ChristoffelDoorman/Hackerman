@@ -11,15 +11,6 @@ import random
 def drawBuilding(building, x, y, color):
 
 	# add building to map
-<<<<<<< HEAD
-    ax1.add_patch(
-        patches.Rectangle(
-            (x, y),             # (x, y)
-            building.length,	# length
-            building.width,		# width
-        )
-    )
-=======
 	ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
@@ -28,8 +19,6 @@ def drawBuilding(building, x, y, color):
 	        facecolor=color		# color
 	    )
 	)
-
->>>>>>> e674f5375cd718da23e2b95957768ffd8297856f
 
 if __name__ == "__main__":
 	fig1 = plt.figure()
