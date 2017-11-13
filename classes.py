@@ -5,10 +5,10 @@
 class house:
 
 	def __init__(self, x, y):
-			length = 12
-			width = 12
-			price = 285.000
-			marginalValue = 1.03
+		length = 12
+		width = 12
+		price = 285.000
+		marginalValue = 1.03
 		self.location = (x, y)
 
 	def score(self, distanceNeighbour):
@@ -35,15 +35,11 @@ class maison:
 
 	length = 16.5
 	width = 17
-	price = 610000
+	price = 610.000
 	marginalValue = 1.06
 
 	def __init__(self, x, y):
 		self.location = (x, y)
-		self.length = 16.5
-		self.width = 17
-		self.price = 610000
-		self.marginalValue = 1.06
 
 	def value(self, distanceNeighbour):
 		self.freeSpace = distanceNeighbour
