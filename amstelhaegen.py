@@ -41,9 +41,11 @@ if __name__ == "__main__":
 	for i in range(12):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
-		buildings.append([xrandom, yrandom])
-		overlap(buildings[0], )
+
+		buildings.append(house(xrandom, yrandom))
+
 		for building in buildings:
+			overlap(buildings[building],  )
 
 			while (overlap(building, building[building]) = True)
 			xrandom = random.randint(0, 170)
