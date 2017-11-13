@@ -4,11 +4,12 @@
 
 class house:
 
+	length = 12
+	width = 12
+	price = 285.000
+	marginalValue = 1.03
+
 	def __init__(self, x, y):
-		length = 12
-		width = 12
-		price = 285.000
-		marginalValue = 1.03
 		self.location = (x, y)
 
 	def score(self, distanceNeighbour):
