@@ -12,10 +12,10 @@ def drawBuilding(building, x, y):
 	# add building to map
     ax1.add_patch(
         patches.Rectangle(
-            (x, y),				# (x,y)
+            (x, y),             # (x, y)
             building.length,	# length
             building.width,		# width
-            )
+        )
     )
 
 if __name__ == "__main__":
