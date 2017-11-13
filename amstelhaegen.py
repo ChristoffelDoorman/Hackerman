@@ -4,14 +4,12 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import helpers
+import classes
 import random
 
-
 def drawBuilding(building, x, y, color):
-
 	# add building to map
-	ax1.add_patch(
+    ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
 	        building.length,    # length
@@ -24,7 +22,7 @@ def drawBuilding(building, x, y, color):
 if __name__ == "__main__":
 	fig1 = plt.figure()
 	ax1 = fig1.add_subplot(111, aspect='equal')
-	
+
 	for i in range(12):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
@@ -43,5 +41,3 @@ if __name__ == "__main__":
 	ax1.set_xlim(0,180)
 	ax1.set_ylim(0,160)
 	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
-
-
