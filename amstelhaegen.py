@@ -7,17 +7,16 @@ import matplotlib.patches as patches
 import classes
 import random
 
-def drawBuilding(building, x, y, color):
+def drawBuilding(building, x, y):
+
 	# add building to map
     ax1.add_patch(
-	    patches.Rectangle(
-	        (x, y),   			# (x,y)
-	        building.length,    # length
-	        building.width,     # width
-	        facecolor=color		# color
-	    )
-	)
-
+        patches.Rectangle(
+            (x, y),				# (x,y)
+            building.length,	# length
+            building.width,		# width
+            )
+    )
 
 if __name__ == "__main__":
 	fig1 = plt.figure()
@@ -26,17 +25,17 @@ if __name__ == "__main__":
 	for i in range(12):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
-		drawBuilding(helpers.house, xrandom, yrandom, "red")
+		drawBuilding(classes.house, xrandom, yrandom, "red")
 
 	for i in range(5):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
-		drawBuilding(helpers.bungalow, xrandom, yrandom, "blue")
+		drawBuilding(classes.bungalow, xrandom, yrandom, "blue")
 
 	for i in range(3):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
-		drawBuilding(helpers.maison, xrandom, yrandom, "green")
+		drawBuilding(classes.maison, xrandom, yrandom, "green")
 
 	ax1.set_xlim(0,180)
 	ax1.set_ylim(0,160)
