@@ -21,34 +21,46 @@ def drawBuilding(building, x, y, color):
 	)
 
 def overlap(building1, building2):
-	xOverlap = True
-	yOverlap = True
+	xoverlap = True
+	yoverlap = True
 
-	if (building1.left > building2.right) or (building1.right < building2.left):
-		xOverlap = False
+	if ((building1.left > building2.right) or (building1.right < building2.left)):
+		xoverlap = False
 
-	if (building1.top < building2.bottom) or (building1.bottom > building2.top):
-		xOverlap = False
+	if ((building1.top < building2.bottom) or (building1.bottom > building2.top)):
+		yoverlap = False
 
-	return xOverlap and yOverlap
+	if not yoverlap and not xoverlap:
+		return False
+
+	return True
 
 if __name__ == "__main__":
 	fig1 = plt.figure()
 	ax1 = fig1.add_subplot(111, aspect='equal')
 	# fill building array with a house at a random point
-	buildings = [classes.house(0,0)]
+	buildings = []
 
-	while len(buildings) <= 12:
-		print len(buildings)
+	while len(buildings) < 12:
+		print(len(buildings))
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
-		for building in buildings:
-			print building
-			print overlap(building, classes.house(xrandom, yrandom))
-			if overlap(building, classes.house(xrandom, yrandom)):
-				break
-		buildings.append(classes.house(xrandom, yrandom))
-		drawBuilding(classes.house, xrandom, yrandom, "red")
+		print (xrandom, yrandom)
+		house = classes.house(xrandom, yrandom)
+
+		olap = True
+		while(olap and len(buildings)!=0):
+			for building in buildings:
+				olap = overlap(building, house)
+				if olap:
+					print ("bla")
+					house.left = random.randint(0, 170)
+					house.bottom = random.randint(0, 150)
+					break
+
+
+		buildings.append(house)
+		drawBuilding(house, xrandom, yrandom, "red")
 
 	#for i in buildings
 	#print overlap(buildings[0], buildings[1])
@@ -61,7 +73,7 @@ if __name__ == "__main__":
 			#yrandom = random.randint(0, 150)
 			#drawBuilding(classes.house, xrandom, yrandom, "red")
 	# print buildings
-
+	'''
 	for i in range(5):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
@@ -70,7 +82,7 @@ if __name__ == "__main__":
 	for i in range(3):
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
-		drawBuilding(classes.maison, xrandom, yrandom, "green")
+		drawBuilding(classes.maison, xrandom, yrandom, "green")'''
 
 	ax1.set_xlim(0,180)
 	ax1.set_ylim(0,160)

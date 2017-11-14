@@ -2,8 +2,7 @@
 
 
 class house:
-	length = 12
-	width = 12
+
 
 	def __init__(self, x, y):
 		self.length = 12
@@ -15,6 +14,9 @@ class house:
 		self.right = x + self.width
 		self.bottom = y
 		self.top = y + self.length
+
+	# def __str__(self):
+		# return 
 
 	def score(self, distanceNeighbour):
 		self.freeSpace = distanceNeighbour
