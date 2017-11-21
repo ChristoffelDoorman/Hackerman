@@ -8,6 +8,8 @@ import classes
 import random
 import pdb
 
+HUIZEN_AANTAL = 20
+
 def drawBuilding(building, x, y):
 
 	# add building to map
@@ -43,7 +45,13 @@ if __name__ == "__main__":
 	yrandom = random.randint(0, 296)
 	buildings.append(classes.house(xrandom, yrandom))
 
-	while len(buildings) < 60:
+	while len(buildings) < HUIZEN_AANTAL:
+
+		house_number = 0.6 * HUIZEN_AANTAL
+		bungalow_number = 0.25 * HUIZEN_AANTAL
+		maison_number = 0.15 * HUIZEN_AANTAL
+
+
 		xrandom = random.randint(0, 336)
 		yrandom = random.randint(0, 296)
 		house = classes.house(xrandom, yrandom)
