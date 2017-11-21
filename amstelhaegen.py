@@ -106,9 +106,9 @@ if __name__ == "__main__":
 
 	# fill building array with a house at a random point
 	buildings = []
-	xrandom = random.randint(0, 336)
-	yrandom = random.randint(0, 296)
-	buildings.append(classes.house(xrandom, yrandom))
+
+	# append first house to array 'buildings'
+	buildings.append(classes.house(canvas_x, canvas_y))
 
 	h_counter, b_counter, m_counter = 0, 0, 0
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 	b_number = 0.25 * HUIZEN_AANTAL
 	m_number = 0.15 * HUIZEN_AANTAL
 
-	while len(buildings) < HUIZEN_AANTAL:
+	while len(buildings) <= HUIZEN_AANTAL:
 
 		building_type = random.choice(['house', 'bungalow', 'maison'])
 
