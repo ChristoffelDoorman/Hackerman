@@ -8,9 +8,11 @@ import classes
 import random
 import pdb
 
-HUIZEN_AANTAL = 60
-canvas_x = 360
-canvas_y = 320
+
+TOTAL_HOUSES = 60
+X_DIMENSION = 360
+Y_DIMENSION = 320
+
 
 def drawBuilding(building, x, y, edgecolor):
 
@@ -37,8 +39,8 @@ def overlap(building1, building2):
 
 def h_build(buildings, h_counter):
 
-	xrandom = random.randint(0, canvas_x - classes.house.width)
-	yrandom = random.randint(0, canvas_y - classes.house.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.house.width)
+	yrandom = random.randint(0, Y_DIMENSION - classes.house.length)
 
 	house = classes.house(xrandom, yrandom)
 
@@ -58,8 +60,8 @@ def h_build(buildings, h_counter):
 
 def b_build(buildings, b_counter):
 
-	xrandom = random.randint(0, canvas_x - classes.bungalow.width)
-	yrandom = random.randint(0, canvas_y - classes.bungalow.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.bungalow.width)
+	yrandom = random.randint(0, Y_DIMENSION - classes.bungalow.length)
 	bungalow = classes.bungalow(xrandom, yrandom)
 
 	olap = True
@@ -78,8 +80,8 @@ def b_build(buildings, b_counter):
 
 def m_build(buildings, m_counter):
 
-	xrandom = random.randint(0, canvas_x - classes.maison.width)
-	yrandom = random.randint(0, canvas_y - classes.maison.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.maison.width)
+	yrandom = random.randint(0, Y_DIMENSION - classes.maison.length)
 	maison = classes.maison(xrandom, yrandom)
 
 	olap = True
@@ -108,17 +110,18 @@ if __name__ == "__main__":
 	buildings = []
 
 	# append first house to array 'buildings'
-	buildings.append(classes.house(canvas_x, canvas_y))
+	buildings.append(classes.house(X_DIMENSION, Y_DIMENSION))
 
 	# set number of each building type
-	h_number = 0.6 * HUIZEN_AANTAL
-	b_number = 0.25 * HUIZEN_AANTAL
-	m_number = 0.15 * HUIZEN_AANTAL
+	h_number = 0.6 * TOTAL_HOUSES
+	b_number = 0.25 * TOTAL_HOUSES
+	m_number = 0.15 * TOTAL_HOUSES
 
     # create counters to count number of each building
 	h_counter, b_counter, m_counter = 0, 0, 0
 
-	while len(buildings) < HUIZEN_AANTAL:
+	# build houses until maximum is reached
+	while len(buildings) < TOTAL_HOUSES:
 
         # choose random building type
 		building_type = random.choice(['house', 'bungalow', 'maison'])
@@ -132,6 +135,7 @@ if __name__ == "__main__":
 		if building_type == 'maison' and m_counter < m_number:
 			buildings, m_counter = m_build(buildings, m_counter)
 
+    # safe figure
 	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
 
     # delete first house from array
