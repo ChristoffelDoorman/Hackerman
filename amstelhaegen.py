@@ -14,26 +14,23 @@ def drawBuilding(building, x, y, color):
 	ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
-	        building.length,    # length
-	        building.width,     # width
+	        12,    # length
+	        12,     # width
 	        facecolor=color		# color
 	    )
 	)
 
 def overlap(building1, building2):
-	xoverlap = True
-	yoverlap = True
+	overlap = True
 
-	if ((building1.left > building2.right) or (building1.right < building2.left)):
-		xoverlap = False
+	if (building1.left > building2.right or building2.left > building1.right
+		or building1.bottom > building2.top or building2.bottom > building1.top):
+		overlap = False
 
-	if ((building1.top < building2.bottom) or (building1.bottom > building2.top)):
-		yoverlap = False
-
-	if not yoverlap and not xoverlap:
+	if not overlap:
 		return False
-	else:
-		return True
+
+	return True
 
 if __name__ == "__main__":
 	fig1 = plt.figure()
@@ -41,25 +38,30 @@ if __name__ == "__main__":
 	# fill building array with a house at a random point
 	buildings = []
 
-	while len(buildings) < 12:
+	while len(buildings) <= 12:
 		xrandom = random.randint(0, 170)
 		yrandom = random.randint(0, 150)
 		house = classes.house(xrandom, yrandom)
 
+		if len(buildings) == 0:
+			buildings.append(house)
+			drawBuilding(house, house.left, house.bottom, "red")
+
 		olap = True
-		while(olap and len(buildings) != 0):
+		while(olap):
+
 			for building in buildings:
 				olap = overlap(house, building)
 				print building
-				
+
 				# print olap
 				if olap:
-					house.left = random.randint(0, 170)
-					house.bottom = random.randint(0, 150)
+					house.left = random.randint(0, 340)
+					house.bottom = random.randint(0, 300)
 					break
 
 		buildings.append(house)
-		drawBuilding(house, xrandom, yrandom, "red")
+		drawBuilding(house, house.left, house.bottom, "red")
 
 	# for i in buildings
 	# print overlap(buildings[0], buildings[1])

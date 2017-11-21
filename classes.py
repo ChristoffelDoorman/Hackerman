@@ -10,7 +10,7 @@ class house:
 		self.right = x + self.width
 		self.bottom = y
 		self.top = y + self.length
-	
+
 	# def __str__(self):
 		# return
 
