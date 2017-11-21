@@ -14,8 +14,8 @@ def drawBuilding(building, x, y, color):
 	ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
-	        12,    # length
-	        12,     # width
+	        24,    # length
+	        24,     # width
 	        facecolor=color		# color
 	    )
 	)
@@ -38,9 +38,10 @@ if __name__ == "__main__":
 	# fill building array with a house at a random point
 	buildings = []
 
-	while len(buildings) <= 12:
-		xrandom = random.randint(0, 170)
-		yrandom = random.randint(0, 150)
+	while len(buildings) < 12:
+		print len(buildings)
+		xrandom = random.randint(0, 336)
+		yrandom = random.randint(0, 296)
 		house = classes.house(xrandom, yrandom)
 
 		if len(buildings) == 0:
@@ -48,16 +49,19 @@ if __name__ == "__main__":
 			drawBuilding(house, house.left, house.bottom, "red")
 
 		olap = True
-		while(olap):
-
+		while olap:
 			for building in buildings:
 				olap = overlap(house, building)
+				print olap
 				print building
-
-				# print olap
+				print building.left
+				print building.bottom
+				print house.left
+				print house.right
 				if olap:
-					house.left = random.randint(0, 340)
-					house.bottom = random.randint(0, 300)
+					# print olap
+					house.left = random.randint(0, 336)
+					house.bottom = random.randint(0, 296)
 					break
 
 		buildings.append(house)
@@ -85,6 +89,6 @@ if __name__ == "__main__":
 	# 	yrandom = random.randint(0, 150)
 	# 	drawBuilding(classes.maison, xrandom, yrandom, "green")
 
-	ax1.set_xlim(0,180)
-	ax1.set_ylim(0,160)
+	ax1.set_xlim(0,360)
+	ax1.set_ylim(0,320)
 	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
