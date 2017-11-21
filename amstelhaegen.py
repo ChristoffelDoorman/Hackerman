@@ -110,14 +110,17 @@ if __name__ == "__main__":
 	# append first house to array 'buildings'
 	buildings.append(classes.house(canvas_x, canvas_y))
 
-	h_counter, b_counter, m_counter = 0, 0, 0
-
+	# set number of each building type
 	h_number = 0.6 * HUIZEN_AANTAL
 	b_number = 0.25 * HUIZEN_AANTAL
 	m_number = 0.15 * HUIZEN_AANTAL
 
-	while len(buildings) <= HUIZEN_AANTAL:
+    # create counters to count number of each building
+	h_counter, b_counter, m_counter = 0, 0, 0
 
+	while len(buildings) < HUIZEN_AANTAL:
+
+        # choose random building type
 		building_type = random.choice(['house', 'bungalow', 'maison'])
 
 		if building_type == 'house' and h_counter < h_number:
@@ -130,3 +133,6 @@ if __name__ == "__main__":
 			buildings, m_counter = m_build(buildings, m_counter)
 
 	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
+
+    # delete first house from array
+	buildings.pop(0)
