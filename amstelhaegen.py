@@ -43,15 +43,12 @@ if __name__ == "__main__":
 	buildings = []
 
 	while len(buildings) < 60:
-		print len(buildings)
 		xrandom = random.randint(0, 336)
 		yrandom = random.randint(0, 296)
 		house = classes.house(xrandom, yrandom)
 
 		if len(buildings) == 0:
 			buildings.append(house)
-			drawBuilding(house, house.left, house.bottom)
-
 			left = random.randint(0, 336)
 			bottom = random.randint(0, 296)
 			house = classes.house(left, bottom)
