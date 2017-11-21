@@ -8,15 +8,17 @@ import classes
 import random
 import pdb
 
-def drawBuilding(building, x, y, color):
+def drawBuilding(building, x, y):
 
 	# add building to map
 	ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
 	        24,    # length
-	        24,     # width
-	        facecolor=color		# color
+	        24,     # width	# color
+			linewidth = 1,
+			edgecolor = 'r',
+			facecolor = 'none'
 	    )
 	)
 
@@ -35,10 +37,12 @@ def overlap(building1, building2):
 if __name__ == "__main__":
 	fig1 = plt.figure()
 	ax1 = fig1.add_subplot(111, aspect='equal')
+	ax1.set_xlim(0,360)
+	ax1.set_ylim(0,320)
 	# fill building array with a house at a random point
 	buildings = []
 
-	while len(buildings) < 12:
+	while len(buildings) < 60:
 		print len(buildings)
 		xrandom = random.randint(0, 336)
 		yrandom = random.randint(0, 296)
@@ -46,27 +50,27 @@ if __name__ == "__main__":
 
 		if len(buildings) == 0:
 			buildings.append(house)
-			drawBuilding(house, house.left, house.bottom, "red")
+			drawBuilding(house, house.left, house.bottom)
+
+			left = random.randint(0, 336)
+			bottom = random.randint(0, 296)
+			house = classes.house(left, bottom)
 
 		olap = True
-		while olap:
-			for building in buildings:
-				olap = overlap(house, building)
-				print olap
-				print building
-				print building.left
-				print building.bottom
-				print house.left
-				print house.right
-				if olap:
-					# print olap
-					house.left = random.randint(0, 336)
-					house.bottom = random.randint(0, 296)
-					break
+		for building in buildings:
+			olap = overlap(house, building)
 
-		buildings.append(house)
-		drawBuilding(house, house.left, house.bottom, "red")
+			if olap:
+				house.left = random.randint(0, 336)
+				house.bottom = random.randint(0, 296)
+				house.right = house.left + 24
+				house.top = house.bottom + 24
+				break
 
+		if not olap:
+			buildings.append(house)
+			drawBuilding(house, house.left, house.bottom)
+			#plt.pause(0.8)
 	# for i in buildings
 	# print overlap(buildings[0], buildings[1])
     #
@@ -88,7 +92,4 @@ if __name__ == "__main__":
 	# 	xrandom = random.randint(0, 170)
 	# 	yrandom = random.randint(0, 150)
 	# 	drawBuilding(classes.maison, xrandom, yrandom, "green")
-
-	ax1.set_xlim(0,360)
-	ax1.set_ylim(0,320)
 	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
