@@ -1,7 +1,7 @@
 class house:
+	length = 24
+	width = 24
 	def __init__(self, x, y):
-		# self.length = 24
-		# self.width = 24
 		# self.price = 285.000
 		# self.marginalValue = 1.03
 		# self.location = (x, y)
@@ -19,8 +19,8 @@ class house:
 
 
 class bungalow:
-	# length = 10.5
-	# width = 13
+	length = 21
+	width = 26
 	# price = 399.000
 	# marginalValue = 1.04
 
@@ -36,9 +36,8 @@ class bungalow:
     #
 
 class maison:
-    #
-	# length = 16.5
-	# width = 17
+	length = 33
+	width = 34
 	# price = 610.000
 	# marginalValue = 1.06
 

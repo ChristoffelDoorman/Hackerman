@@ -8,18 +8,20 @@ import classes
 import random
 import pdb
 
-HUIZEN_AANTAL = 20
+HUIZEN_AANTAL = 60
+canvas_x = 360
+canvas_y = 320
 
-def drawBuilding(building, x, y):
+def drawBuilding(building, x, y, edgecolor):
 
 	# add building to map
 	ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
-	        24,    # length
-	        24,     # width	# color
+	        building.length,    # length
+	        building.width,     # width	# color
 			linewidth = 1,
-			edgecolor = 'r',
+			edgecolor = edgecolor,
 			facecolor = 'none'
 	    )
 	)
@@ -33,7 +35,70 @@ def overlap(building1, building2):
 
 	return overlap
 
+def h_build(buildings, h_counter):
+
+	xrandom = random.randint(0, canvas_x - classes.house.width)
+	yrandom = random.randint(0, canvas_y - classes.house.length)
+
+	house = classes.house(xrandom, yrandom)
+
+	olap = True
+	for building in buildings:
+		olap = overlap(house, building)
+
+		if olap:
+			break
+
+	if not olap:
+		buildings.append(house)
+		drawBuilding(house, house.left, house.bottom, 'red')
+		h_counter += 1
+
+	return buildings, h_counter
+
+def b_build(buildings, b_counter):
+
+	xrandom = random.randint(0, canvas_x - classes.bungalow.width)
+	yrandom = random.randint(0, canvas_y - classes.bungalow.length)
+	bungalow = classes.bungalow(xrandom, yrandom)
+
+	olap = True
+	for building in buildings:
+		olap = overlap(bungalow, building)
+
+		if olap:
+			break
+
+	if not olap:
+		buildings.append(bungalow)
+		drawBuilding(bungalow, bungalow.left, bungalow.bottom, 'blue')
+		b_counter += 1
+
+	return buildings, b_counter
+
+def m_build(buildings, m_counter):
+
+	xrandom = random.randint(0, canvas_x - classes.maison.width)
+	yrandom = random.randint(0, canvas_y - classes.maison.length)
+	maison = classes.maison(xrandom, yrandom)
+
+	olap = True
+	for building in buildings:
+		olap = overlap(maison, building)
+
+		if olap:
+			break
+
+	if not olap:
+		buildings.append(maison)
+		drawBuilding(maison, maison.left, maison.bottom, 'green')
+		m_counter += 1
+
+	return buildings, m_counter
+
+
 if __name__ == "__main__":
+
 	fig1 = plt.figure()
 	ax1 = fig1.add_subplot(111, aspect='equal')
 	ax1.set_xlim(0,360)
@@ -45,47 +110,23 @@ if __name__ == "__main__":
 	yrandom = random.randint(0, 296)
 	buildings.append(classes.house(xrandom, yrandom))
 
+	h_counter, b_counter, m_counter = 0, 0, 0
+
+	h_number = 0.6 * HUIZEN_AANTAL
+	b_number = 0.25 * HUIZEN_AANTAL
+	m_number = 0.15 * HUIZEN_AANTAL
+
 	while len(buildings) < HUIZEN_AANTAL:
 
-		house_number = 0.6 * HUIZEN_AANTAL
-		bungalow_number = 0.25 * HUIZEN_AANTAL
-		maison_number = 0.15 * HUIZEN_AANTAL
+		building_type = random.choice(['house', 'bungalow', 'maison'])
 
+		if building_type == 'house' and h_counter < h_number:
+			buildings, h_counter = h_build(buildings, h_counter)
 
-		xrandom = random.randint(0, 336)
-		yrandom = random.randint(0, 296)
-		house = classes.house(xrandom, yrandom)
+		if building_type == 'bungalow' and b_counter < b_number:
+			buildings, b_counter = b_build(buildings, b_counter)
 
-		olap = True
-		for building in buildings:
-			olap = overlap(house, building)
+		if building_type == 'maison' and m_counter < m_number:
+			buildings, m_counter = m_build(buildings, m_counter)
 
-			if olap:
-				break
-
-		if not olap:
-			buildings.append(house)
-			drawBuilding(house, house.left, house.bottom)
-			#plt.pause(0.8)
-	# for i in buildings
-	# print overlap(buildings[0], buildings[1])
-    #
-	# 	for i in buildings:
-	# 		overlap(buildings[building],  )
-    #
-	# 		while (overlap(building, building[building]) = True)
-	# 		xrandom = random.randint(0, 170)
-	# 		yrandom = random.randint(0, 150)
-	# 		drawBuilding(classes.house, xrandom, yrandom, "red")
-	# print buildings
-    #
-	# for i in range(5):
-	# 	xrandom = random.randint(0, 170)
-	# 	yrandom = random.randint(0, 150)
-	# 	drawBuilding(classes.bungalow, xrandom, yrandom, "blue")
-    #
-	# for i in range(3):
-	# 	xrandom = random.randint(0, 170)
-	# 	yrandom = random.randint(0, 150)
-	# 	drawBuilding(classes.maison, xrandom, yrandom, "green")
 	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
