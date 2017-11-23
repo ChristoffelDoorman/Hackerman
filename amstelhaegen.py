@@ -98,6 +98,9 @@ def m_build(buildings, m_counter):
 
 	return buildings, m_counter
 
+# def score(buildings):
+
+
 
 if __name__ == "__main__":
 
