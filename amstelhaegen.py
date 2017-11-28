@@ -10,7 +10,7 @@ import pdb
 import numpy as np
 
 
-TOTAL_HOUSES = 60
+TOTAL_HOUSES = 20
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
@@ -110,7 +110,6 @@ def score(buildings):
 	current_building = buildings[10]
 	print current_building.left_bottom, "gebouw"
 
-	left_top_buildings = []
 	closest = 50000
 	for building in buildings:
 
@@ -118,8 +117,11 @@ def score(buildings):
 		if (building.right_bottom[0] < current_building.left_top[0]
 		 	and building.right_bottom[1] > current_building.left_top[1]):
 
+            # calculate distance
 			dist = distance(current_building.left_top[0], current_building.left_top[1],
 			building.right_bottom[0], building.right_bottom[1])
+
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -128,10 +130,10 @@ def score(buildings):
 			and building.right_bottom[0] > current_building.left_top[0]
 			and building.left_bottom[0] < current_building.right_top[0]):
 
-			# print "onderkant verelijking", building.right_bottom[1]
-			# print "bovenkant current", current_building.right_top[1]
+			# calculate distance
 			dist = building.right_bottom[1] - current_building.right_top[1]
 
+            # update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -139,8 +141,11 @@ def score(buildings):
 		if (building.left_bottom[0] > current_building.right_top[0]
 		 	and building.right_bottom[1] > current_building.left_top[1]):
 
+			# calculate distance
 			dist = distance(current_building.right_top[0], current_building.right_top[1],
 			building.left_bottom[0], building.left_bottom[1])
+
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -149,10 +154,10 @@ def score(buildings):
 			and building.left_bottom[1] < current_building.right_top[1]
 			and building.left_top[1] > current_building.right_bottom[1]):
 
-			# print "onderkant verelijking", building.right_bottom[1]
-			# print "bovenkant current", current_building.right_top[1]
+			# calculate distance
 			dist = building.left_bottom[0] - current_building.right_bottom[0]
 
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -160,8 +165,11 @@ def score(buildings):
 		if (building.left_top[0] > current_building.right_bottom[0]
 		 	and building.right_top[1] < current_building.right_bottom[1]):
 
+			# calculate distance
 			dist = distance(current_building.right_bottom[0], current_building.right_bottom[1],
 			building.left_top[0], building.left_top[1])
+
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -170,10 +178,10 @@ def score(buildings):
 			and building.right_top[0] > current_building.left_bottom[0]
 			and building.left_top[0] < current_building.right_bottom[0]):
 
-			# print "onderkant verelijking", building.right_bottom[1]
-			# print "bovenkant current", current_building.right_top[1]
+			# calculate distance
 			dist = current_building.right_top[1] - building.right_bottom[1]
 
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -181,8 +189,11 @@ def score(buildings):
 		if (building.right_top[0] < current_building.left_bottom[0]
 		 	and building.right_top[1] < current_building.left_bottom[1]):
 
+			# calculate distance
 			dist = distance(current_building.left_bottom[0], current_building.left_bottom[1],
 			building.right_top[0], building.right_top[1])
+
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
@@ -191,17 +202,15 @@ def score(buildings):
 			and building.right_bottom[1] < current_building.left_top[1]
 			and building.right_top[1] > current_building.left_bottom[1]):
 
-			# print "onderkant verelijking", building.right_bottom[1]
-			# print "bovenkant current", current_building.right_top[1]
+			# calculate distance
 			dist = current_building.left_bottom[0] - building.right_bottom[0]
 
+			# update closest distance if closer
 			if dist < closest:
 				closest = dist
 
-			print building.left_bottom, "de vergelijking"
-			print dist, "afstand"
 
-	print closest
+	print closest, "closest"
 
 
 		# closest = 100
@@ -262,7 +271,5 @@ if __name__ == "__main__":
     # delete first house from array
 	buildings.pop(0)
 
+    # calculate closest distance to buildings
 	score(buildings)
-
-	# for building in buildings:
-	# 	print building.left

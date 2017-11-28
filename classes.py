@@ -1,4 +1,4 @@
-class house:
+ class house:
 	length = 24
 	width = 24
 
