@@ -8,16 +8,17 @@ import classes
 import random
 import pdb
 import numpy as np
+import locale
 
 
-TOTAL_HOUSES = 20
+TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
-def distance(x1, y1, x2, y2):
-	dist = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+def pythagoras(x1, y1, x2, y2):
+	distance = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
-	return dist
+	return distance
 
 def drawBuilding(building, x, y, edgecolor):
 
@@ -104,13 +105,10 @@ def m_build(buildings, m_counter):
 
 	return buildings, m_counter
 
-def score(buildings):
-
-	# for building in buildings:
-	current_building = buildings[10]
-	print current_building.left_bottom, "gebouw"
+def closest_distance(current_building, buildings):
 
 	closest = 50000
+
 	for building in buildings:
 
         # area linksboven
@@ -118,12 +116,12 @@ def score(buildings):
 		 	and building.right_bottom[1] > current_building.left_top[1]):
 
             # calculate distance
-			dist = distance(current_building.left_top[0], current_building.left_top[1],
+			distance = pythagoras(current_building.left_top[0], current_building.left_top[1],
 			building.right_bottom[0], building.right_bottom[1])
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
         # area midden boven
 		if (building.right_bottom[1] > current_building.left_top[1]
@@ -131,23 +129,23 @@ def score(buildings):
 			and building.left_bottom[0] < current_building.right_top[0]):
 
 			# calculate distance
-			dist = building.right_bottom[1] - current_building.right_top[1]
+			distance = building.right_bottom[1] - current_building.right_top[1]
 
             # update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
         # area rechtsboven
 		if (building.left_bottom[0] > current_building.right_top[0]
 		 	and building.right_bottom[1] > current_building.left_top[1]):
 
 			# calculate distance
-			dist = distance(current_building.right_top[0], current_building.right_top[1],
+			distance = pythagoras(current_building.right_top[0], current_building.right_top[1],
 			building.left_bottom[0], building.left_bottom[1])
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
         # area midden rechts
 		if (building.left_bottom[0] > current_building.right_top[0]
@@ -155,23 +153,23 @@ def score(buildings):
 			and building.left_top[1] > current_building.right_bottom[1]):
 
 			# calculate distance
-			dist = building.left_bottom[0] - current_building.right_bottom[0]
+			distance = building.left_bottom[0] - current_building.right_bottom[0]
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
         # area rechtsonder
 		if (building.left_top[0] > current_building.right_bottom[0]
 		 	and building.right_top[1] < current_building.right_bottom[1]):
 
 			# calculate distance
-			dist = distance(current_building.right_bottom[0], current_building.right_bottom[1],
+			distance = pythagoras(current_building.right_bottom[0], current_building.right_bottom[1],
 			building.left_top[0], building.left_top[1])
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
 		# area midden onder
 		if (building.right_top[1] < current_building.left_bottom[1]
@@ -179,23 +177,23 @@ def score(buildings):
 			and building.left_top[0] < current_building.right_bottom[0]):
 
 			# calculate distance
-			dist = current_building.right_top[1] - building.right_bottom[1]
+			distance = current_building.right_top[1] - building.right_bottom[1]
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
         # area linksonder
 		if (building.right_top[0] < current_building.left_bottom[0]
 		 	and building.right_top[1] < current_building.left_bottom[1]):
 
 			# calculate distance
-			dist = distance(current_building.left_bottom[0], current_building.left_bottom[1],
+			distance = pythagoras(current_building.left_bottom[0], current_building.left_bottom[1],
 			building.right_top[0], building.right_top[1])
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
+			if distance < closest:
+				closest = distance
 
         # area midden rechts
 		if (building.right_bottom[0] < current_building.left_bottom[0]
@@ -210,22 +208,7 @@ def score(buildings):
 				closest = dist
 
 
-	print closest, "closest"
-
-
-		# closest = 100
-		# for building.left_bottom[0] in building:
-		# 	distance = building.left_bottom[0] - building.left_bottom
-		# 	if distance < closest:
-		# 		closest = distance
-
-	# building_coordinates = []
-    #
-	# for building in buildings:
-	# 	building_coordinates.append(building.left_bottom)
-	# 	building_coordinates.sort()
-	# 	print building_coordinates
-
+	return closest
 
 
 
@@ -272,4 +255,19 @@ if __name__ == "__main__":
 	buildings.pop(0)
 
     # calculate closest distance to buildings
-	score(buildings)
+	counter = 0
+	total_value = 0
+	for current_building in buildings:
+		counter += 1
+		closest = closest_distance(current_building, buildings)
+		total_value += current_building.score(closest)
+
+
+		print counter
+		print "current_building is ", current_building
+		print "closest is", closest
+		print "dus waarde van dit huis is", current_building.score(closest), "\n"
+
+	print "TOTAL VALUE AMSTELHAEGEN = ", round(total_value, 2), "EURO\n"
+	locale.setlocale(locale.LC_ALL, '')
+	print locale.currency(total_value, grouping=True)
