@@ -13,7 +13,7 @@ import timeit
 
 start = timeit.default_timer()
 
-ITERATIONS = 100000
+ITERATIONS = 1000000
 TOTAL_HOUSES = 20
 X_DIMENSION = 360
 Y_DIMENSION = 320
@@ -233,7 +233,7 @@ if __name__ == "__main__":
 		h_counter, b_counter, m_counter = 0, 0, 0
 
 		# build houses until maximum is reached
-		while len(buildings) < TOTAL_HOUSES:
+		while (len(buildings) - 1) < TOTAL_HOUSES:
 
 	        # choose random building type
 			building_type = random.choice(['house', 'bungalow', 'maison'])
