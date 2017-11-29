@@ -1,4 +1,5 @@
-class house:
+class House:
+	name = 'house'
 	length = 24
 	width = 24
 	price = 285000
@@ -25,7 +26,8 @@ class house:
 		return value
 
 
-class bungalow:
+class Bungalow:
+	name = 'bungalow'
 	length = 21
 	width = 26
 	price = 399000
@@ -50,7 +52,8 @@ class bungalow:
 		return value
 
 
-class maison:
+class Maison:
+	name = 'maison'
 	length = 33
 	width = 34
 	price = 610000
