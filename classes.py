@@ -17,7 +17,7 @@ class house:
 	def __repr__(self):
 		return("x=%i, y=%i, type = house "%(self.left_bottom[0], self.left_bottom[1]))
 
-
+	# Dit is nog cumulatief, en dat mag niet!
 	def score(self, closest):
 		self.freeSpace = closest
 		value = 285000 * (1.03 ** self.freeSpace)
