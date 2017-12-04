@@ -14,7 +14,7 @@ import timeit
 start = timeit.default_timer()
 
 ITERATIONS = 1000000
-TOTAL_HOUSES = 20
+TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
 best_iteration = 0
@@ -205,12 +205,11 @@ def closest_distance(current_building, buildings):
 			and building.right_top[1] > current_building.left_bottom[1]):
 
 			# calculate distance
-			dist = current_building.left_bottom[0] - building.right_bottom[0]
+			distance = current_building.left_bottom[0] - building.right_bottom[0]
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
-
+			if distance < closest:
+				closest = distance
 
 	return closest
 
