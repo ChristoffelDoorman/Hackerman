@@ -13,9 +13,11 @@ import timeit
 
 start = timeit.default_timer()
 
+ITERATIONS = 1000000
 TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
+best_iteration = 0
 
 def pythagoras(x1, y1, x2, y2):
 	distance = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
@@ -48,10 +50,10 @@ def overlap(building1, building2):
 def h_build(buildings, h_counter):
 
 
-	xrandom = random.randint(0, X_DIMENSION - classes.house.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.house.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
+	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 
-	house = classes.house(xrandom, yrandom)
+	house = classes.House(xrandom, yrandom)
 
 	olap = True
 	for building in buildings:
@@ -62,16 +64,16 @@ def h_build(buildings, h_counter):
 
 	if not olap:
 		buildings.append(house)
-		drawBuilding(house, house.left_bottom[0], house.left_bottom[1], 'red')
+		# drawBuilding(house, house.left_bottom[0], house.left_bottom[1], 'red')
 		h_counter += 1
 
 	return buildings, h_counter
 
 def b_build(buildings, b_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.bungalow.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.bungalow.length)
-	bungalow = classes.bungalow(xrandom, yrandom)
+	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
+	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
+	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	olap = True
 	for building in buildings:
@@ -82,16 +84,16 @@ def b_build(buildings, b_counter):
 
 	if not olap:
 		buildings.append(bungalow)
-		drawBuilding(bungalow, bungalow.left_bottom[0], bungalow.left_bottom[1], 'blue')
+		# drawBuilding(bungalow, bungalow.left_bottom[0], bungalow.left_bottom[1], 'blue')
 		b_counter += 1
 
 	return buildings, b_counter
 
 def m_build(buildings, m_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.maison.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.maison.length)
-	maison = classes.maison(xrandom, yrandom)
+	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
+	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
+	maison = classes.Maison(xrandom, yrandom)
 
 	olap = True
 	for building in buildings:
@@ -102,7 +104,7 @@ def m_build(buildings, m_counter):
 
 	if not olap:
 		buildings.append(maison)
-		drawBuilding(maison, maison.left_bottom[0], maison.left_bottom[1], 'green')
+		# drawBuilding(maison, maison.left_bottom[0], maison.left_bottom[1], 'green')
 		m_counter += 1
 
 	return buildings, m_counter
@@ -203,77 +205,80 @@ def closest_distance(current_building, buildings):
 			and building.right_top[1] > current_building.left_bottom[1]):
 
 			# calculate distance
-			dist = current_building.left_bottom[0] - building.right_bottom[0]
+			distance = current_building.left_bottom[0] - building.right_bottom[0]
 
 			# update closest distance if closer
-			if dist < closest:
-				closest = dist
-
+			if distance < closest:
+				closest = distance
 
 	return closest
 
-
-
 if __name__ == "__main__":
 
-	fig1 = plt.figure()
-	ax1 = fig1.add_subplot(111, aspect='equal')
-	ax1.set_xlim(0,360)
-	ax1.set_ylim(0,320)
+	for i in range(ITERATIONS):
 
-	# fill building array with a house at a random point
-	buildings = []
+		# fill building array with a house at a random point
+		buildings = []
 
-	# append first house to array 'buildings'
-	buildings.append(classes.house(X_DIMENSION, Y_DIMENSION))
+		# append first house to array 'buildings'
+		buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
 
-	# set number of each building type
-	h_number = 0.6 * TOTAL_HOUSES
-	b_number = 0.25 * TOTAL_HOUSES
-	m_number = 0.15 * TOTAL_HOUSES
+		# set number of each building type
+		h_number = 0.6 * TOTAL_HOUSES
+		b_number = 0.25 * TOTAL_HOUSES
+		m_number = 0.15 * TOTAL_HOUSES
 
-    # create counters to count number of each building
-	h_counter, b_counter, m_counter = 0, 0, 0
+	    # create counters to count number of each building
+		h_counter, b_counter, m_counter = 0, 0, 0
 
-	# build houses until maximum is reached
-	while (len(buildings) - 1) < TOTAL_HOUSES:
+		# build houses until maximum is reached
+		while (len(buildings) - 1) < TOTAL_HOUSES:
 
-        # choose random building type
-		building_type = random.choice(['house', 'bungalow', 'maison'])
+	        # choose random building type
+			building_type = random.choice(['house', 'bungalow', 'maison'])
 
-		if building_type == 'house' and h_counter < h_number:
-			buildings, h_counter = h_build(buildings, h_counter)
+			if building_type == 'house' and h_counter < h_number:
+				buildings, h_counter = h_build(buildings, h_counter)
 
-		if building_type == 'bungalow' and b_counter < b_number:
-			buildings, b_counter = b_build(buildings, b_counter)
+			if building_type == 'bungalow' and b_counter < b_number:
+				buildings, b_counter = b_build(buildings, b_counter)
 
-		if building_type == 'maison' and m_counter < m_number:
-			buildings, m_counter = m_build(buildings, m_counter)
+			if building_type == 'maison' and m_counter < m_number:
+				buildings, m_counter = m_build(buildings, m_counter)
 
-    # safe figure
-	fig1.savefig('rect1.png', dpi=90, bbox_inches='tight')
+	    # delete first house from array
+		buildings.pop(0)
 
-    # delete first house from array
-	buildings.pop(0)
+	    # calculate closest distance to buildings
+		counter = 0
+		total_value = 0
+		for current_building in buildings:
+			counter += 1
+			closest = closest_distance(current_building, buildings)
+			total_value += current_building.score(closest)
 
-    # calculate closest distance to buildings
-	counter = 0
-	total_value = 0
-	for current_building in buildings:
-		counter += 1
-		closest = closest_distance(current_building, buildings)
-		total_value += current_building.score(closest)
+		if total_value > best_iteration:
+			best_iteration = total_value
 
+			fig1 = plt.figure()
+			ax1 = fig1.add_subplot(111, aspect='equal')
+			ax1.set_xlim(0,360)
+			ax1.set_ylim(0,320)
 
-		print counter
-		print "current_building is ", current_building
-		print "closest is", closest
-		print "dus waarde van dit huis is", current_building.score(closest), "\n"
+			for building in buildings:
+				if building.name == 'house':
+					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'red')
+				if building.name == 'bungalow':
+					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'blue')
+				if building.name == 'maison':
+					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'green')
 
-	print "TOTAL VALUE AMSTELHAEGEN = ", round(total_value, 2), "EURO\n"
-	locale.setlocale(locale.LC_ALL, '')
-	print locale.currency(total_value, grouping=True)
+			# safe figure
+			fig1.savefig('best_random.png', dpi=90, bbox_inches='tight')
+
+		print total_value
+		print best_iteration
 
 	stop = timeit.default_timer()
-
-	print stop - start
+	print "De tijd is: ", stop - start
+	print "De hoogste score is: ", best_iteration
