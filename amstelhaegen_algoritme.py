@@ -18,8 +18,8 @@ import main
 
 start = timeit.default_timer()
 
-ITERATIONS = 1000
-TOTAL_HOUSES = 60
+ITERATIONS = 1000000
+TOTAL_HOUSES = 20
 X_DIMENSION = 360
 Y_DIMENSION = 320
 best_iteration = 0
@@ -54,11 +54,13 @@ def overlap(building1, building2):
 
 def h_build(buildings, waters, h_counter):
 
-
 	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
+	if not buildings:
+		buildings.append(house)
+		return buildings, h_counter
 
 	olap = True
 	if overlap(waters[0], house):
@@ -82,12 +84,17 @@ def b_build(buildings, waters, b_counter):
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
-	if random.choice((True, False)):
-		if True:
-			bungalow.length, bungalow.width = bungalow.width, bungalow.length
-			bungalow.left_top[1] = yrandom + bungalow.length
-			bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
-			bungalow.right_bottom[0] = xrandom + bungalow.width
+
+	choice = random.getrandbits(1)
+	if choice:
+		bungalow.length, bungalow.width = bungalow.width, bungalow.length
+		bungalow.left_top[1] = yrandom + bungalow.length
+		bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
+		bungalow.right_bottom[0] = xrandom + bungalow.width
+
+	if not buildings:
+		buildings.append(bungalow)
+		return buildings, b_counter
 
 	olap = True
 	if overlap(waters[0], bungalow):
@@ -112,12 +119,17 @@ def m_build(buildings, waters, m_counter):
 	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 	# random: length, width = width, length
-	if random.choice((True, False)):
-		if True:
-			maison.length, maison.width = maison.width, maison.length
-			maison.left_top[1] = yrandom + maison.length
-			maison.right_top = [xrandom + maison.width, yrandom + maison.length]
-			maison.right_bottom[0] = xrandom + maison.width
+
+	choice = random.getrandbits(1)
+	if choice:
+		maison.length, maison.width = maison.width, maison.length
+		maison.left_top[1] = yrandom + maison.length
+		maison.right_top = [xrandom + maison.width, yrandom + maison.length]
+		maison.right_bottom[0] = xrandom + maison.width
+
+	if not buildings:
+		buildings.append(maison)
+		return buildings, m_counter
 
 	olap = True
 	if overlap(waters[0], maison):
@@ -251,7 +263,6 @@ if __name__ == "__main__":
 		waters = []
 
 		waters.append(classes.Water(28.2, 122.05, 75.89, 303.58))
-
 
 		# append first house to array 'buildings'
 		buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
