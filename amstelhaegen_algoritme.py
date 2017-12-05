@@ -50,11 +50,13 @@ def overlap(building1, building2):
 
 def h_build(buildings, waters, h_counter):
 
-
 	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
+	if (len(buildings == 0)):
+		buildings.append(house)
+		return buildings, h_counter
 
 	olap = True
 	if overlap(waters[0], house):
@@ -86,6 +88,10 @@ def b_build(buildings, waters, b_counter):
 		bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
 		bungalow.right_bottom[0] = xrandom + bungalow.width
 
+	if (len(buildings == 0)):
+		buildings.append(bungalow)
+		return buildings, b_counter
+
 	olap = True
 	if overlap(waters[0], bungalow):
 		return buildings, b_counter
@@ -109,12 +115,17 @@ def m_build(buildings, waters, m_counter):
 	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 	# random: length, width = width, length
+
 	choice = random.getrandbits(1)
 	if choice:
 		maison.length, maison.width = maison.width, maison.length
 		maison.left_top[1] = yrandom + maison.length
 		maison.right_top = [xrandom + maison.width, yrandom + maison.length]
 		maison.right_bottom[0] = xrandom + maison.width
+
+	if (len(buildings == 0)):
+		buildings.append(maison)
+		return buildings, m_counter
 
 	olap = True
 	if overlap(waters[0], maison):
