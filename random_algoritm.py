@@ -11,7 +11,6 @@ import numpy as np
 import locale
 import timeit
 import math
-from os import path
 
 # import files
 import classes
@@ -19,26 +18,23 @@ import main
 import helpers
 import visualisation
 
-# start = timeit.default_timer()
 
+
+TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
 
-
 def main(total_houses, iterations):
-
-    # where to save output files
-    outpath = ("output/{}".format(total_houses))
-
     best_iteration = 0
-
-    fig1 = plt.figure()
 
     for i in range(iterations):
 
         # fill building array with a house at a random point
         buildings = []
+
+        # append first house to array 'buildings'
+        buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
 
         # set number of each building type
         h_number = 0.6 * total_houses
@@ -49,7 +45,7 @@ def main(total_houses, iterations):
         h_counter, b_counter, m_counter = 0, 0, 0
 
         # build houses until maximum is reached
-        while len(buildings) < total_houses:
+        while (len(buildings) - 1) < total_houses:
 
 	        # choose random building type
             building_type = random.choice(['house', 'bungalow', 'maison'])
@@ -63,6 +59,8 @@ def main(total_houses, iterations):
             if building_type == 'maison' and m_counter < m_number:
                 buildings, m_counter = helpers.m_build(buildings, m_counter)
 
+        # delete first house from array
+        buildings.pop(0)
 
         # calculate closest distance to buildings
         counter = 0
@@ -75,11 +73,10 @@ def main(total_houses, iterations):
         if (total_value > best_iteration):
             best_iteration = total_value
 
-            # add subplot
+            fig1 = plt.figure()
             ax1 = fig1.add_subplot(111, aspect='equal')
-            ax1.set_xlim(0, X_DIMENSION)
-            ax1.set_ylim(0, Y_DIMENSION)
-            plt.suptitle("The total value is: {:,}".format(best_iteration))
+            ax1.set_xlim(0, 360)
+            ax1.set_ylim(0, 320)
 
             for building in buildings:
                 if building.name == 'house':
@@ -89,14 +86,13 @@ def main(total_houses, iterations):
                 if building.name == 'maison':
                     visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'green')
 
-            # save figure
-            fig1.savefig(path.join(outpath,"20_houses_{0}.png".format(i)))
-            plt.gcf().clear()
-            print best_iteration
+            # safe figure
+            fig1.savefig('random_algoritm.png', dpi=90, bbox_inches='tight')
 
+        print("best_iteration")
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
-    print "De hoogste score is: ", best_iteration
+    print("De hoogste score is: ", best_iteration)
 
 # if __name__ == "__main__":
 #     main(iterations)

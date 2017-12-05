@@ -1,4 +1,5 @@
 import random_algoritm
+import expanding_universe
 
 
 if __name__ == "__main__":
@@ -10,3 +11,7 @@ if __name__ == "__main__":
         iterations = input("How many iterations?: ")
 
         random_algoritm.main(total_houses, iterations)
+
+    elif algoritm == "expanding universe":
+
+        expanding_universe.main(total_houses)
