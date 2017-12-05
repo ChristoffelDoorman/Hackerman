@@ -13,7 +13,7 @@ import timeit
 
 start = timeit.default_timer()
 
-ITERATIONS = 1000000
+ITERATIONS = 5
 TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
