@@ -54,8 +54,8 @@ class Bungalow:
 
 class Maison:
 	name = 'maison'
-	length = 33
-	width = 34
+	length = 34
+	width = 33
 	price = 610000
 	marginalValue = 1.06
 
@@ -73,8 +73,3 @@ class Maison:
 		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
 		self.value = value
 		return value
-
-# class Water:
-# 	total_area = 0.2 * 360 * 320
-# 	min_ratio = 1
-# 	max_ratio = 4
