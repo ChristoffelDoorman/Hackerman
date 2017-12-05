@@ -2,10 +2,38 @@
 Amstelhaegen
 
 # TODO:
-laatst aangepast: 5-12
+laatst aangepast: 5-12, na aanleiding van tech-assist 
 
-    ....
-
+    .gitignore ??
+    
+    Ook een Algoritmen map aanmaken, met daarin alle algoritmen + een readme daarover.
+    
+    visualiser.py maken,
+    
+    overlap in helpers gooien 
+    
+    main moet het algoritmen aanroepen, dan krijg je een gevulde map, die je dan weer in visualiser kan gooien om een png bestand te 
+    krijgen, dus echt alles opdelen. 
+    
+    link naar je github voor punten aanvraag
+    
+    nog een 'map'-class maken, daarin sla je de locaties op. Kan in een Array. hierin H_build enz. want nu zijn het een soort van losse 
+    functies. 
+    
+    datastructuur: niet te veel data opslaan, doen we al niet, maar let erop!
+    
+    inheritance?
+    
+    Kijk naar het algoritme: greedy, ik zet een plek neer waar de map het meeste waard is, dan weer een huis waar de map het meeste 
+    waard is. 
+    
+    water: bij zestig huizen, gewoon x aantal lichamen neerzetten en dan pas de random laten lopen. volgens techt-assist is dit het beste.
+    
+    punten aanvraag advies tech-assist:
+    datastructuur voor 4 gaan.
+    infrastructuur ook 4.
+    algoritmen, nu 1 punt, want we hebben er pas 1
+    
 # Opdracht
 
 **requirements voor de wijk**
