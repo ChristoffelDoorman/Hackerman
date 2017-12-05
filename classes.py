@@ -73,8 +73,8 @@ class Maison:
 		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
 		self.value = value
 		return value
-#
+
 # class Water:
-# 	total_area = 0.2 * 180 * 160
+# 	total_area = 0.2 * 360 * 320
 # 	min_ratio = 1
 # 	max_ratio = 4
