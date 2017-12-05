@@ -4,7 +4,7 @@ Amstelhaegen
 # TODO:
    laatst aangepast: 5-12, 
 
-Na aanleiding van de les:
+Naar aanleiding van de les:
 
     Sommige vrije-vrije-ruimte wordt niet benut, bijvoobeeld als een huis links 10 meter vrij heeft maar rechts maar 5, dan wordt er 5
     dan wordt er 5 meter niet gebruikt. Probeer alle vrije vrije ruimte te benutten! 
@@ -12,7 +12,7 @@ Na aanleiding van de les:
     De Docent kwam met intresant idee voor een algortime: de huizen als magneten (atomen) die elkaar afstoten op basis van een kracht. 
     Waarbij bijvoorbeeld de Maison's harder stoten dan de Eengezinswoningen. 
 
-Na aanleiding van tech-assist 
+Naar aanleiding van tech-assist 
 
     .gitignore ??
     
