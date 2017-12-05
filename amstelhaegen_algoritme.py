@@ -52,7 +52,7 @@ def h_build(buildings, h_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
-
+	print xrandom
 	house = classes.House(xrandom, yrandom)
 
 	olap = True
@@ -262,8 +262,8 @@ if __name__ == "__main__":
 
 			fig1 = plt.figure()
 			ax1 = fig1.add_subplot(111, aspect='equal')
-			ax1.set_xlim(0,360)
-			ax1.set_ylim(0,320)
+			ax1.set_xlim(0, 360)
+			ax1.set_ylim(0, 320)
 
 			for building in buildings:
 				if building.name == 'house':

@@ -1,7 +1,7 @@
 class House:
 	name = 'house'
-	length = 10
-	width = 10
+	length = 20
+	width = 20
 	price = 285000
 	marginalValue = 1.03
 
@@ -21,15 +21,15 @@ class House:
 	# Dit is nog cumulatief, en dat mag niet!
 	def score(self, closest):
 		self.freeSpace = closest
-		value = 285000 + (285000 * 0.03 * self.freeSpace)
+		value = 285000 + (285000 * 0.03 * (self.freeSpace / 2))
 		self.value = value
 		return value
 
 
 class Bungalow:
 	name = 'bungalow'
-	length = 10.5
-	width = 13
+	length = 21
+	width = 26
 	price = 399000
 	marginalValue = 1.04
 
@@ -47,15 +47,15 @@ class Bungalow:
 
 	def score(self, closest):
 		self.freeSpace = closest
-		value = 399000 + (399000 * 0.04 * self.freeSpace)
+		value = 399000 + (399000 * 0.04 * (self.freeSpace / 2))
 		self.value = value
 		return value
 
 
 class Maison:
 	name = 'maison'
-	length = 16.5
-	width = 17
+	length = 33
+	width = 34
 	price = 610000
 	marginalValue = 1.06
 
@@ -70,8 +70,11 @@ class Maison:
 
 	def score(self, closest):
 		self.freeSpace = closest
-		value = 610000 + (610000 * 0.06 * self.freeSpace)
+		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
 		self.value = value
 		return value
-
-class Water:
+#
+# class Water:
+# 	total_area = 0.2 * 180 * 160
+# 	min_ratio = 1
+# 	max_ratio = 4
