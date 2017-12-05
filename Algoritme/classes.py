@@ -90,10 +90,8 @@ class Water:
 
 class Map:
 
-	def __init__():
-		self.dkj
-
 	def h_build(buildings, h_counter):
+
 
 		xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 		yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
