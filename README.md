@@ -2,13 +2,7 @@
 Amstelhaegen
 
 # TODO:
-<<<<<<< HEAD
-laatst aangepast: 5-12
-
-    
-=======
 laatst aangepast: 5-12, na aanleiding van tech-assist 
->>>>>>> 415701e3376646cb1c285fa4f4ac6be4aadf1b65
 
     .gitignore ??
     
