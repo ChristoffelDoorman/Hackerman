@@ -13,7 +13,7 @@ import timeit
 
 start = timeit.default_timer()
 
-ITERATIONS = 5
+ITERATIONS = 50
 TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
@@ -30,8 +30,8 @@ def drawBuilding(building, x, y, edgecolor):
 	ax1.add_patch(
 	    patches.Rectangle(
 	        (x, y),   			# (x,y)
-	        building.length,    # length
-	        building.width,     # width	# color
+	        building.width,    # length
+	        building.length,     # width	# color
 			linewidth = 1,
 			edgecolor = edgecolor,
 			facecolor = 'none'
