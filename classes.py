@@ -52,6 +52,11 @@ class Bungalow:
 		return value
 
 
+	def rotate():
+
+		inheretence
+
+
 class Maison:
 	name = 'maison'
 	length = 34
@@ -73,6 +78,7 @@ class Maison:
 		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
 		self.value = value
 		return value
+
 
 class Water:
 	name = 'water'

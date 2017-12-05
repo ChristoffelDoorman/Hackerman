@@ -122,7 +122,7 @@ def m_build(buildings, m_counter):
 
 	return buildings, m_counter
 
-def w_build():
+def w_build(buildings, waters):
 	choice = random.getrandbits(1)
 	if choice:
 		w_length = random.randint(1, 90)
@@ -137,10 +137,26 @@ def w_build():
 
 	xrandom = random.randint(0, X_DIMENSION - w_width)
 	yrandom = random.randint(0, Y_DIMENSION - w_length)
-	print xrandom, yrandom, w_width, w_length
+
 	water = classes.Water(xrandom, yrandom, w_length, w_width)
 
-	return water
+	olap = True
+	for building in buildings:
+		olap = overlap(water, building)
+
+		if olap:
+			break
+
+	for water2 in waters:
+		olap = overlap(water, water2)
+
+		if olap:
+			break
+
+	if not olap:
+		waters.append(water)
+
+	return waters
 
 
 def closest_distance(current_building, buildings):
@@ -249,13 +265,11 @@ def closest_distance(current_building, buildings):
 
 if __name__ == "__main__":
 
-	water = w_build()
-	print water
-
 	for i in range(ITERATIONS):
 
 		# fill building array with a house at a random point
 		buildings = []
+		waters = []
 
 		# append first house to array 'buildings'
 		buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
@@ -283,6 +297,8 @@ if __name__ == "__main__":
 			if building_type == 'maison' and m_counter < m_number:
 				buildings, m_counter = m_build(buildings, m_counter)
 
+		w_build(buildings, waters)
+
 	    # delete first house from array
 		buildings.pop(0)
 
@@ -290,9 +306,9 @@ if __name__ == "__main__":
 		counter = 0
 		total_value = 0
 		for current_building in buildings:
-			counter += 1
-			closest = closest_distance(current_building, buildings)
-			total_value += current_building.score(closest)
+				counter += 1
+				closest = closest_distance(current_building, buildings)
+				total_value += current_building.score(closest)
 
 
 
@@ -308,9 +324,12 @@ if __name__ == "__main__":
 				if building.name == 'house':
 					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'red')
 				if building.name == 'bungalow':
-					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'blue')
+					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'black')
 				if building.name == 'maison':
 					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'green')
+
+			for water in waters:
+				drawBuilding(water, water.left_bottom[0], water.left_bottom[1], 'blue')
 
 			# safe figure
 			fig1.savefig('best_random.png', dpi=90, bbox_inches='tight')
