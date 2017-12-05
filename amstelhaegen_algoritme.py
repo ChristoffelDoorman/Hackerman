@@ -12,7 +12,7 @@ import locale
 import timeit
 import math
 
-# import files
+# import filesd
 import classes
 import main
 

@@ -36,6 +36,9 @@ def h_build(buildings, h_counter):
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
+	if not buildings:
+		buildings.append(house)
+		return buildings, h_counter
 
 	olap = True
 	for building in buildings:
@@ -57,12 +60,17 @@ def b_build(buildings, b_counter):
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
-	if random.choice((True, False)):
-		if True:
-			bungalow.length, bungalow.width = bungalow.width, bungalow.length
-			bungalow.left_top[1] = yrandom + bungalow.length
-			bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
-			bungalow.right_bottom[0] = xrandom + bungalow.width
+
+	choice = random.getrandbits(1)
+	if choice:
+		bungalow.length, bungalow.width = bungalow.width, bungalow.length
+		bungalow.left_top[1] = yrandom + bungalow.length
+		bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
+		bungalow.right_bottom[0] = xrandom + bungalow.width
+
+	if not buildings:
+		buildings.append(bungalow)
+		return buildings, b_counter
 
 	olap = True
 	for building in buildings:
@@ -84,13 +92,18 @@ def m_build(buildings, m_counter):
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
+
 	# random: length, width = width, length
-	if random.choice((True, False)):
-		if True:
-			maison.length, maison.width = maison.width, maison.length
-			maison.left_top[1] = yrandom + maison.length
-			maison.right_top = [xrandom + maison.width, yrandom + maison.length]
-			maison.right_bottom[0] = xrandom + maison.width
+	choice = random.getrandbits(1)
+	if choice:
+		maison.length, maison.width = maison.width, maison.length
+		maison.left_top[1] = yrandom + maison.length
+		maison.right_top = [xrandom + maison.width, yrandom + maison.length]
+		maison.right_bottom[0] = xrandom + maison.width
+
+	if not buildings:
+		buildings.append(maison)
+		return buildings, m_counter
 
 	olap = True
 	for building in buildings:
@@ -105,7 +118,6 @@ def m_build(buildings, m_counter):
 		m_counter += 1
 
 	return buildings, m_counter
-
 
 def closest_distance(current_building, buildings):
 
