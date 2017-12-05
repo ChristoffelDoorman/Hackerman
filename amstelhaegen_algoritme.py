@@ -55,6 +55,7 @@ def h_build(buildings, waters, h_counter):
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
+
 	olap = True
 	if overlap(waters[0], house):
 		return buildings, h_counter
