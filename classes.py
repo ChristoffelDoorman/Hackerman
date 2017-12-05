@@ -42,7 +42,7 @@ class Bungalow:
 
 
 	def __repr__(self):
-		return("x=%i, y=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1]))
+		return("x=%i, y=%i, type = bungalow, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
 
 
 	def score(self, closest):
@@ -73,3 +73,17 @@ class Maison:
 		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
 		self.value = value
 		return value
+
+class Water:
+	name = 'water'
+
+	def __init__(self, x, y, length, width):
+		self.length = length
+		self.width = width
+		self.left_bottom = [x, y]
+		self.left_top = [x, y + self.length]
+		self.right_top = [x + self.width, y + self.length]
+		self.right_bottom = [x + self.width, y]
+
+	def __repr__(self):
+		return("x=%i, y=%i, type = water, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))

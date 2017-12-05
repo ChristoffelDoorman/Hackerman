@@ -10,10 +10,11 @@ import pdb
 import numpy as np
 import locale
 import timeit
+import math
 
 start = timeit.default_timer()
 
-ITERATIONS = 50
+ITERATIONS = 1
 TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
@@ -73,6 +74,12 @@ def b_build(buildings, b_counter):
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
+	if random.choice((True, False)):
+		if True:
+			bungalow.length, bungalow.width = bungalow.width, bungalow.length
+			bungalow.left_top[1] = yrandom + bungalow.length
+			bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
+			bungalow.right_bottom[0] = xrandom + bungalow.width
 
 	olap = True
 	for building in buildings:
@@ -93,6 +100,13 @@ def m_build(buildings, m_counter):
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
+	# random: length, width = width, length
+	if random.choice((True, False)):
+		if True:
+			maison.length, maison.width = maison.width, maison.length
+			maison.left_top[1] = yrandom + maison.length
+			maison.right_top = [xrandom + maison.width, yrandom + maison.length]
+			maison.right_bottom[0] = xrandom + maison.width
 
 	olap = True
 	for building in buildings:
@@ -107,6 +121,27 @@ def m_build(buildings, m_counter):
 		m_counter += 1
 
 	return buildings, m_counter
+
+def w_build():
+	choice = random.getrandbits(1)
+	if choice:
+		w_length = random.randint(1, 90)
+		w_width = random.randint(1, 4) * w_length
+		print "true"
+
+	else:
+		print "false"
+		w_width = random.randint(1, 80)
+		w_length = random.randint(1, 4) * w_width
+
+
+	xrandom = random.randint(0, X_DIMENSION - w_width)
+	yrandom = random.randint(0, Y_DIMENSION - w_length)
+	print xrandom, yrandom, w_width, w_length
+	water = classes.Water(xrandom, yrandom, w_length, w_width)
+
+	return water
+
 
 def closest_distance(current_building, buildings):
 
@@ -214,6 +249,9 @@ def closest_distance(current_building, buildings):
 
 if __name__ == "__main__":
 
+	water = w_build()
+	print water
+
 	for i in range(ITERATIONS):
 
 		# fill building array with a house at a random point
@@ -255,6 +293,8 @@ if __name__ == "__main__":
 			counter += 1
 			closest = closest_distance(current_building, buildings)
 			total_value += current_building.score(closest)
+
+
 
 		if total_value > best_iteration:
 			best_iteration = total_value
