@@ -52,11 +52,6 @@ class Bungalow:
 		return value
 
 
-	def rotate():
-
-		inheretence
-
-
 class Maison:
 	name = 'maison'
 	length = 34
@@ -79,7 +74,6 @@ class Maison:
 		self.value = value
 		return value
 
-
 class Water:
 	name = 'water'
 
@@ -96,10 +90,8 @@ class Water:
 
 class Map:
 
-	def __init__():
-		self.dkj
-
 	def h_build(buildings, h_counter):
+
 
 		xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 		yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
