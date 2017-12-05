@@ -54,7 +54,7 @@ def h_build(buildings, waters, h_counter):
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
-	if (len(buildings == 0)):
+	if not buildings:
 		buildings.append(house)
 		return buildings, h_counter
 
@@ -88,7 +88,7 @@ def b_build(buildings, waters, b_counter):
 		bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
 		bungalow.right_bottom[0] = xrandom + bungalow.width
 
-	if (len(buildings == 0)):
+	if not buildings:
 		buildings.append(bungalow)
 		return buildings, b_counter
 
@@ -123,7 +123,7 @@ def m_build(buildings, waters, m_counter):
 		maison.right_top = [xrandom + maison.width, yrandom + maison.length]
 		maison.right_bottom[0] = xrandom + maison.width
 
-	if (len(buildings == 0)):
+	if not buildings:
 		buildings.append(maison)
 		return buildings, m_counter
 
