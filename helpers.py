@@ -1,8 +1,3 @@
-# HEURISTIEKEN
-# Project: Amstelhaegen
-# Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
-
-
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import random
@@ -12,14 +7,8 @@ import locale
 import timeit
 import math
 
-# import files
 import classes
-import main
 
-start = timeit.default_timer()
-
-ITERATIONS = 100000
-TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
 best_iteration = 0
@@ -29,19 +18,6 @@ def pythagoras(x1, y1, x2, y2):
 
 	return distance
 
-def drawBuilding(building, x, y, edgecolor):
-
-	# add building to map
-	ax1.add_patch(
-	    patches.Rectangle(
-	        (x, y),   			# (x,y)
-	        building.width,    # length
-	        building.length,     # width	# color
-			linewidth = 1,
-			edgecolor = edgecolor,
-			facecolor = 'none'
-	    )
-	)
 
 def overlap(building1, building2):
 	overlap = True
@@ -52,20 +28,16 @@ def overlap(building1, building2):
 
 	return overlap
 
-def h_build(buildings, waters, h_counter):
+
+def h_build(buildings, h_counter):
+
 
 	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
-	if not buildings:
-		buildings.append(house)
-		return buildings, h_counter
 
 	olap = True
-	if overlap(waters[0], house):
-		return buildings, h_counter
-
 	for building in buildings:
 		olap = overlap(house, building)
 
@@ -79,27 +51,20 @@ def h_build(buildings, waters, h_counter):
 
 	return buildings, h_counter
 
-def b_build(buildings, waters, b_counter):
+
+def b_build(buildings, b_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
-
-	choice = random.getrandbits(1)
-	if choice:
-		bungalow.length, bungalow.width = bungalow.width, bungalow.length
-		bungalow.left_top[1] = yrandom + bungalow.length
-		bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
-		bungalow.right_bottom[0] = xrandom + bungalow.width
-
-	if not buildings:
-		buildings.append(bungalow)
-		return buildings, b_counter
+	if random.choice((True, False)):
+		if True:
+			bungalow.length, bungalow.width = bungalow.width, bungalow.length
+			bungalow.left_top[1] = yrandom + bungalow.length
+			bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
+			bungalow.right_bottom[0] = xrandom + bungalow.width
 
 	olap = True
-	if overlap(waters[0], bungalow):
-		return buildings, b_counter
-
 	for building in buildings:
 		olap = overlap(bungalow, building)
 
@@ -113,28 +78,21 @@ def b_build(buildings, waters, b_counter):
 
 	return buildings, b_counter
 
-def m_build(buildings, waters, m_counter):
+
+def m_build(buildings, m_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 	# random: length, width = width, length
-
-	choice = random.getrandbits(1)
-	if choice:
-		maison.length, maison.width = maison.width, maison.length
-		maison.left_top[1] = yrandom + maison.length
-		maison.right_top = [xrandom + maison.width, yrandom + maison.length]
-		maison.right_bottom[0] = xrandom + maison.width
-
-	if not buildings:
-		buildings.append(maison)
-		return buildings, m_counter
+	if random.choice((True, False)):
+		if True:
+			maison.length, maison.width = maison.width, maison.length
+			maison.left_top[1] = yrandom + maison.length
+			maison.right_top = [xrandom + maison.width, yrandom + maison.length]
+			maison.right_bottom[0] = xrandom + maison.width
 
 	olap = True
-	if overlap(waters[0], maison):
-		return buildings, m_counter
-
 	for building in buildings:
 		olap = overlap(maison, building)
 
@@ -147,26 +105,6 @@ def m_build(buildings, waters, m_counter):
 		m_counter += 1
 
 	return buildings, m_counter
-
-# def w_build(buildings, waters):
-# 	# choice = random.getrandbits(1)
-# 	# if choice:
-# 	# 	w_length = random.randint(1, 90)
-# 	# 	w_width = random.randint(1, 4) * w_length
-# 	# 	print "true"
-#     #
-# 	# else:
-# 	# 	print "false"
-# 	# 	w_width = random.randint(1, 80)
-# 	# 	w_length = random.randint(1, 4) * w_width
-#
-#
-# 	xrandom = random.randint(0, X_DIMENSION - w_width)
-# 	yrandom = random.randint(0, Y_DIMENSION - w_length)
-#
-# 	water = classes.Water(xrandom, yrandom, w_length, w_width)
-#
-# 	return waters
 
 
 def closest_distance(current_building, buildings):
@@ -253,84 +191,3 @@ def closest_distance(current_building, buildings):
 			closest = distance
 
 	return closest
-
-if __name__ == "__main__":
-
-	for i in range(ITERATIONS):
-
-		# fill building array with a house at a random point
-		buildings = []
-		waters = []
-
-		waters.append(classes.Water(28.2, 122.05, 75.89, 303.58))
-
-		# append first house to array 'buildings'
-		buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
-
-		# set number of each building type
-		h_number = 0.6 * TOTAL_HOUSES
-		b_number = 0.25 * TOTAL_HOUSES
-		m_number = 0.15 * TOTAL_HOUSES
-
-	    # create counters to count number of each building
-		h_counter, b_counter, m_counter = 0, 0, 0
-
-		# build houses until maximum is reached
-		while (len(buildings) - 1) < TOTAL_HOUSES:
-
-	        # choose random building type
-			building_type = random.choice(['house', 'bungalow', 'maison'])
-
-			if building_type == 'house' and h_counter < h_number:
-				buildings, h_counter = h_build(buildings, waters, h_counter)
-
-			if building_type == 'bungalow' and b_counter < b_number:
-				buildings, b_counter = b_build(buildings, waters, b_counter)
-
-			if building_type == 'maison' and m_counter < m_number:
-				buildings, m_counter = m_build(buildings, waters, m_counter)
-
-
-	    # delete first house from array
-		buildings.pop(0)
-
-	    # calculate closest distance to buildings
-		counter = 0
-		total_value = 0
-		for current_building in buildings:
-			counter += 1
-			closest = closest_distance(current_building, buildings)
-			total_value += current_building.score(closest)
-
-
-		if total_value > best_iteration:
-			best_iteration = total_value
-			print best_iteration
-
-			fig1 = plt.figure()
-			ax1 = fig1.add_subplot(111, aspect='equal')
-			ax1.set_xlim(0, 360)
-			ax1.set_ylim(0, 320)
-
-			for building in buildings:
-				if building.name == 'house':
-					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'red')
-				if building.name == 'bungalow':
-					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'black')
-				if building.name == 'maison':
-					drawBuilding(building, building.left_bottom[0], building.left_bottom[1], 'green')
-
-			drawBuilding(waters[0], waters[0].left_bottom[0], waters[0].left_bottom[1], 'blue')
-
-			# for water in waters:
-			# 	drawBuilding(water, water.left_bottom[0], water.left_bottom[1], 'blue')
-
-			# safe figure
-			fig1.savefig('best_random.png', dpi=90, bbox_inches='tight')
-
-		print total_value
-		print best_iteration
-
-	stop = timeit.default_timer()
-	print "De tijd is: ", stop - start
-	print "De hoogste score is: ", best_iteration
