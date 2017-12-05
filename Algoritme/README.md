@@ -1,9 +1,12 @@
-# Algoritmen
+
+#Algoritmen
+
+
 
 **randomiser**
     amstelhaegen_algoritme.py
     
-    voor een bepaald tijd:
+    voor een bepaalde tijd:
         bouwt een random huis op een random plek, tot alle huizen gebouwd
         dan berekent hij de waarden
         meest waardevole tot dan toe slaat hij op
