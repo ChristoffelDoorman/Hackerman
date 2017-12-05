@@ -27,7 +27,8 @@ laatst aangepast: 5-12, na aanleiding van tech-assist
     Kijk naar het algoritme: greedy, ik zet een plek neer waar de map het meeste waard is, dan weer een huis waar de map het meeste 
     waard is. 
     
-    water: bij zestig huizen, gewoon x aantal lichamen neerzetten en dan pas de random laten lopen. volgens techt-assist is dit het beste.
+    water: bij zestig huizen, gewoon x aantal lichamen neerzetten en dan pas de random laten lopen. volgens techt-assist is 2 lichamn het
+    beste.
     
     punten aanvraag advies tech-assist:
     datastructuur voor 4 gaan.
