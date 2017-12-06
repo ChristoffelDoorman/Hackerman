@@ -1,6 +1,6 @@
 import random_algoritm
 import expanding_universe
-import hillclimber
+import hillclimber_algoritm
 
 
 if __name__ == "__main__":

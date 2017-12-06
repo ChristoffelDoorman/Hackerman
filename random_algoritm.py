@@ -66,25 +66,22 @@ def main(total_houses, iterations):
         if (total_value > best_iteration):
             best_iteration = total_value
 
-            # fig1 = plt.figure()
-            # ax1 = fig1.add_subplot(111, aspect='equal')
-            # ax1.set_xlim(0, 360)
-            # ax1.set_ylim(0, 320)
-            #
-            # for building in buildings:
-            #     if building.name == 'house':
-            #         visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')
-            #     if building.name == 'bungalow':
-            #         visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'black')
-            #     if building.name == 'maison':
-            #         visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'green')
-            #
-            # # safe figure
-            # fig1.savefig('random_algoritm.png', dpi=90, bbox_inches='tight')
+            fig1 = plt.figure()
+            ax1 = fig1.add_subplot(111, aspect='equal')
+            ax1.set_xlim(0, 360)
+            ax1.set_ylim(0, 320)
 
-    return buildings
+            for building in buildings:
+                if building.name == 'house':
+                    visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')
+                if building.name == 'bungalow':
+                    visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'black')
+                if building.name == 'maison':
+                    visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'green')
 
-        print("best_iteration")
+            # safe figure
+            fig1.savefig('random_algoritm.png', dpi=90, bbox_inches='tight')
+            print("best_iteration")
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
 
