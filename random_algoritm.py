@@ -19,7 +19,6 @@ import helpers
 import visualisation
 
 
-
 TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
@@ -33,9 +32,6 @@ def main(total_houses, iterations):
         # fill building array with a house at a random point
         buildings = []
 
-        # append first house to array 'buildings'
-        buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
-
         # set number of each building type
         h_number = 0.6 * total_houses
         b_number = 0.25 * total_houses
@@ -45,7 +41,7 @@ def main(total_houses, iterations):
         h_counter, b_counter, m_counter = 0, 0, 0
 
         # build houses until maximum is reached
-        while (len(buildings) - 1) < total_houses:
+        while len(buildings) < total_houses:
 
 	        # choose random building type
             building_type = random.choice(['house', 'bungalow', 'maison'])
@@ -58,9 +54,6 @@ def main(total_houses, iterations):
 
             if building_type == 'maison' and m_counter < m_number:
                 buildings, m_counter = helpers.m_build(buildings, m_counter)
-
-        # delete first house from array
-        buildings.pop(0)
 
         # calculate closest distance to buildings
         counter = 0
@@ -94,6 +87,7 @@ def main(total_houses, iterations):
         print("best_iteration")
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
+
     print "De hoogste score is: ", best_iteration
     return buildings
 
