@@ -65,7 +65,7 @@ def main(total_houses, iterations):
 
         if (total_value > best_iteration):
             best_iteration = total_value
-
+            
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
 
