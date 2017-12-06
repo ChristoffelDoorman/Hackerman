@@ -81,7 +81,7 @@ def main(total_houses, iterations):
 
             # safe figure
             fig1.savefig('random_algoritm.png', dpi=90, bbox_inches='tight')
-            print("best_iteration")
+            print(best_iteration)
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
 
