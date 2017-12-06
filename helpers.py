@@ -204,3 +204,12 @@ def closest_distance(current_building, buildings):
 			closest = distance
 
 	return closest
+
+def calculate_score(buildings):
+
+	total_value = 0
+	for current_building in buildings:
+		closest = closest_distance(current_building, buildings)
+		total_value += current_building.score(closest)
+
+	return total_value

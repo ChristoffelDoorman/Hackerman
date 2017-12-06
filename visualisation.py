@@ -45,7 +45,7 @@ def main(buildings, output_file, total_houses, best_iteration, save_in_file):
 
     # safe figure
     if save_in_file:
-        fig1.savefig(path.join(outpath,"random_{}_{}.png".format(total_houses, str(datetime.now()))), dpi=90, bbox_inches='tight')
+        fig1.savefig(path.join(outpath,"random_{}.png".format(total_houses)), dpi=90, bbox_inches='tight')
 
     else:
         fig1.savefig(output_file, dpi=90, bbox_inches='tight')

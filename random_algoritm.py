@@ -25,6 +25,7 @@ Y_DIMENSION = 320
 
 
 def main(total_houses, iterations):
+
     best_iteration = 0
 
     for i in range(iterations):
@@ -56,16 +57,11 @@ def main(total_houses, iterations):
                 buildings, m_counter = helpers.m_build(buildings, m_counter)
 
         # calculate closest distance to buildings
-        counter = 0
-        total_value = 0
-        for current_building in buildings:
-            counter += 1
-            closest = helpers.closest_distance(current_building, buildings)
-            total_value += current_building.score(closest)
+        total_value = helpers.calculate_score(buildings)
 
         if (total_value > best_iteration):
             best_iteration = total_value
-            
+
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
 
