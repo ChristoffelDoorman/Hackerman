@@ -10,7 +10,7 @@ if __name__ == "__main__":
     if algoritm == "random":
         iterations = input("How many iterations?: ")
 
-        random_algoritm.main(total_houses, iterations)
+        buildings = random_algoritm.main(total_houses, iterations)
 
     elif algoritm == "expanding universe":
 

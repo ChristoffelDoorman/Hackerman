@@ -17,24 +17,35 @@ def main(total_houses):
     b_number = 0.25 * total_houses
     m_number = 0.15 * total_houses
 
+    # build houses in middle of map
     grid_size = int(math.ceil(math.sqrt(h_number)))
-    print grid_size
     counter = 0
     for i in range(grid_size):
-        x = (X_DIMENSION / 2) + classes.House.width * (i - (grid_size / 2))
+
+        x = (X_DIMENSION + (classes.House.width * (2 * i - grid_size - 1))) / 2
+
+        # x = (X_DIMENSION / 2) + classes.House.width * (i - (grid_size / 2))
+
 
         for j in range(grid_size):
 
             if counter == h_number:
                 break
 
-            y = (Y_DIMENSION / 2) + (classes.House.length * ((grid_size / 2) - j))
+            y = (Y_DIMENSION + (classes.House.width * (-2 * j + grid_size - 1))) / 2
+
+            # y = (Y_DIMENSION / 2) + (classes.House.length * ((grid_size / 2) - j))
 
             counter += 1
             house = classes.House(x, y)
             buildings.append(house)
 
-    
+
+    for i in range(b_number):
+
+        x = (X_DIMENSION / 2) - grid_size
+
+
 
     fig1 = plt.figure()
     ax1 = fig1.add_subplot(111, aspect='equal')
