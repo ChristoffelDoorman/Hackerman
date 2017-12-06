@@ -40,20 +40,10 @@ def main(total_houses):
             house = classes.House(x, y)
             buildings.append(house)
 
+    #
+    # for i in range(b_number):
+    #
+    #     x = (X_DIMENSION / 2) - grid_size
 
-    for i in range(b_number):
 
-        x = (X_DIMENSION / 2) - grid_size
-
-
-
-    fig1 = plt.figure()
-    ax1 = fig1.add_subplot(111, aspect='equal')
-    ax1.set_xlim(0, 360)
-    ax1.set_ylim(0, 320)
-
-    for building in buildings:
-        visualisation.drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')
-
-    # safe figure
-    fig1.savefig('expanding_universe.png', dpi=90, bbox_inches='tight')
+    return buildings

@@ -119,6 +119,7 @@ def m_build(buildings, m_counter):
 
 	return buildings, m_counter
 
+
 def closest_distance(current_building, buildings):
 
 	distance = 500

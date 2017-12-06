@@ -1,19 +1,28 @@
 import random_algoritm
 import expanding_universe
-import hillclimber_algoritm
+import visualisation
+# import hillclimber
 
 
 if __name__ == "__main__":
 
     total_houses = input("Total number of houses?: ")
-    algoritm = raw_input("Which algoritm?: ")
+    algoritm_choice = input("Which algoritm? [1: random], [2: hillclimber], [3: expanding universe]: ")
 
-    if algoritm == "random":
+    if algoritm_choice == 1:
+        algoritm = "random"
         iterations = input("How many iterations?: ")
 
-        random_algoritm.main(total_houses, iterations)
+        buildings, best_iteration = random_algoritm.main(total_houses, iterations)
 
-    elif algoritm == "hillclimber":
+        print ("best iteration is", best_iteration)
+
+        # visualisation.main(buildings, algoritm, 0, 0, False)
+        visualisation.main(buildings, algoritm, total_houses, best_iteration, True)
+
+
+    elif algoritm_choice == 2:
+        algoritm = "hillclimber"
 
         iterations = input("How many iterations random first?: ")
 
@@ -24,6 +33,9 @@ if __name__ == "__main__":
         hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
 
 
-    elif algoritm == "expanding universe":
+    elif algoritm_choice == 3:
+        algoritm = "expanding_universe"
 
-        expanding_universe.main(total_houses)
+        buildings = expanding_universe.main(total_houses)
+
+        visualisation.main(buildings, algoritm, total_houses, 0, False)
