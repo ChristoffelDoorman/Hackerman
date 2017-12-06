@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 import visualisation
 import classes
+import helpers
 
 X_DIMENSION = 360
 Y_DIMENSION = 320
@@ -40,6 +41,10 @@ def main(total_houses):
             house = classes.House(x, y)
             buildings.append(house)
 
+
+    # r = (grid_size / 2) * math.sqrt(2) * classes.House.width
+    # x = a + r.cos(t)
+    # y = b + r.sin(t)
     #
     # for i in range(b_number):
     #
