@@ -97,6 +97,7 @@ def main(total_houses, iterations):
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
     print "De hoogste score is: ", best_iteration
+    return buildings
 
 # if __name__ == "__main__":
 #     main(iterations)
