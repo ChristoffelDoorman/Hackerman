@@ -28,12 +28,26 @@ def drawBuilding(ax1, building, x, y, edgecolor):
 	    )
 	)
 
+def print_canvas(buildings, file_name):
+    ax1, fig1 = draw_canvas()
+
+    outpath =  "test/"
+
+    for building in buildings:
+        if building.name == 'house':
+            drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')
+        if building.name == 'bungalow':
+            drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'black')
+        if building.name == 'maison':
+            drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'green')
+
+    fig1.savefig(path.join(outpath,"test_{}.png".format(file_name)), dpi=90, bbox_inches='tight')
 
 def main(buildings, output_file, total_houses, best_iteration, save_in_file):
 
     ax1, fig1 = draw_canvas()
     plt.suptitle("The total value is: {:,}".format(best_iteration))
-    
+
     outpath = ("output/{}/{}".format(output_file, total_houses))
 
     for building in buildings:

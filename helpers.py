@@ -218,30 +218,27 @@ def calculate_score(buildings):
 def move(building, direction):
 
     if direction == 'left':
-        print building.left_bottom[0]
-        building.left_bottom[0] -= 1
-        building.left_top[0] -= 1
-        building.right_top[0] -= 1
-        building.right_bottom[0] -= 1
-        print building.left_bottom[0]
-        # return building
+        building.left_bottom[0] -= 5
+        building.left_top[0] -= 5
+        building.right_top[0] -= 5
+        building.right_bottom[0] -= 5
 
     if direction == 'up':
-        building.left_bottom[1] += 1
-        building.left_top[1] += 1
-        building.right_top[1] += 1
-        building.right_bottom[1] += 1
+        building.left_bottom[1] += 5
+        building.left_top[1] += 5
+        building.right_top[1] += 5
+        building.right_bottom[1] += 5
 
     if direction == 'right':
-        building.left_bottom[0] += 1
-        building.left_top[0] += 1
-        building.right_top[0] += 1
-        building.right_bottom[0] += 1
+        building.left_bottom[0] += 5
+        building.left_top[0] += 5
+        building.right_top[0] += 5
+        building.right_bottom[0] += 5
 
     if direction == 'down':
-        building.left_bottom[1] -= 1
-        building.left_top[1] -= 1
-        building.right_top[1] -= 1
-        building.right_bottom[1] -= 1
+        building.left_bottom[1] -= 5
+        building.left_top[1] -= 5
+        building.right_top[1] -= 5
+        building.right_bottom[1] -= 5
 
     return building
