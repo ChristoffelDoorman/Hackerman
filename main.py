@@ -1,7 +1,7 @@
 import random_algoritm
 import expanding_universe
 import visualisation
-# import hillclimber
+import hillclimber_algoritm
 
 
 if __name__ == "__main__":
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
         iterations = input("How many iterations random first?: ")
 
-        buildings = random_algoritm.main(total_houses, iterations)
+        buildings, best_iteration = random_algoritm.main(total_houses, iterations)
 
         iterations_hill = input("How many iterations for hillclimber: ")
 

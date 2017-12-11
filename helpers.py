@@ -204,3 +204,44 @@ def closest_distance(current_building, buildings):
 			closest = distance
 
 	return closest
+
+def calculate_score(buildings):
+
+	total_value = 0
+
+	for current_building in buildings:
+		closest = closest_distance(current_building, buildings)
+		total_value += current_building.score(closest)
+
+	return total_value
+
+def move(building, direction):
+
+    if direction == 'left':
+        print building.left_bottom[0]
+        building.left_bottom[0] -= 1
+        building.left_top[0] -= 1
+        building.right_top[0] -= 1
+        building.right_bottom[0] -= 1
+        print building.left_bottom[0]
+        # return building
+
+    if direction == 'up':
+        building.left_bottom[1] += 1
+        building.left_top[1] += 1
+        building.right_top[1] += 1
+        building.right_bottom[1] += 1
+
+    if direction == 'right':
+        building.left_bottom[0] += 1
+        building.left_top[0] += 1
+        building.right_top[0] += 1
+        building.right_bottom[0] += 1
+
+    if direction == 'down':
+        building.left_bottom[1] -= 1
+        building.left_top[1] -= 1
+        building.right_top[1] -= 1
+        building.right_bottom[1] -= 1
+
+    return building
