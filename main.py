@@ -9,6 +9,10 @@ import helpers
 if __name__ == "__main__":
 
     total_houses = input("Total number of houses?: ")
+
+    while total_houses < 7:
+        total_houses = input("Choose number bigger than 7: ")
+
     algoritm_choice = input("Which algoritm? [1: random], [2: hillclimber], [3: expanding universe]: ")
 
     if algoritm_choice == 1:

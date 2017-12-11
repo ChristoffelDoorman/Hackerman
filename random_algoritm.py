@@ -19,7 +19,6 @@ import helpers
 import visualisation
 
 
-TOTAL_HOUSES = 60
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
