@@ -5,6 +5,7 @@ import helpers
 import visualisation
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import copy
 
 
 def main(total_houses, iterations_hill, buildings):
@@ -13,58 +14,56 @@ def main(total_houses, iterations_hill, buildings):
 
     for building in buildings:
 
+        map_score = helpers.calculate_score(buildings)
+        print "map score = ", map_score
+
         for direction in directions:
-            check(building, direction)
+
+            old_building = copy.deepcopy(building)
+            # tijdelijke oplossing
+            buildings.remove(building)
+            new_building = helpers.move(building, direction)
+
+            possible = check_overlap(new_building, old_building, buildings, direction)
+
+            print "possible = ", possible
+            if direction == 'left' and possible:
+                score_left = helpers.calculate_score(buildings)
+                buildings.append(old_building)
+
+            if direction == 'top' and possible:
+                score_top = helpers.calculate_score(buildings)
+                print "score top: {}".format(score_top)
+                buildings.append(old_building)
+
+            if direction == 'right' and possible:
+                score_right = helpers.calculate_score(buildings)
+                print "score right: {}".format(score_right)
+                buildings.append(old_building)
+
+            if direction == 'down' and possible:
+                score_down = helpers.calculate_score(buildings)
+                print "score down: {}".format(score_down)
+                buildings.append(old_building)
+        #
+        # if score_left or score_top or score_right or score_down > map_score:
+        #     map_score = ......
 
 
+def check_overlap(new_building, old_building, buildings, direction):
 
-
-def move(building, direction):
-
-    if direction == 'left':
-        building.left_bottom[0] -= 1
-        building.left_top[0] -= 1
-        building.right_top[0] -= 1
-        building.right_bottom[0] -= 1
-
-    if direction == 'up':
-        building.left_bottom[1] += 1
-        building.left_top[1] += 1
-        building.right_top[1] += 1
-        building.right_bottom[1] += 1
-
-    if direction == 'right':
-        building.left_bottom[0] += 1
-        building.left_top[0] += 1
-        building.right_top[0] += 1
-        building.right_bottom[0] += 1
-
-    if direction == 'down':
-        building.left_bottom[1] -= 1
-        building.left_top[1] -= 1
-        building.right_top[1] -= 1
-        building.right_bottom[1] -= 1
-
-    return building
-
-def check_overlap(building, direction):
-
-    print "current building: {}".format(building)
-
-    old_building = building
-    new_building = move(building, 'direction')
-    buildings.remove(building)
 
     olap = True
-    for building2 in buildings:
-        olap = helpers.overlap(building2, new_building)
+    for building in buildings:
+        olap = helpers.overlap(building, new_building)
 
         if olap:
             print "this overlaps"
-            buildings.append(old_building)
-            break
+            return False
+            # print 'false: ', buildings
 
     if not olap:
-        buildings.append(new_building)
-        print "moved building: {}".format(building)
-        return
+        print "no overlap"
+        # print "moved building: {}".format(building)
+        return True
+        # print 'true: ', buildings

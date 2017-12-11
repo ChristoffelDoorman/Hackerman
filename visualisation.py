@@ -33,6 +33,7 @@ def main(buildings, output_file, total_houses, best_iteration, save_in_file):
 
     ax1, fig1 = draw_canvas()
     plt.suptitle("The total value is: {:,}".format(best_iteration))
+    
     outpath = ("output/{}/{}".format(output_file, total_houses))
 
     for building in buildings:
