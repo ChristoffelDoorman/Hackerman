@@ -7,47 +7,64 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import copy
 
+X_DIMENSION = 360
+Y_DIMENSION = 320
 
 def main(total_houses, iterations_hill, buildings):
 
+
     directions = ['left', 'up', 'right', 'down']
 
-    for building in buildings:
+    for i in range(iterations_hill):
 
-        map_score = helpers.calculate_score(buildings)
+        for building in buildings:
 
-        print "map score = ", map_score
+            map_score = helpers.calculate_score(buildings)
 
-        for direction in directions:
+            print "map score = ", map_score
 
-            possible = check_overlap(building, buildings, direction)
+            for direction in directions:
 
-            # print "possible = ", possible
+                possible = check_overlap(building, buildings, direction)
 
-            if direction == 'left' and possible:
-                score_left = moved_score(building, buildings, direction)
-                # print "score left: {}".format(score_left)
+                # print "possible = ", possible
+                best_direction = 'none'
 
-            if direction == 'up' and possible:
-                score_up = moved_score(building, buildings, direction)
-                # print "score up: {}".format(score_up)
+                if direction == 'left' and possible:
+                    score_left = moved_score(building, buildings, direction)
+                    if score_left > map_score:
+                        map_score = score_left
+                        best_direction = direction
 
-            if direction == 'right' and possible:
-                score_right = moved_score(building, buildings, direction)
-                # print "score right: {}".format(score_right)
+                if direction == 'up' and possible:
+                    score_up = moved_score(building, buildings, direction)
+                    if score_up > map_score:
+                        map_score = score_up
+                        best_direction = direction
 
+                if direction == 'right' and possible:
+                    score_right = moved_score(building, buildings, direction)
+                    if score_right > map_score:
+                        map_score = score_right
+                        best_direction = direction
 
-            if direction == 'down' and possible:
-                score_down = moved_score(building, buildings, direction)
-                # print "score down: {}".format(score_down)
+                if direction == 'down' and possible:
+                    score_down = moved_score(building, buildings, direction)
+                    if score_down > map_score:
+                        map_score = score_down
+                        best_direction = direction
 
-            print map_score
-
+                helpers.move(building, best_direction)
+                
+    return buildings, map_score
 
 def check_overlap(building, buildings, direction):
 
     old_building = copy.deepcopy(building)
     new_building = helpers.move(old_building, direction)
+
+    if (new_building.left_bottom[0] < 0) or (new_building.left_bottom[1] < 0) or (new_building.right_top[0] > X_DIMENSION) or (new_building.right_top[1] > Y_DIMENSION):
+        return False
 
     olap = True
     for build in buildings:
@@ -71,31 +88,19 @@ def check_overlap(building, buildings, direction):
 def moved_score(building, buildings, direction):
 
     old_building = copy.deepcopy(building)
+    helpers.move(building, direction)
+    score = helpers.calculate_score(buildings)
 
     if direction == 'left':
-        helpers.move(building, direction)
-        score_left = helpers.calculate_score(buildings)
-        # visualisation.print_canvas(buildings, '1')
         helpers.move(building, 'right')
-        return score_left
 
     if direction == 'up':
-        building = helpers.move(building, direction)
-        score_up = helpers.calculate_score(buildings)
-        # visualisation.print_canvas(buildings, '2')
         helpers.move(building, 'down')
-        return score_up
 
     if direction == 'right':
-        building = helpers.move(building, direction)
-        score_right = helpers.calculate_score(buildings)
-        # visualisation.print_canvas(buildings, '3')
         helpers.move(building, 'left')
-        return score_right
 
     if direction == 'down':
-        building = helpers.move(building, direction)
-        score_down = helpers.calculate_score(buildings)
-        # visualisation.print_canvas(buildings, '4')
         helpers.move(building, 'up')
-        return score_down
+
+    return score
