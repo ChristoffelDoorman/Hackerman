@@ -47,7 +47,92 @@ def main(total_houses):
         y = ((Y_DIMENSION - classes.Bungalow.length) / 2) + r * math.sin(t * i)
 
         bungalow = classes.Bungalow(x, y)
+        for building in buildings:
+            olap = helpers.overlap(bungalow, building)
+
+            if (bungalow.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] > Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    bungalow = helpers.move(bungalow, 'left')
+                    bungalow = helpers.move(bungalow, 'up')
+                    olap = helpers.overlap(bungalow, building)
+
+            if (bungalow.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] < Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    bungalow = helpers.move(bungalow, 'left')
+                    bungalow = helpers.move(bungalow, 'down')
+                    olap = helpers.overlap(bungalow, building)
+
+            if (bungalow.left_bottom[0] > X_DIMENSION / 2) and (building.left_bottom[1] < Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    bungalow = helpers.move(bungalow, 'right')
+                    bungalow = helpers.move(bungalow, 'down')
+                    olap = helpers.overlap(bungalow, building)
+
+            if (bungalow.left_bottom[0] > X_DIMENSION / 2) and (building.left_bottom[1] > Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    bungalow = helpers.move(bungalow, 'right')
+                    bungalow = helpers.move(bungalow, 'up')
+                    olap = helpers.overlap(bungalow, building)
+
         buildings.append(bungalow)
+
+
+    r = (classes.House.width / 2) * (grid_size + 1) + classes.Bungalow.width
+    t = ((2 * math.pi) / (m_number))
+    for i in range(m_number):
+
+        x = ((X_DIMENSION - classes.Maison.width) / 2) + r * math.cos(t * i)
+        y = ((Y_DIMENSION - classes.Maison.length) / 2) + r * math.sin(t * i)
+
+        maison = classes.Maison(x, y)
+        for building in buildings:
+            olap = helpers.overlap(maison, building)
+
+            if (maison.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] > Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    maison = helpers.move(maison, 'left')
+                    maison = helpers.move(maison, 'up')
+                    olap = helpers.overlap(maison, building)
+
+            if (maison.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] < Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    maison = helpers.move(maison, 'left')
+                    maison = helpers.move(maison, 'down')
+                    olap = helpers.overlap(maison, building)
+
+            if (maison.left_bottom[0] > X_DIMENSION / 2) and (building.left_bottom[1] < Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    maison = helpers.move(maison, 'right')
+                    maison = helpers.move(maison, 'down')
+                    olap = helpers.overlap(maison, building)
+
+            if (maison.left_bottom[0] > X_DIMENSION / 2) and (building.left_bottom[1] > Y_DIMENSION / 2) and olap:
+                while olap == True:
+                    maison = helpers.move(maison, 'right')
+                    maison = helpers.move(maison, 'up')
+                    olap = helpers.overlap(maison, building)
+
+        buildings.append(maison)
+
+
+    # for building in buildings:
+    #     if building.name == 'bungalow':
+    #
+    #         bungalow = building
+    #
+    #         for building in buildings:
+    #             olap = True
+    #
+    #             while olap:
+    #                 olap = helpers.overlap(bungalow, building)
+    #
+    #                 if (bungalow.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] > Y_DIMENSION / 2) and olap:
+    #
+    #                         bungalow1 = helpers.move(bungalow, 'left')
+    #                         bungalow = helpers.move(bungalow1, 'up')
+    #
+    #                 else:
+    #                     break
 
 
 

@@ -3,6 +3,8 @@ import expanding_universe
 import visualisation
 import hillclimber_algoritm
 
+import helpers
+
 
 if __name__ == "__main__":
 
@@ -37,5 +39,7 @@ if __name__ == "__main__":
         algoritm = "expanding_universe"
 
         buildings = expanding_universe.main(total_houses)
+
+        print "score is: ", helpers.calculate_score(buildings)
 
         visualisation.main(buildings, algoritm, total_houses, 0, False)
