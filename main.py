@@ -1,7 +1,7 @@
 import algorithms
-import random_algoritm
+import random_algorithm
 import expanding_universe
-import hillclimber_algoritm
+import hillclimber_algorihtm
 import visualisation
 import classes
 import helpers
