@@ -3,6 +3,11 @@ Amstelhaegen
 
 # TODO:
 
+     #kan 'olap = True' hier niet weg? (regel 108 van helper.py)
+	olap = True
+	for building in buildings:
+		olap = overlap(maison, building)
+
 Na les 12, 12:
 
      Presentatie, (10min)
