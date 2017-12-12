@@ -40,6 +40,8 @@ class Bungalow:
 		self.right_bottom = [x + self.width, y]
 		# self.score = 0
 
+	def top_right(self):
+		return [self.x+self.width, self.y+self.length]
 
 	def __repr__(self):
 		return("x=%i, y=%i, type = bungalow, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
@@ -96,25 +98,16 @@ class Water:
 
 class Map:
 
-	def __init__():
-		self.dkj
+	#buildings = []
 
-	def h_build(buildings, h_counter):
+	def __init__(self, height, width):
+		self.height = height
+		self.width = width
+		self.buildings = []
+		self.score = 0
 
-		xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-		yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
-		house = classes.House(xrandom, yrandom)
 
-		olap = True
-		for building in buildings:
-			olap = overlap(house, building)
-
-			if olap:
-				break
-
-		if not olap:
-			buildings.append(house)
-			# drawBuilding(house, house.left_bottom[0], house.left_bottom[1], 'red')
-			h_counter += 1
-
-		return buildings, h_counter
+	# def score(self):
+    #
+    #
+	# map.buildings.append(building)

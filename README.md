@@ -2,6 +2,71 @@
 Amstelhaegen
 
 # TODO:
+
+     #kan 'olap = True' hier niet weg? (regel 108 van helper.py)
+	olap = True
+	for building in buildings:
+		olap = overlap(maison, building)
+
+Na les 12, 12:
+
+     Presentatie, (10min)
+      
+     Case uitleg duidelijk maken,
+      
+     Eigenlijk alles wat je in requirements moet uitleggen ook in de presentatie uitleggen.
+     
+     Algoritme uitleggen, bijv Hill climber, dan hoef je niet het principe uit te leggen, maar wel hoe je het hebt toegepast, wat het 
+     betekent voor jouw case
+     
+     Geen code in je presentatie verwerken!!! 
+     
+     Veel duidelijk uitleggen, waaorm bepaalde keuzes gemaakt zijn. 
+     
+     Tabellen, diagrammen met resultaten laten zien. <----- HIER GEWOON LEKKER VEEL VAN zoals:
+     - wat is max waarde 100.000x random?
+     - wat is max waarde 1x random dan 100.000x Hill Climber?
+     - wat is max waarde 100.000x random + dan 100.000x Hill Climber?
+          En dat voor alle algoritmen + alle combinaties. 
+     
+     Future work, inzicht daarin laten zien, van; 'deze algoritmen geen tijd meer voor, maar is veelbelovend want dit en dat...
+     
+   Opmerkingen docent:
+     
+       Vergelijk hill climber op 1random, met 1000 random, welke is beter welke conclusie's kunnen we daaruit trekken?
+       
+       Plant: ook slechte pakken, want je weet dat je daar in iedergeval niet moet zijn, dus lekker grote stap maken, 
+            10 mappen, maken beste krijgen veel kinderen die lijken op ouder, slechtste weinig kinderen die er erg niet op lijken, dan  
+            daaruit weer tien beste kiezen en nog een keer enz. enz. enz. Kinderen is de oudermap met kleine veranderingen (1 huis swap)  
+            of grote veranderingen (veel huis-swaps, grote stappen naar de andere kant van de map, tien huizen weer helemaal random                   
+            neerzetten enz.)
+            
+       Bij Greedy als twee waardes hetzelfde zijn, zet hij op de laatste waarde.
+       
+       Als Hill Climber zegt kan geen stappen meer maken, dan simulated annealing (dus tien huizen een stap laten zetten) en kijken of je 
+       weer verder kan met Hill Climber, want soms kun je geen huizen meer een stap zetten zonder in waarde omhoog te gaan, terwijl er 
+       wel betere mappen zijn, daar kun je dan uitbreken met simulated annealing. Check bij simulated annealing wel de temperatuur (aan 
+       de hand van een temperatuur functie, die checkt hoeveel stappen er nog zijn en hoeveel achteruitgang hij dus voor lief neemt, 
+       weinig stappen over? wil je geen achteruitgang meer accepteren, want maak je dat nog wel goed? anders gezegd: dat de grote van 
+       de verslechtering een overweging is om deze stap wel of niet te accepteren.
+   
+   
+     
+
+Na tech-assist 12-12:
+
+      Maak een map: class, Idee: om zwevende date te voorkomen (pas dan 5punten data-structuur mogelijk)
+
+      requirements files maken? requirements.txt
+
+      Experimentatie: Wat we missen is het laten zien van resultaten, wat krijgen we bij welk algoritme, is dat een verbetering? enz... 
+      vergelijk ze, trek conclusie's. bijv. random x aantal keer, wat is je beste? dan hillclimber hoeveel verbetering levert dit op? bij
+      alle algoritme minimaal 10.000 iteraties.
+
+      Als we nog creedy maken, hebben we opzich genoeg algoritmen. 
+
+
+# TODO:
    laatst aangepast: 5-12, 
 
 Naar aanleiding van de les:

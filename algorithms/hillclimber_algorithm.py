@@ -1,14 +1,14 @@
 # import files
-import classes
-import main
-import helpers
-import visualisation
+from classes import Map
+from helpers import calculate_score, move, overlap
+
+# import modules
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import copy
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
+# create map class as district
+district = Map(320, 360)
 
 def main(iterations_hill, buildings, map_score):
 

@@ -2,9 +2,13 @@
 # Project: Amstelhaegen
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
+# import files
+from classes import Map
+from helpers import h_build, b_build, m_build, calculate_score
+import visualisation
 
+# import modules
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import random
 import pdb
 import numpy as np
@@ -13,15 +17,8 @@ import timeit
 import math
 import copy
 
-# import files
-import classes
-import main
-import helpers
-import visualisation
 
-
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district = Map(320, 360)
 
 
 def main(total_houses, iterations):
@@ -57,7 +54,7 @@ def main(total_houses, iterations):
                 buildings, m_counter = helpers.m_build(buildings, m_counter)
 
         # calculate closest distance to buildings
-        total_value = helpers.calculate_score(buildings)
+        total_value = calculate_score(buildings)
 
 
         if (total_value > best_iteration):
