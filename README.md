@@ -31,6 +31,12 @@ Na les 12, 12:
             daaruit weer tien beste kiezen en nog een keer enz. enz. enz. Kinderen is de oudermap met kleine veranderingen (1 huis swap)  
             of grote veranderingen (veel huis-swaps, grote stappen naar de andere kant van de map, tien huizen weer helemaal random                   
             neerzetten enz.)
+            
+       Bij Greedy als twee waardes hetzelfde zijn, zet hij op de laatste waarde.
+       
+       Als Hill Climber zegt kan geen stappen meer maken, dan simulated annealing (dus tien huizen een stap laten zetten) en kijken of je 
+       weer verder kan met Hill Climber, want soms kun je geen huizen meer een stap zetten zonder in waarde omhoog te gaan, terwijl er 
+       wel betere mappen zijn, daar kun je dan uitbreken met simulated annealing. 
    
    
      
