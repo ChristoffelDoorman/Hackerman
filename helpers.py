@@ -205,6 +205,7 @@ def closest_distance(current_building, buildings):
 
 	return closest
 
+
 def calculate_score(buildings):
 
 	total_value = 0
@@ -214,6 +215,7 @@ def calculate_score(buildings):
 		total_value += current_building.score(closest)
 
 	return total_value
+
 
 def move(building, direction, step):
 

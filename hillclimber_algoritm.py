@@ -58,6 +58,7 @@ def main(total_houses, iterations_hill, buildings):
 
     return buildings, map_score
 
+
 def check_overlap(building, buildings, direction):
 
     old_building = copy.deepcopy(building)
@@ -84,6 +85,7 @@ def check_overlap(building, buildings, direction):
         # print "moved building: {}".format(building)
         return True
         # print 'true: ', buildings
+
 
 def moved_score(building, buildings, direction):
 
