@@ -18,7 +18,11 @@ Na les 12, 12:
      
      Veel duidelijk uitleggen, waaorm bepaalde keuzes gemaakt zijn. 
      
-     Tabellen, diagrammen met resultaten laten zien. <----- HIER GEWOON LEKKER VEEL VAN 
+     Tabellen, diagrammen met resultaten laten zien. <----- HIER GEWOON LEKKER VEEL VAN zoals:
+     - wat is max waarde 100.000x random?
+     - wat is max waarde 1x random dan 100.000x Hill Climber?
+     - wat is max waarde 100.000x random + dan 100.000x Hill Climber?
+          En dat voor alle algoritmen + alle combinaties. 
      
      Future work, inzicht daarin laten zien, van; 'deze algoritmen geen tijd meer voor, maar is veelbelovend want dit en dat...
      
