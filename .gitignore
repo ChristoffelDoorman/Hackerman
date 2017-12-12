@@ -1,2 +1,4 @@
-
-best_random.png
+# Compiled source #
+###################
+*.pyc
+*.png

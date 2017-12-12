@@ -20,7 +20,7 @@ def main(total_houses, iterations_hill, buildings):
 
             map_score = helpers.calculate_score(buildings)
 
-            print map_score
+            # print map_score
 
             for direction in directions:
 
