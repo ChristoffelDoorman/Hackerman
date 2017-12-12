@@ -40,9 +40,10 @@ Na les 12, 12:
        
        Als Hill Climber zegt kan geen stappen meer maken, dan simulated annealing (dus tien huizen een stap laten zetten) en kijken of je 
        weer verder kan met Hill Climber, want soms kun je geen huizen meer een stap zetten zonder in waarde omhoog te gaan, terwijl er 
-       wel betere mappen zijn, daar kun je dan uitbreken met simulated annealing. Check bij simulated annealing wel de tempratuur (aan 
-       de hand van een tempratuur functie, die checkt hoeveel stappen er nog zijn en hoeveel achteruitgang hij dus voor lief neemt, weinig
-       stappen over? wil je geen achteruitgang meer accepteren, want maak je dat nog wel goed?
+       wel betere mappen zijn, daar kun je dan uitbreken met simulated annealing. Check bij simulated annealing wel de temperatuur (aan 
+       de hand van een temperatuur functie, die checkt hoeveel stappen er nog zijn en hoeveel achteruitgang hij dus voor lief neemt, 
+       weinig stappen over? wil je geen achteruitgang meer accepteren, want maak je dat nog wel goed? anders gezegd: dat de grote van 
+       de verslechtering een overweging is om deze stap wel of niet te accepteren.
    
    
      
