@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import visualisation
 import classes
 import helpers
+import hillclimber_algoritm
 
 X_DIMENSION = 360
 Y_DIMENSION = 320
@@ -53,26 +54,26 @@ def set_initial_map(total_houses):
 
             if (bungalow.left_bottom[0] <= X_DIMENSION / 2) and (bungalow.left_bottom[1] >= Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'left')
-                    bungalow = helpers.move(bungalow, 'up')
+                    bungalow = helpers.move(bungalow, 'left', 2)
+                    bungalow = helpers.move(bungalow, 'up', 2)
                     olap = helpers.overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= X_DIMENSION / 2) and (bungalow.left_bottom[1] < Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'left')
-                    bungalow = helpers.move(bungalow, 'down')
+                    bungalow = helpers.move(bungalow, 'left', 2)
+                    bungalow = helpers.move(bungalow, 'down', 2)
                     olap = helpers.overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > X_DIMENSION / 2) and (bungalow.left_bottom[1] <= Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'right')
-                    bungalow = helpers.move(bungalow, 'down')
+                    bungalow = helpers.move(bungalow, 'right', 2)
+                    bungalow = helpers.move(bungalow, 'down', 2)
                     olap = helpers.overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > X_DIMENSION / 2) and (bungalow.left_bottom[1] > Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'right')
-                    bungalow = helpers.move(bungalow, 'up')
+                    bungalow = helpers.move(bungalow, 'right', 2)
+                    bungalow = helpers.move(bungalow, 'up', 2)
                     olap = helpers.overlap(bungalow, building)
 
         buildings.append(bungalow)
@@ -91,26 +92,26 @@ def set_initial_map(total_houses):
 
             if (maison.left_bottom[0] <= X_DIMENSION / 2) and (maison.left_bottom[1] >= Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'left')
-                    maison = helpers.move(maison, 'up')
+                    maison = helpers.move(maison, 'left', 2)
+                    maison = helpers.move(maison, 'up', 2)
                     olap = helpers.overlap(maison, building)
 
             if (maison.left_bottom[0] <= X_DIMENSION / 2) and (maison.left_bottom[1] < Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'left')
-                    maison = helpers.move(maison, 'down')
+                    maison = helpers.move(maison, 'left', 2)
+                    maison = helpers.move(maison, 'down', 2)
                     olap = helpers.overlap(maison, building)
 
             if (maison.left_bottom[0] > X_DIMENSION / 2) and (maison.left_bottom[1] <= Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'right')
-                    maison = helpers.move(maison, 'down')
+                    maison = helpers.move(maison, 'right', 2)
+                    maison = helpers.move(maison, 'down', 2)
                     olap = helpers.overlap(maison, building)
 
             if (maison.left_bottom[0] > X_DIMENSION / 2) and (maison.left_bottom[1] > Y_DIMENSION / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'right')
-                    maison = helpers.move(maison, 'up')
+                    maison = helpers.move(maison, 'right', 2)
+                    maison = helpers.move(maison, 'up', 2)
                     olap = helpers.overlap(maison, building)
 
         buildings.append(maison)
@@ -118,14 +119,47 @@ def set_initial_map(total_houses):
 
     return buildings
 
+def expand(building, steps):
+
+    for i in range(steps):
+
+        if (building.name == building.name) and (building.left_top[0] < X_DIMENSION / 2) and (building.left_top[1] > Y_DIMENSION / 2):
+            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.right_bottom[0], building.right_bottom[1], (Y_DIMENSION / 2))
+            building = helpers.move(building, 'left', r_middle / 80)
+            building = helpers.move(building, 'up', r_middle / 80)
+
+        if (building.name == building.name) and (building.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] < Y_DIMENSION / 2):
+            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.right_top[0], building.right_top[1], (Y_DIMENSION / 2))
+            building = helpers.move(building, 'left', r_middle / 80)
+            building = helpers.move(building, 'down', r_middle / 80)
+
+        if (building.name == building.name) and (building.right_top[0] > X_DIMENSION / 2) and (building.right_top[1] > Y_DIMENSION / 2):
+            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.left_bottom[0], building.left_bottom[1], (Y_DIMENSION / 2))
+            building = helpers.move(building, 'up', r_middle / 80)
+            building = helpers.move(building, 'right', r_middle / 80)
+
+        if (building.name == building.name) and (building.right_bottom[0] > X_DIMENSION / 2) and (building.right_bottom[1] < Y_DIMENSION / 2):
+            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.left_top[0], building.left_top[1], (Y_DIMENSION / 2))
+            building = helpers.move(building, 'right', r_middle / 80)
+            building = helpers.move(building, 'down', r_middle / 80)
+
+    return building
+
 def main(total_houses):
 
     buildings = set_initial_map(total_houses)
 
     # for building in buildings:
-    #     if (building.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] > Y_DIMENSION / 2):
-    #         building = move(building, 'left')
-    #         building = move(building, 'up')
-    #         score = helpers.calculate_score(buildings)
+    #     if building.name == "maison":
+    #         expand(building, 20)
+    #
+    # for building in buildings:
+    #     if building.name == "bungalow":
+    #         expand(building, 20)
+    #
+    # for building in buildings:
+    #     if building.name == "house":
+    #         expand(building, 20)
+
 
     return buildings

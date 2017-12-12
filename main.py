@@ -37,7 +37,7 @@ if __name__ == "__main__":
         iterations_hill = input("How many iterations for hillclimber: ")
 
         buildings, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
-        
+
         visualisation.main(buildings, algoritm, total_houses, map_score, True)
 
     elif algoritm_choice == 3:
@@ -45,6 +45,10 @@ if __name__ == "__main__":
 
         buildings = expanding_universe.main(total_houses)
 
-        print "score is: ", helpers.calculate_score(buildings)
+        map_score = helpers.calculate_score(buildings)
 
-        visualisation.main(buildings, algoritm, total_houses, 0, False)
+        iterations_hill = input("How many iterations for hillclimber: ")
+
+        buildings, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
+
+        visualisation.main(buildings, algoritm, total_houses, map_score, False)
