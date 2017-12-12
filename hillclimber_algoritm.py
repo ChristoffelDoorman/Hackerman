@@ -52,12 +52,8 @@ def main(total_houses, iterations_hill, buildings):
                         map_score = score_down
                         best_direction = direction
 
-<<<<<<< HEAD
                 helpers.move(building, best_direction, 1)
 
-=======
-                helpers.move(building, best_direction, 3)
->>>>>>> e073a36478529eacd9c6154f09cc88459c044071
 
     return buildings, map_score
 
@@ -85,30 +81,14 @@ def check_overlap(building, buildings, direction):
         return True
 
 
-<<<<<<< HEAD
-    # visualisation.print_canvas(buildings, '1')
-    helpers.move(building, direction, 1)
-    # visualisation.print_canvas(buildings, '2')
-    score = helpers.calculate_score(buildings)
-
-    if direction == 'left':
-        helpers.move(building, 'right', 1)
-        # visualisation.print_canvas(buildings, '3')
-
-=======
 def moved_score(building, buildings, direction):
 
->>>>>>> e073a36478529eacd9c6154f09cc88459c044071
     old_building = copy.deepcopy(building)
     helpers.move(building, direction, 3)
     score = helpers.calculate_score(buildings)
 
     if direction == 'left':
-<<<<<<< HEAD
-        helpers.move(building, 'right', 1)
-=======
         helpers.move(building, 'right', 3)
->>>>>>> e073a36478529eacd9c6154f09cc88459c044071
 
     if direction == 'up':
         helpers.move(building, 'down', 3)

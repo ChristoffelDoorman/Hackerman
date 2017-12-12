@@ -45,14 +45,8 @@ if __name__ == "__main__":
 
         print map_score
 
-<<<<<<< HEAD
         visualisation.print_canvas(buildings2, 'hill')
 
-=======
-        visualisation.print_canvas(buildings, 'hill')
-
-        # visualisation.main(buildings, algoritm, total_houses, map_score, True)
->>>>>>> e073a36478529eacd9c6154f09cc88459c044071
 
     elif algoritm_choice == 3:
         algoritm = "expanding_universe"
