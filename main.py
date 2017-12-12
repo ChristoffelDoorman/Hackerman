@@ -33,21 +33,20 @@ if __name__ == "__main__":
 
         iterations = input("How many iterations random first?: ")
 
-        buildings, best_iteration = random_algoritm.main(total_houses, iterations)
+        buildings1, best_iteration = random_algoritm.main(total_houses, iterations)
 
-        visualisation.print_canvas(buildings, 'random')
+        visualisation.print_canvas(buildings1, 'random')
 
         print best_iteration
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
-        buildings, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
+        buildings2, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings1)
 
         print map_score
 
-        visualisation.print_canvas(buildings, 'hill')
+        visualisation.print_canvas(buildings2, 'hill')
 
-        # visualisation.main(buildings, algoritm, total_houses, map_score, True)
 
     elif algoritm_choice == 3:
         algoritm = "expanding_universe"

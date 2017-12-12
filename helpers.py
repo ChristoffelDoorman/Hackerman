@@ -218,7 +218,7 @@ def calculate_score(buildings):
 
 
 def move(building, direction, step):
-
+	
     if direction == 'left':
 
         building.left_bottom[0] -= step

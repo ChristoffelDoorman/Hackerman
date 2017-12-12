@@ -52,7 +52,8 @@ def main(total_houses, iterations_hill, buildings):
                         map_score = score_down
                         best_direction = direction
 
-                helpers.move(building, best_direction, 3)
+                helpers.move(building, best_direction, 1)
+
 
     return buildings, map_score
 
@@ -74,15 +75,10 @@ def check_overlap(building, buildings, direction):
         olap = helpers.overlap(build, new_building)
 
         if olap:
-            # print "this overlaps"
             return False
-            # print 'false: ', buildings
 
     if not olap:
-        # print "no overlap"
-        # print "moved building: {}".format(building)
         return True
-        # print 'true: ', buildings
 
 
 def moved_score(building, buildings, direction):
