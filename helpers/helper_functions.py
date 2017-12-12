@@ -191,7 +191,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden rechts
-		if (building.right_bottom[0] < current_building.left_bottom[0]
+		elif (building.right_bottom[0] < current_building.left_bottom[0]
 			and building.right_bottom[1] < current_building.left_top[1]
 			and building.right_top[1] > current_building.left_bottom[1]):
 
@@ -219,29 +219,41 @@ def calculate_score(buildings):
 
 def move(building, direction, step):
 
-    if direction == -1:
+    if direction == 'left':
 
         building.left_bottom[0] -= step
         building.left_top[0] -= step
         building.right_top[0] -= step
         building.right_bottom[0] -= step
 
-    if direction == 2:
+    if direction == 'up':
         building.left_bottom[1] += step
         building.left_top[1] += step
         building.right_top[1] += step
         building.right_bottom[1] += step
 
-    if direction == 1:
+    if direction == 'right':
         building.left_bottom[0] += step
         building.left_top[0] += step
         building.right_top[0] += step
         building.right_bottom[0] += step
 
-    if direction == -2:
+    if direction == 'down':
         building.left_bottom[1] -= step
         building.left_top[1] -= step
         building.right_top[1] -= step
         building.right_bottom[1] -= step
 
     return building
+
+
+# def swap(building1, building2):
+    #
+	# building1, building2 = building2, buildings1
+    #
+	# building1.
+	# for building in buildings:
+    #
+	# 	if overlap(building, building1) or overlap(building, building2):
+	# 		building1, building2 = building2, building1
+	# 		return buildings

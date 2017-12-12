@@ -106,8 +106,11 @@ class Map:
 		self.buildings = []
 		self.score = 0
 
+	def score(self, buildings):
+		total_value = 0
 
-	# def score(self):
-    #
-    #
-	# map.buildings.append(building)
+		for current_building in buildings:
+			closest = closest_distance(current_building, buildings)
+			total_value += current_building.score(closest)
+
+		return total_value

@@ -45,13 +45,13 @@ def main(total_houses, iterations):
             building_type = random.randint(1, 3)
 
             if building_type == 1 and h_counter < h_number:
-                buildings, h_counter = helpers.h_build(buildings, h_counter)
+                buildings, h_counter = h_build(buildings, h_counter)
 
             if building_type == 2 and b_counter < b_number:
-                buildings, b_counter = helpers.b_build(buildings, b_counter)
+                buildings, b_counter = b_build(buildings, b_counter)
 
             if building_type == 3 and m_counter < m_number:
-                buildings, m_counter = helpers.m_build(buildings, m_counter)
+                buildings, m_counter = m_build(buildings, m_counter)
 
         # calculate closest distance to buildings
         total_value = calculate_score(buildings)
