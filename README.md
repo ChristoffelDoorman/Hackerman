@@ -2,6 +2,21 @@
 Amstelhaegen
 
 # TODO:
+
+Na tech-assist 12-12:
+
+   Maak een map: class, Idee: om zwevende date te voorkomen (pas dan een 5 data-structuur)
+   
+   requirements files maken? requirements.txt
+   
+   Experimentatie: Wat we missen is het laten zien van resultaten, wat krijgen we bij welk algoritme, is dat een verbetering? enz... 
+   vergelijk ze, trek conclusie's. bijv. random x aantal keer, wat is je beste? dan hillclimber hoeveel verbetering levert dit op? bij
+   alle algoritme minimaal 10.000 iteraties.
+   
+   Als je nog creedy maakt hebben we opzich genoeg algoritme. 
+
+
+# TODO:
    laatst aangepast: 5-12, 
 
 Naar aanleiding van de les:
