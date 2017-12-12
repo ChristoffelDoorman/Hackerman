@@ -107,8 +107,7 @@ class Map:
 		self.score = 0
 
 
-	def score(self):
-
-
-
-	map.buildings.append(building)
+	# def score(self):
+    # 
+    #
+	# map.buildings.append(building)
