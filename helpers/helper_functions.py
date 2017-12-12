@@ -9,7 +9,7 @@ import math
 
 import classes
 
-district = classes.Map
+district = classes.Map(320, 360)
 
 best_iteration = 0
 

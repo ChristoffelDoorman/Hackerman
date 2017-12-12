@@ -1,13 +1,15 @@
+# import files
+from classes import *
+from helpers import overlap, move
+
 import math
 import matplotlib.pyplot as plt
 
-import visualisation
-import classes
-import helpers
-import hillclimber_algoritm
+# import visualisation
+# from classes import *
+# from helpers import *
 
-district = classes.Map
-
+district = Map(320, 360)
 
 def set_initial_map(total_houses):
 
@@ -24,7 +26,7 @@ def set_initial_map(total_houses):
     counter = 0
     for i in range(grid_size):
 
-        x = (district.width - (classes.House.width * (grid_size - (2.7 * i)))) / 2
+        x = (district.width - (House.width * (grid_size - (2.7 * i)))) / 2
 
 
         for j in range(grid_size):
@@ -32,86 +34,86 @@ def set_initial_map(total_houses):
             if counter == h_number:
                 break
 
-            y = (district.height + (classes.House.length * (grid_size - 2 - (2.7 * j)))) / 2
+            y = (district.height + (House.length * (grid_size - 2 - (2.7 * j)))) / 2
 
             counter += 1
-            house = classes.House(x, y)
+            house = House(x, y)
             buildings.append(house)
 
     # place bungalows around houses
-    r = (classes.House.width / 2) * (grid_size + 1)
+    r = (House.width / 2) * (grid_size + 1)
     t = ((2 * math.pi) / (b_number))
 
     for i in range(b_number):
 
-        x = ((district.width - classes.Bungalow.width) / 2) + r * math.cos(t * i)
-        y = ((district.height - classes.Bungalow.length) / 2) + r * math.sin(t * i)
+        x = ((district.width - Bungalow.width) / 2) + r * math.cos(t * i)
+        y = ((district.height - Bungalow.length) / 2) + r * math.sin(t * i)
 
-        bungalow = classes.Bungalow(x, y)
+        bungalow = Bungalow(x, y)
         for building in buildings:
-            olap = helpers.overlap(bungalow, building)
+            olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] >= district.height / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'left', 10)
-                    bungalow = helpers.move(bungalow, 'up', 10)
-                    olap = helpers.overlap(bungalow, building)
+                    bungalow = move(bungalow, 'left', 10)
+                    bungalow = move(bungalow, 'up', 10)
+                    olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] < district.height / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'left', 10)
-                    bungalow = helpers.move(bungalow, 'down', 10)
-                    olap = helpers.overlap(bungalow, building)
+                    bungalow = move(bungalow, 'left', 10)
+                    bungalow = move(bungalow, 'down', 10)
+                    olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] <= district.height / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'right', 10)
-                    bungalow = helpers.move(bungalow, 'down', 10)
-                    olap = helpers.overlap(bungalow, building)
+                    bungalow = move(bungalow, 'right', 10)
+                    bungalow = move(bungalow, 'down', 10)
+                    olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] > district.height / 2) and olap:
                 while olap == True:
-                    bungalow = helpers.move(bungalow, 'right', 10)
-                    bungalow = helpers.move(bungalow, 'up', 10)
-                    olap = helpers.overlap(bungalow, building)
+                    bungalow = move(bungalow, 'right', 10)
+                    bungalow = move(bungalow, 'up', 10)
+                    olap = overlap(bungalow, building)
 
         buildings.append(bungalow)
 
     # place maisons around bungalows
-    r = (classes.House.width / 2) * (grid_size + 1) + classes.Bungalow.width
+    r = (House.width / 2) * (grid_size + 1) + Bungalow.width
     t = ((2 * math.pi) / (m_number))
     for i in range(m_number):
 
-        x = ((district.width - classes.Maison.width) / 2) + r * math.cos(t * i)
-        y = ((district.height - classes.Maison.length) / 2) + r * math.sin(t * i)
+        x = ((district.width - Maison.width) / 2) + r * math.cos(t * i)
+        y = ((district.height - Maison.length) / 2) + r * math.sin(t * i)
 
-        maison = classes.Maison(x, y)
+        maison = Maison(x, y)
         for building in buildings:
-            olap = helpers.overlap(maison, building)
+            olap = overlap(maison, building)
 
             if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] >= district.height / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'left', 15)
-                    maison = helpers.move(maison, 'up', 15)
-                    olap = helpers.overlap(maison, building)
+                    maison = move(maison, 'left', 15)
+                    maison = move(maison, 'up', 15)
+                    olap = overlap(maison, building)
 
             if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] < district.height / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'left', 15)
-                    maison = helpers.move(maison, 'down', 15)
-                    olap = helpers.overlap(maison, building)
+                    maison = move(maison, 'left', 15)
+                    maison = move(maison, 'down', 15)
+                    olap = overlap(maison, building)
 
             if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] <= district.height / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'right', 15)
-                    maison = helpers.move(maison, 'down', 15)
-                    olap = helpers.overlap(maison, building)
+                    maison = move(maison, 'right', 15)
+                    maison = move(maison, 'down', 15)
+                    olap = overlap(maison, building)
 
             if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] > district.height / 2) and olap:
                 while olap == True:
-                    maison = helpers.move(maison, 'right', 15)
-                    maison = helpers.move(maison, 'up', 15)
-                    olap = helpers.overlap(maison, building)
+                    maison = move(maison, 'right', 15)
+                    maison = move(maison, 'up', 15)
+                    olap = overlap(maison, building)
 
         buildings.append(maison)
 
@@ -123,24 +125,24 @@ def expand(building, steps):
     for i in range(steps):
 
         if (building.name == building.name) and (building.left_top[0] < district.width / 2) and (building.left_top[1] > district.height / 2):
-            r_middle = helpers.pythagoras((district.width / 2), building.right_bottom[0], building.right_bottom[1], (district.height / 2))
-            building = helpers.move(building, 'left', r_middle / 80)
-            building = helpers.move(building, 'up', r_middle / 80)
+            r_middle = pythagoras((district.width / 2), building.right_bottom[0], building.right_bottom[1], (district.height / 2))
+            building = move(building, 'left', r_middle / 80)
+            building = move(building, 'up', r_middle / 80)
 
         if (building.name == building.name) and (building.left_bottom[0] < district.width / 2) and (building.left_bottom[1] < district.height / 2):
-            r_middle = helpers.pythagoras((district.width / 2), building.right_top[0], building.right_top[1], (district.height / 2))
-            building = helpers.move(building, 'left', r_middle / 80)
-            building = helpers.move(building, 'down', r_middle / 80)
+            r_middle = pythagoras((district.width / 2), building.right_top[0], building.right_top[1], (district.height / 2))
+            building = move(building, 'left', r_middle / 80)
+            building = move(building, 'down', r_middle / 80)
 
         if (building.name == building.name) and (building.right_top[0] > district.width / 2) and (building.right_top[1] > district.height / 2):
-            r_middle = helpers.pythagoras((district.width / 2), building.left_bottom[0], building.left_bottom[1], (district.height / 2))
-            building = helpers.move(building, 'up', r_middle / 80)
-            building = helpers.move(building, 'right', r_middle / 80)
+            r_middle = pythagoras((district.width / 2), building.left_bottom[0], building.left_bottom[1], (district.height / 2))
+            building = move(building, 'up', r_middle / 80)
+            building = move(building, 'right', r_middle / 80)
 
         if (building.name == building.name) and (building.right_bottom[0] > district.width / 2) and (building.right_bottom[1] < district.height / 2):
-            r_middle = helpers.pythagoras((district.width / 2), building.left_top[0], building.left_top[1], (district.height / 2))
+            r_middle = pythagoras((district.width / 2), building.left_top[0], building.left_top[1], (district.height / 2))
             building = helpers.move(building, 'right', r_middle / 80)
-            building = helpers.move(building, 'down', r_middle / 80)
+            building = move(building, 'down', r_middle / 80)
 
     return building
 

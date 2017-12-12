@@ -1,15 +1,17 @@
 # import files
-import classes
-import main
-import helpers
-import visualisation
+from classes import Map
+from helpers import calculate_score, move, overlap
+
+# import modules
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import copy
 
-district = classes.Map
+# create map class as district
+district = Map(320, 360)
 
 def main(total_houses, iterations_hill, buildings):
+
 
     directions = ['left', 'up', 'right', 'down']
 
@@ -17,7 +19,7 @@ def main(total_houses, iterations_hill, buildings):
 
         for building in buildings:
 
-            map_score = helpers.calculate_score(buildings)
+            map_score = calculate_score(buildings)
 
             # print map_score
 
@@ -51,7 +53,7 @@ def main(total_houses, iterations_hill, buildings):
                         map_score = score_down
                         best_direction = direction
 
-                helpers.move(building, best_direction, 1)
+                move(building, best_direction, 1)
 
 
     return buildings, map_score
@@ -60,7 +62,7 @@ def main(total_houses, iterations_hill, buildings):
 def check_overlap(building, buildings, direction):
 
     old_building = copy.deepcopy(building)
-    new_building = helpers.move(old_building, direction, 1)
+    new_building = move(old_building, direction, 1)
 
     if (new_building.left_bottom[0] < 0) or (new_building.left_bottom[1] < 0) or (new_building.right_top[0] > district.width) or (new_building.right_top[1] > district.height):
         return False
@@ -71,7 +73,7 @@ def check_overlap(building, buildings, direction):
         if build == building:
             continue
 
-        olap = helpers.overlap(build, new_building)
+        olap = overlap(build, new_building)
 
         if olap:
             return False
@@ -83,19 +85,19 @@ def check_overlap(building, buildings, direction):
 def moved_score(building, buildings, direction):
 
     old_building = copy.deepcopy(building)
-    helpers.move(building, direction, 3)
-    score = helpers.calculate_score(buildings)
+    move(building, direction, 3)
+    score = calculate_score(buildings)
 
     if direction == 'left':
-        helpers.move(building, 'right', 3)
+        move(building, 'right', 3)
 
     if direction == 'up':
-        helpers.move(building, 'down', 3)
+        move(building, 'down', 3)
 
     if direction == 'right':
-        helpers.move(building, 'left', 3)
+        move(building, 'left', 3)
 
     if direction == 'down':
-        helpers.move(building, 'up', 3)
+        move(building, 'up', 3)
 
     return score

@@ -100,14 +100,14 @@ class Map:
 
 	#buildings = []
 
-	def __init__(self, height, width, buildings):
-		self.height = 320
-		self.width = 360
-		self.buildings = buildings
+	def __init__(self, height, width):
+		self.height = height
+		self.width = width
+		self.buildings = []
 		self.score = 0
 
 
 	# def score(self):
-    # 
+    #
     #
 	# map.buildings.append(building)

@@ -2,9 +2,13 @@
 # Project: Amstelhaegen
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
-import classes, helpers, visualisation
+# import files
+from classes import Map
+from helpers import h_build, b_build, m_build, calculate_score
+import visualisation
+
+# import modules
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import random
 import pdb
 import numpy as np
@@ -12,14 +16,8 @@ import locale
 import timeit
 import math
 
-# import files
-import classes
-import main
-import helpers
-import visualisation
 
-
-district = classes.Map
+district = Map(320, 360)
 
 
 def main(total_houses, iterations):
@@ -46,16 +44,16 @@ def main(total_houses, iterations):
             building_type = random.choice(['house', 'bungalow', 'maison'])
 
             if building_type == 'house' and h_counter < h_number:
-                buildings, h_counter = helpers.h_build(buildings, h_counter)
+                buildings, h_counter = h_build(buildings, h_counter)
 
             if building_type == 'bungalow' and b_counter < b_number:
-                buildings, b_counter = helpers.b_build(buildings, b_counter)
+                buildings, b_counter = b_build(buildings, b_counter)
 
             if building_type == 'maison' and m_counter < m_number:
-                buildings, m_counter = helpers.m_build(buildings, m_counter)
+                buildings, m_counter = m_build(buildings, m_counter)
 
         # calculate closest distance to buildings
-        total_value = helpers.calculate_score(buildings)
+        total_value = calculate_score(buildings)
 
         if (total_value > best_iteration):
             best_iteration = total_value
