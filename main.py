@@ -20,7 +20,8 @@ if __name__ == "__main__":
         iterations = input("How many iterations?: ")
 
         buildings, best_iteration = random_algoritm.main(total_houses, iterations)
-
+    	stop = timeit.default_timer()
+    	print "De tijd is: ", stop - start
         print ("best iteration is", best_iteration)
 
         # visualisation.main(buildings, algoritm, 0, 0, False)
@@ -34,11 +35,19 @@ if __name__ == "__main__":
 
         buildings, best_iteration = random_algoritm.main(total_houses, iterations)
 
+        visualisation.print_canvas(buildings, 'random')
+
+        print best_iteration
+
         iterations_hill = input("How many iterations for hillclimber: ")
 
         buildings, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
 
-        visualisation.main(buildings, algoritm, total_houses, map_score, True)
+        print map_score
+
+        visualisation.print_canvas(buildings, 'hill')
+
+        # visualisation.main(buildings, algoritm, total_houses, map_score, True)
 
     elif algoritm_choice == 3:
         algoritm = "expanding_universe"
