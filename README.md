@@ -3,6 +3,38 @@ Amstelhaegen
 
 # TODO:
 
+Na les 12, 12:
+
+     Presentatie, (10min)
+      
+     Case uitleg duidelijk maken,
+      
+     Eigenlijk alles wat je in requirements moet uitleggen ook in de presentatie uitleggen.
+     
+     Algoritme uitleggen, bijv Hill climber, dan hoef je niet het principe uit te leggen, maar wel hoe je het hebt toegepast, wat het 
+     betekent voor jouw case
+     
+     Geen code in je presentatie verwerken!!! 
+     
+     Veel duidelijk uitleggen, waaorm bepaalde keuzes gemaakt zijn. 
+     
+     Tabellen, diagrammen met resultaten laten zien. <----- HIER GEWOON LEKKER VEEL VAN 
+     
+     Future work, inzicht daarin laten zien, van; 'deze algoritmen geen tijd meer voor, maar is veelbelovend want dit en dat...
+     
+   Opmerkingen docent:
+     
+       Vergelijk hill climber op 1random, met 1000 random, welke is beter welke conclusie's kunnen we daaruit trekken?
+       
+       Plant: ook slechte pakken, want je weet dat je daar in iedergeval niet moet zijn, dus lekker grote stap maken, 
+            10 mappen, maken beste krijgen veel kinderen die lijken op ouder, slechtste weinig kinderen die er erg niet op lijken, dan  
+            daaruit weer tien beste kiezen en nog een keer enz. enz. enz. Kinderen is de oudermap met kleine veranderingen (1 huis swap)  
+            of grote veranderingen (veel huis-swaps, grote stappen naar de andere kant van de map, tien huizen weer helemaal random                   
+            neerzetten enz.)
+   
+   
+     
+
 Na tech-assist 12-12:
 
       Maak een map: class, Idee: om zwevende date te voorkomen (pas dan 5punten data-structuur mogelijk)
