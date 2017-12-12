@@ -1,4 +1,4 @@
-import algorithms
+import algorithms, classes, helpers
 import random_algorithm
 import expanding_universe
 import hillclimber_algorihtm
