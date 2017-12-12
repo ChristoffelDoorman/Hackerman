@@ -45,7 +45,7 @@ def check_move2(building, buildings, direction):
 
     move(building, direction, 0.5)
 
-    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
+    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > district.width) or (building.right_top[1] > district.height):
         return False, 0
 
     olap = True
