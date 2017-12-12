@@ -19,6 +19,7 @@ def main(total_houses, iterations_hill, buildings):
         for building in buildings:
 
             map_score = helpers.calculate_score(buildings)
+
             print map_score
 
             for direction in directions:
@@ -51,14 +52,18 @@ def main(total_houses, iterations_hill, buildings):
                         map_score = score_down
                         best_direction = direction
 
+<<<<<<< HEAD
                 helpers.move(building, best_direction)
+=======
+                helpers.move(building, best_direction, 1)
+>>>>>>> 8178fe6afa59ab9ab4aa13ae18b9b67418dcf213
 
     return buildings, map_score
 
 def check_overlap(building, buildings, direction):
 
     old_building = copy.deepcopy(building)
-    new_building = helpers.move(old_building, direction)
+    new_building = helpers.move(old_building, direction, 1)
 
     if (new_building.left_bottom[0] < 0) or (new_building.left_bottom[1] < 0) or (new_building.right_top[0] > X_DIMENSION) or (new_building.right_top[1] > Y_DIMENSION):
         return False
@@ -84,6 +89,7 @@ def check_overlap(building, buildings, direction):
 
 def moved_score(building, buildings, direction):
 
+<<<<<<< HEAD
     # visualisation.print_canvas(buildings, '1')
     helpers.move(building, direction)
     # visualisation.print_canvas(buildings, '2')
@@ -92,14 +98,22 @@ def moved_score(building, buildings, direction):
     if direction == 'left':
         helpers.move(building, 'right')
         # visualisation.print_canvas(buildings, '3')
+=======
+    old_building = copy.deepcopy(building)
+    helpers.move(building, direction, 1)
+    score = helpers.calculate_score(buildings)
+
+    if direction == 'left':
+        helpers.move(building, 'right', 1)
+>>>>>>> 8178fe6afa59ab9ab4aa13ae18b9b67418dcf213
 
     if direction == 'up':
-        helpers.move(building, 'down')
+        helpers.move(building, 'down', 1)
 
     if direction == 'right':
-        helpers.move(building, 'left')
+        helpers.move(building, 'left', 1)
 
     if direction == 'down':
-        helpers.move(building, 'up')
+        helpers.move(building, 'up', 1)
 
     return score
