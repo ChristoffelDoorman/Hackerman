@@ -11,7 +11,8 @@ Y_DIMENSION = 320
 
 def main(iterations, buildings, map_score):
 
-    directions = [-1, 2, 1, -2]
+    best_direction = None
+    total_score = map_score
 
     start_time = time.time()
     print "begin score: ", map_score
@@ -50,6 +51,7 @@ def check_move2(building, buildings, direction):
         olap = helpers.overlap(build, building)
 
         if olap:
+            helpers.move(building, -direction, 0.5)
             return False, 0
 
     if not olap:
