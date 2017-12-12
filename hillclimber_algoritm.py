@@ -10,61 +10,44 @@ import copy
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
-def main(total_houses, iterations_hill, buildings):
+def main(iterations_hill, buildings, map_score):
 
-    directions = ['left', 'up', 'right', 'down']
+    # left, up, right, down
+    directions = [-1, 2, 1, -2]
+    best_direction = None
+    total_score = map_score
 
     for i in range(iterations_hill):
 
         for building in buildings:
 
-            map_score = helpers.calculate_score(buildings)
-
-            print map_score
+            best_direction = None
 
             for direction in directions:
 
-                possible = check_overlap(building, buildings, direction)
+                possible, move_score = check_move(building, buildings, direction)
 
-                best_direction = None
+                if possible and move_score > map_score:
+                    print 'move score: ', move_score
+                    best_direction = direction
+                    map_score = move_score
 
-                if direction == 'left' and possible:
-                    score_left = moved_score(building, buildings, direction)
-                    if score_left > map_score:
-                        map_score = score_left
-                        best_direction = direction
+            helpers.move(building, best_direction, 0.5)
 
-                if direction == 'up' and possible:
-                    score_up = moved_score(building, buildings, direction)
-                    if score_up > map_score:
-                        map_score = score_up
-                        best_direction = direction
+        print i
 
-                if direction == 'right' and possible:
-                    score_right = moved_score(building, buildings, direction)
-                    if score_right > map_score:
-                        map_score = score_right
-                        best_direction = direction
+        if map_score > total_score:
+            total_score = map_score
+            best_buildings = copy.deepcopy(buildings)
 
-                if direction == 'down' and possible:
-                    score_down = moved_score(building, buildings, direction)
-                    if score_down > map_score:
-                        map_score = score_down
-                        best_direction = direction
+    return best_buildings, total_score
 
-                helpers.move(building, best_direction, 1)
+def check_move(building, buildings, direction):
 
+    helpers.move(building, direction, 0.5)
 
-    return buildings, map_score
-
-
-def check_overlap(building, buildings, direction):
-
-    old_building = copy.deepcopy(building)
-    new_building = helpers.move(old_building, direction, 1)
-
-    if (new_building.left_bottom[0] < 0) or (new_building.left_bottom[1] < 0) or (new_building.right_top[0] > X_DIMENSION) or (new_building.right_top[1] > Y_DIMENSION):
-        return False
+    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
+        return False, 0
 
     olap = True
     for build in buildings:
@@ -72,31 +55,13 @@ def check_overlap(building, buildings, direction):
         if build == building:
             continue
 
-        olap = helpers.overlap(build, new_building)
+        olap = helpers.overlap(build, building)
 
         if olap:
-            return False
+            helpers.move(building, -direction, 0.5)
+            return False, 0
 
     if not olap:
-        return True
-
-
-def moved_score(building, buildings, direction):
-
-    old_building = copy.deepcopy(building)
-    helpers.move(building, direction, 3)
-    score = helpers.calculate_score(buildings)
-
-    if direction == 'left':
-        helpers.move(building, 'right', 3)
-
-    if direction == 'up':
-        helpers.move(building, 'down', 3)
-
-    if direction == 'right':
-        helpers.move(building, 'left', 3)
-
-    if direction == 'down':
-        helpers.move(building, 'up', 3)
-
-    return score
+        score = helpers.calculate_score(buildings)
+        helpers.move(building, -direction, 0.5)
+        return True, score

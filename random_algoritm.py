@@ -11,6 +11,7 @@ import numpy as np
 import locale
 import timeit
 import math
+import copy
 
 # import files
 import classes
@@ -44,24 +45,26 @@ def main(total_houses, iterations):
         while len(buildings) < total_houses:
 
 	        # choose random building type
-            building_type = random.choice(['house', 'bungalow', 'maison'])
+            building_type = random.randint(1, 3)
 
-            if building_type == 'house' and h_counter < h_number:
+            if building_type == 1 and h_counter < h_number:
                 buildings, h_counter = helpers.h_build(buildings, h_counter)
 
-            if building_type == 'bungalow' and b_counter < b_number:
+            if building_type == 2 and b_counter < b_number:
                 buildings, b_counter = helpers.b_build(buildings, b_counter)
 
-            if building_type == 'maison' and m_counter < m_number:
+            if building_type == 3 and m_counter < m_number:
                 buildings, m_counter = helpers.m_build(buildings, m_counter)
 
         # calculate closest distance to buildings
         total_value = helpers.calculate_score(buildings)
 
+
         if (total_value > best_iteration):
+            best_buildings = copy.deepcopy(buildings)
             best_iteration = total_value
 
 	# stop = timeit.default_timer()
 	# print "De tijd is: ", stop - start
 
-    return buildings, best_iteration
+    return best_buildings, best_iteration
