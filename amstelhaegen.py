@@ -14,8 +14,8 @@ import timeit
 start = timeit.default_timer()
 
 TOTAL_HOUSES = 60
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district.width = 360
+district.height = 320
 
 def pythagoras(x1, y1, x2, y2):
 	distance = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
@@ -48,8 +48,8 @@ def overlap(building1, building2):
 def h_build(buildings, h_counter):
 
 
-	xrandom = random.randint(0, X_DIMENSION - classes.house.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.house.length)
+	xrandom = random.randint(0, district.width - classes.house.width)
+	yrandom = random.randint(0, district.height - classes.house.length)
 
 	house = classes.house(xrandom, yrandom)
 
@@ -69,8 +69,8 @@ def h_build(buildings, h_counter):
 
 def b_build(buildings, b_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.bungalow.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.bungalow.length)
+	xrandom = random.randint(0, district.width - classes.bungalow.width)
+	yrandom = random.randint(0, district.height - classes.bungalow.length)
 	bungalow = classes.bungalow(xrandom, yrandom)
 
 	olap = True
@@ -89,8 +89,8 @@ def b_build(buildings, b_counter):
 
 def m_build(buildings, m_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.maison.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.maison.length)
+	xrandom = random.randint(0, district.width - classes.maison.width)
+	yrandom = random.randint(0, district.height - classes.maison.length)
 	maison = classes.maison(xrandom, yrandom)
 
 	olap = True
@@ -225,7 +225,7 @@ if __name__ == "__main__":
 	buildings = []
 
 	# append first house to array 'buildings'
-	buildings.append(classes.house(X_DIMENSION, Y_DIMENSION))
+	buildings.append(classes.house(district.width, district.height))
 
 	# set number of each building type
 	h_number = 0.6 * TOTAL_HOUSES

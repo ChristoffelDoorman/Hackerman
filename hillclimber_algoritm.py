@@ -7,8 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import copy
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district = classes.Map
 
 def main(total_houses, iterations_hill, buildings):
 
@@ -63,7 +62,7 @@ def check_overlap(building, buildings, direction):
     old_building = copy.deepcopy(building)
     new_building = helpers.move(old_building, direction, 1)
 
-    if (new_building.left_bottom[0] < 0) or (new_building.left_bottom[1] < 0) or (new_building.right_top[0] > X_DIMENSION) or (new_building.right_top[1] > Y_DIMENSION):
+    if (new_building.left_bottom[0] < 0) or (new_building.left_bottom[1] < 0) or (new_building.right_top[0] > district.width) or (new_building.right_top[1] > district.height):
         return False
 
     olap = True

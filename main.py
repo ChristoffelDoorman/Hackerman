@@ -2,12 +2,16 @@ import random_algoritm
 import expanding_universe
 import visualisation
 import hillclimber_algoritm
-
+import classes
 import helpers
 
 
 if __name__ == "__main__":
-
+    house = classes.Bungalow(100,100)
+    print house
+    house.x = 50
+    print house.x
+'''
     total_houses = input("Total number of houses?: ")
 
     while total_houses < 7:
@@ -55,8 +59,9 @@ if __name__ == "__main__":
 
         map_score = helpers.calculate_score(buildings)
 
-        iterations_hill = input("How many iterations for hillclimber: ")
-
-        buildings, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
+        # iterations_hill = input("How many iterations for hillclimber: ")
+        #
+        # buildings, map_score = hillclimber_algoritm.main(total_houses, iterations_hill, buildings)
 
         visualisation.main(buildings, algoritm, total_houses, map_score, False)
+'''

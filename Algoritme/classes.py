@@ -93,8 +93,8 @@ class Map:
 	def h_build(buildings, h_counter):
 
 
-		xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-		yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
+		xrandom = random.randint(0, district.width - classes.House.width)
+		yrandom = random.randint(0, district.height - classes.House.length)
 		house = classes.House(xrandom, yrandom)
 
 		olap = True

@@ -9,8 +9,8 @@ import math
 
 import classes
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district = classes.Map
+
 best_iteration = 0
 
 def pythagoras(x1, y1, x2, y2):
@@ -32,8 +32,8 @@ def overlap(building1, building2):
 def h_build(buildings, h_counter):
 
 
-	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
+	xrandom = random.randint(0, district.width - classes.House.width)
+	yrandom = random.randint(0, district.height - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
 	if not buildings:
@@ -57,8 +57,8 @@ def h_build(buildings, h_counter):
 
 def b_build(buildings, b_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
+	xrandom = random.randint(0, district.width - classes.Bungalow.width)
+	yrandom = random.randint(0, district.height - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	choice = random.getrandbits(1)
@@ -89,8 +89,8 @@ def b_build(buildings, b_counter):
 
 def m_build(buildings, m_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
+	xrandom = random.randint(0, district.width - classes.Maison.width)
+	yrandom = random.randint(0, district.height - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 
 	# random: length, width = width, length
@@ -218,7 +218,7 @@ def calculate_score(buildings):
 
 
 def move(building, direction, step):
-	
+
     if direction == 'left':
 
         building.left_bottom[0] -= step

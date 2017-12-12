@@ -19,8 +19,7 @@ import helpers
 import visualisation
 
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district = classes.Map
 
 
 def main(total_houses, iterations):

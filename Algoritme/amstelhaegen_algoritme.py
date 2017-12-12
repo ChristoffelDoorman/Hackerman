@@ -16,8 +16,8 @@ start = timeit.default_timer()
 
 ITERATIONS = 1
 TOTAL_HOUSES = 60
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district.width = 360
+district.height = 320
 best_iteration = 0
 
 def pythagoras(x1, y1, x2, y2):
@@ -51,8 +51,8 @@ def overlap(building1, building2):
 def h_build(buildings, h_counter):
 
 
-	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
+	xrandom = random.randint(0, district.width - classes.House.width)
+	yrandom = random.randint(0, district.height - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
 	olap = True
@@ -71,8 +71,8 @@ def h_build(buildings, h_counter):
 
 def b_build(buildings, b_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
+	xrandom = random.randint(0, district.width - classes.Bungalow.width)
+	yrandom = random.randint(0, district.height - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	choice = random.getrandbits(1)
@@ -98,8 +98,8 @@ def b_build(buildings, b_counter):
 
 def m_build(buildings, m_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
+	xrandom = random.randint(0, district.width - classes.Maison.width)
+	yrandom = random.randint(0, district.height - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 	# random: length, width = width, length
 
@@ -137,8 +137,8 @@ def w_build(buildings, waters):
 		w_length = random.randint(1, 4) * w_width
 
 
-	xrandom = random.randint(0, X_DIMENSION - w_width)
-	yrandom = random.randint(0, Y_DIMENSION - w_length)
+	xrandom = random.randint(0, district.width - w_width)
+	yrandom = random.randint(0, district.height - w_length)
 
 	water = classes.Water(xrandom, yrandom, w_length, w_width)
 
@@ -274,7 +274,7 @@ if __name__ == "__main__":
 		waters = []
 
 		# append first house to array 'buildings'
-		buildings.append(classes.House(X_DIMENSION, Y_DIMENSION))
+		buildings.append(classes.House(district.width, district.height))
 
 		# set number of each building type
 		h_number = 0.6 * TOTAL_HOUSES

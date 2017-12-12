@@ -6,8 +6,7 @@ import classes
 import helpers
 import hillclimber_algoritm
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district = classes.Map
 
 
 def set_initial_map(total_houses):
@@ -25,7 +24,7 @@ def set_initial_map(total_houses):
     counter = 0
     for i in range(grid_size):
 
-        x = (X_DIMENSION - (classes.House.width * (grid_size - (2.7 * i)))) / 2
+        x = (district.width - (classes.House.width * (grid_size - (2.7 * i)))) / 2
 
 
         for j in range(grid_size):
@@ -33,7 +32,7 @@ def set_initial_map(total_houses):
             if counter == h_number:
                 break
 
-            y = (Y_DIMENSION + (classes.House.length * (grid_size - 2 - (2.7 * j)))) / 2
+            y = (district.height + (classes.House.length * (grid_size - 2 - (2.7 * j)))) / 2
 
             counter += 1
             house = classes.House(x, y)
@@ -45,32 +44,32 @@ def set_initial_map(total_houses):
 
     for i in range(b_number):
 
-        x = ((X_DIMENSION - classes.Bungalow.width) / 2) + r * math.cos(t * i)
-        y = ((Y_DIMENSION - classes.Bungalow.length) / 2) + r * math.sin(t * i)
+        x = ((district.width - classes.Bungalow.width) / 2) + r * math.cos(t * i)
+        y = ((district.height - classes.Bungalow.length) / 2) + r * math.sin(t * i)
 
         bungalow = classes.Bungalow(x, y)
         for building in buildings:
             olap = helpers.overlap(bungalow, building)
 
-            if (bungalow.left_bottom[0] <= X_DIMENSION / 2) and (bungalow.left_bottom[1] >= Y_DIMENSION / 2) and olap:
+            if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] >= district.height / 2) and olap:
                 while olap == True:
                     bungalow = helpers.move(bungalow, 'left', 10)
                     bungalow = helpers.move(bungalow, 'up', 10)
                     olap = helpers.overlap(bungalow, building)
 
-            if (bungalow.left_bottom[0] <= X_DIMENSION / 2) and (bungalow.left_bottom[1] < Y_DIMENSION / 2) and olap:
+            if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] < district.height / 2) and olap:
                 while olap == True:
                     bungalow = helpers.move(bungalow, 'left', 10)
                     bungalow = helpers.move(bungalow, 'down', 10)
                     olap = helpers.overlap(bungalow, building)
 
-            if (bungalow.left_bottom[0] > X_DIMENSION / 2) and (bungalow.left_bottom[1] <= Y_DIMENSION / 2) and olap:
+            if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] <= district.height / 2) and olap:
                 while olap == True:
                     bungalow = helpers.move(bungalow, 'right', 10)
                     bungalow = helpers.move(bungalow, 'down', 10)
                     olap = helpers.overlap(bungalow, building)
 
-            if (bungalow.left_bottom[0] > X_DIMENSION / 2) and (bungalow.left_bottom[1] > Y_DIMENSION / 2) and olap:
+            if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] > district.height / 2) and olap:
                 while olap == True:
                     bungalow = helpers.move(bungalow, 'right', 10)
                     bungalow = helpers.move(bungalow, 'up', 10)
@@ -83,32 +82,32 @@ def set_initial_map(total_houses):
     t = ((2 * math.pi) / (m_number))
     for i in range(m_number):
 
-        x = ((X_DIMENSION - classes.Maison.width) / 2) + r * math.cos(t * i)
-        y = ((Y_DIMENSION - classes.Maison.length) / 2) + r * math.sin(t * i)
+        x = ((district.width - classes.Maison.width) / 2) + r * math.cos(t * i)
+        y = ((district.height - classes.Maison.length) / 2) + r * math.sin(t * i)
 
         maison = classes.Maison(x, y)
         for building in buildings:
             olap = helpers.overlap(maison, building)
 
-            if (maison.left_bottom[0] <= X_DIMENSION / 2) and (maison.left_bottom[1] >= Y_DIMENSION / 2) and olap:
+            if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] >= district.height / 2) and olap:
                 while olap == True:
                     maison = helpers.move(maison, 'left', 15)
                     maison = helpers.move(maison, 'up', 15)
                     olap = helpers.overlap(maison, building)
 
-            if (maison.left_bottom[0] <= X_DIMENSION / 2) and (maison.left_bottom[1] < Y_DIMENSION / 2) and olap:
+            if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] < district.height / 2) and olap:
                 while olap == True:
                     maison = helpers.move(maison, 'left', 15)
                     maison = helpers.move(maison, 'down', 15)
                     olap = helpers.overlap(maison, building)
 
-            if (maison.left_bottom[0] > X_DIMENSION / 2) and (maison.left_bottom[1] <= Y_DIMENSION / 2) and olap:
+            if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] <= district.height / 2) and olap:
                 while olap == True:
                     maison = helpers.move(maison, 'right', 15)
                     maison = helpers.move(maison, 'down', 15)
                     olap = helpers.overlap(maison, building)
 
-            if (maison.left_bottom[0] > X_DIMENSION / 2) and (maison.left_bottom[1] > Y_DIMENSION / 2) and olap:
+            if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] > district.height / 2) and olap:
                 while olap == True:
                     maison = helpers.move(maison, 'right', 15)
                     maison = helpers.move(maison, 'up', 15)
@@ -123,23 +122,23 @@ def expand(building, steps):
 
     for i in range(steps):
 
-        if (building.name == building.name) and (building.left_top[0] < X_DIMENSION / 2) and (building.left_top[1] > Y_DIMENSION / 2):
-            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.right_bottom[0], building.right_bottom[1], (Y_DIMENSION / 2))
+        if (building.name == building.name) and (building.left_top[0] < district.width / 2) and (building.left_top[1] > district.height / 2):
+            r_middle = helpers.pythagoras((district.width / 2), building.right_bottom[0], building.right_bottom[1], (district.height / 2))
             building = helpers.move(building, 'left', r_middle / 80)
             building = helpers.move(building, 'up', r_middle / 80)
 
-        if (building.name == building.name) and (building.left_bottom[0] < X_DIMENSION / 2) and (building.left_bottom[1] < Y_DIMENSION / 2):
-            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.right_top[0], building.right_top[1], (Y_DIMENSION / 2))
+        if (building.name == building.name) and (building.left_bottom[0] < district.width / 2) and (building.left_bottom[1] < district.height / 2):
+            r_middle = helpers.pythagoras((district.width / 2), building.right_top[0], building.right_top[1], (district.height / 2))
             building = helpers.move(building, 'left', r_middle / 80)
             building = helpers.move(building, 'down', r_middle / 80)
 
-        if (building.name == building.name) and (building.right_top[0] > X_DIMENSION / 2) and (building.right_top[1] > Y_DIMENSION / 2):
-            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.left_bottom[0], building.left_bottom[1], (Y_DIMENSION / 2))
+        if (building.name == building.name) and (building.right_top[0] > district.width / 2) and (building.right_top[1] > district.height / 2):
+            r_middle = helpers.pythagoras((district.width / 2), building.left_bottom[0], building.left_bottom[1], (district.height / 2))
             building = helpers.move(building, 'up', r_middle / 80)
             building = helpers.move(building, 'right', r_middle / 80)
 
-        if (building.name == building.name) and (building.right_bottom[0] > X_DIMENSION / 2) and (building.right_bottom[1] < Y_DIMENSION / 2):
-            r_middle = helpers.pythagoras((X_DIMENSION / 2), building.left_top[0], building.left_top[1], (Y_DIMENSION / 2))
+        if (building.name == building.name) and (building.right_bottom[0] > district.width / 2) and (building.right_bottom[1] < district.height / 2):
+            r_middle = helpers.pythagoras((district.width / 2), building.left_top[0], building.left_top[1], (district.height / 2))
             building = helpers.move(building, 'right', r_middle / 80)
             building = helpers.move(building, 'down', r_middle / 80)
 
