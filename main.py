@@ -12,7 +12,7 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose number bigger than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random] ")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random] [5: Greedy] ")
 
     if algorithm_choice == 1:
         algorithm = "random"
@@ -79,3 +79,16 @@ if __name__ == "__main__":
         best_buildings_hill, map_score = hillclimber_random.main(iterations_hill, best_buildings_random, best_iteration)
 
         print map_score
+
+    elif algorithm_choice == 5:
+        algorithm = "Greedy"
+
+        # iterations = input("How many iterations?: ")
+
+        #Greedy_algorithm.main(total_houses)
+        try_greedy.main(total_houses)
+
+        # visualisation.print_canvas(buildings, 'try_greedy')
+
+        # visualisation.main(buildings, algorithm, 0, 0, False)
+        # visualisation.main(buildings, algorithm, total_houses, best_iteration, True)
