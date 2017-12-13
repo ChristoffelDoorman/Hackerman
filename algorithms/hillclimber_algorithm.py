@@ -32,7 +32,7 @@ def main(iterations_hill, buildings, map_score):
                     best_direction = direction
                     map_score = move_score
 
-            helpers.move(building, best_direction, 0.5)
+            move(building, best_direction, 0.5)
 
         print i
 
@@ -44,9 +44,9 @@ def main(iterations_hill, buildings, map_score):
 
 def check_move(building, buildings, direction):
 
-    helpers.move(building, direction, 0.5)
+    move(building, direction, 0.5)
 
-    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
+    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > district.width) or (building.right_top[1] > district.height):
         return False, 0
 
     olap = True
@@ -55,13 +55,13 @@ def check_move(building, buildings, direction):
         if build == building:
             continue
 
-        olap = helpers.overlap(build, building)
+        olap = overlap(build, building)
 
         if olap:
-            helpers.move(building, -direction, 0.5)
+            move(building, -direction, 0.5)
             return False, 0
 
     if not olap:
-        score = helpers.calculate_score(buildings)
-        helpers.move(building, -direction, 0.5)
+        score = calculate_score(buildings)
+        move(building, -direction, 0.5)
         return True, score
