@@ -60,7 +60,7 @@ def main(total_houses):
                 best_y = maison.left_bottom[1]
                 print top_value, best_x, best_y
 
-        # hier gebleven, top_value lijkt niet te kloppen, hij vind er maar twee, en altijd op de y = 0 lijn,
+        # hier gebleven, top_value lijkt niet te kloppen, hij vindt er maar twee, en altijd op de y = 0 lijn,
         # dus aan het begin, oplossing vinden, dan: deze functie in functie zetten, dan onpersoonlijkmaken,
         # zodat ook huizen en bugalow die functie kunnen gebruiken,
         # dan functie die huis neerzet op zijn beste plek
