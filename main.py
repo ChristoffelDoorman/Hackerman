@@ -85,3 +85,5 @@ if __name__ == "__main__":
         best_buildings_random, best_iteration = random_algorithm.main(20, 1)
 
         hillclimber_rotate_move_swap.main(best_buildings_random, best_iteration)
+
+    

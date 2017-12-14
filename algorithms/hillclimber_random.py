@@ -31,7 +31,7 @@ def main(iterations, buildings, map_score):
 
         direction = random.randint(-2, 2)
 
-        possible, move_score = check_move2(building, buildings, direction)
+        possible, move_score = check_move(building, buildings, direction)
 
         if possible and move_score > map_score:
             print 'move score: ', move_score
@@ -45,7 +45,7 @@ def main(iterations, buildings, map_score):
     return best_buildings, map_score
 
 
-def check_move2(building, buildings, direction):
+def check_move(building, buildings, direction):
 
     move(building, direction, 0.5)
 

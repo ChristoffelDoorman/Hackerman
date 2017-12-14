@@ -25,23 +25,29 @@ def main(buildings, map_score):
     visualisation.print_canvas (buildings, 'test_test')
 
     for building in buildings:
-        rotate(building, buildings)
+
+        # 0 = move 1 = rotate 2 = swap
+        choice = random.randint(0, 2)
+
+        if building.name == 'house' and choice == 1:
+            hill_move(building)
+
+        elif choice == 1:
+            rotate(building, buildings)
+
+        elif choice == 2:
+            swap....
+
+        else:
+            hill_move(building)
+
 
     visualisation.print_canvas (buildings, 'test_test2')
-    #
-    # for i in range(iterations):
-    #
-    #     building = random.choice(buildings)
-    #
-    #     if not building.name == 'house':
 
-
-def hill_move(buildings, map_score):
+def hill_move(building, buildings, map_score):
 
     # start_time = time.time()
     # print "begin score: ", map_score
-
-    building = random.choice(buildings)
 
     direction = random.randint(-2, 2)
 
@@ -56,8 +62,6 @@ def hill_move(buildings, map_score):
     #
     # print "%s seconds" % (time.time() - start_time)
     return buildings, map_score
-
-
 
 def rotate(building, buildings):
 
