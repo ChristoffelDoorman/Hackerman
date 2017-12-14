@@ -26,14 +26,18 @@ def overlap(building1, building2):
 	if (building1.left_bottom[0] > building2.right_bottom[0] or building2.left_bottom[0] > building1.right_bottom[0]
 		or building1.left_bottom[1] > building2.left_top[1] or building2.left_bottom[1] > building1.left_top[1]):
 		overlap = False
+	if (building1.left_bottom[0] == building2.left_bottom[0] and building1.left_bottom[1] == building2.left_bottom[1]):
+		overlap = True
+		# print "dit ligt op elkaar"
 
+	# print "dit overlapt"
 	return overlap
 
 
 def h_build(buildings, h_counter):
 
 
-	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
+	# xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
