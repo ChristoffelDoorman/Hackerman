@@ -21,7 +21,8 @@
         Alle algoritmen zijn aan te roepen vanaf main.py. Deze algoritmen schakkelen op hun beurt de hulp in van: classes, helpers en
         visualisatie.Hier volgt een korte uitleg van deze files.
         
-        __main__
+   __main__
+        ioahweiufd
         
                 
               
