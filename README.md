@@ -1,6 +1,6 @@
 # Hackerman || Amstelhaegen
 
-**Een Algoritme draaien**
+## Een Algoritme draaien
 
         1. Start main op: 'python main.py'
         2. Kies de huizenvariant (20,40 of 60)
