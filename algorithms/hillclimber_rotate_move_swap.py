@@ -11,11 +11,20 @@ Y_DIMENSION = 320
 
 def main(iterations, buildings, map_score):
 
-    for i in range(iterations):
+    buildings, best_iteration = random_algorithm.main(20, 1)
 
-        building = random.choice(buildings)
+    visualisation.print_canvas (best_buildings_random, 'test_test')
 
-        if not building.name == 'house':
+    for building in buildings:
+        rotate(building, buildings)
+
+    visualisation.print_canvas (best_buildings_random, 'test_test2')
+    #
+    # for i in range(iterations):
+    #
+    #     building = random.choice(buildings)
+    #
+    #     if not building.name == 'house':
 
 
 def hill_move(buildings, map_score):
@@ -39,12 +48,12 @@ def hill_move(buildings, map_score):
     # print "%s seconds" % (time.time() - start_time)
     return buildings, map_score
 
-def rotate(building, buildings, map_score):
 
-	building.length, building.width = building.width, building.length
-	building.left_top[1] = yrandom + building.length
-	building.right_top = [xrandom + building.width, yrandom + building.length]
-	building.right_bottom[0] = xrandom + building.width
+
+def rotate(building, buildings):
+
+    building.length, building.width = building.width, building.length
+    building.update(building.left_bottom[0], building.left_bottom[1])
 
     olap = True
     for build in buildings:
@@ -55,11 +64,12 @@ def rotate(building, buildings, map_score):
         olap = helpers.overlap(build, building)
 
         if olap:
-            return None
+            building.length, building.width = building.width, building.length
+            building.update(building.left_bottom[0], building.left_bottom[1])
 
     if not olap:
-
-        return building, map_score
+        score = helpers.calculate_score(buildings)
+        return score
 
 
 def check_move(building, buildings, direction):
@@ -78,6 +88,7 @@ def check_move(building, buildings, direction):
         olap = helpers.overlap(build, building)
 
         if olap:
+
             return False, 0
 
     if not olap:

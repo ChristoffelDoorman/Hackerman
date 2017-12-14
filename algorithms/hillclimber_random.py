@@ -1,6 +1,7 @@
 # import files
 from classes import Map
 from helpers import calculate_score, move, overlap
+from algorithms import *
 
 # import files
 import random
@@ -15,14 +16,15 @@ import copy
 # create map class as district
 district = Map(320, 360)
 
-
 def main(iterations, buildings, map_score):
 
     best_direction = None
     total_score = map_score
+    best_buildings = None
 
     start_time = time.time()
     print "begin score: ", map_score
+
     for i in range(iterations):
 
         building = random.choice(buildings)
@@ -37,6 +39,7 @@ def main(iterations, buildings, map_score):
             best_buildings = copy.deepcopy(buildings)
         else:
             move(building, -direction, 0.5)
+
 
     print "%s seconds" % (time.time() - start_time)
     return best_buildings, map_score
