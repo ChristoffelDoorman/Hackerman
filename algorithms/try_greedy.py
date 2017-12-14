@@ -15,7 +15,6 @@ import copy
 import classes
 import time
 import helpers
-import numpy as np
 
 district = classes.Map(360, 320)
 
@@ -35,7 +34,7 @@ def main(total_houses):
 
     while (m_counter < 5):
 
-        maison = classes.Maison(-23, 0)
+        maison = classes.Maison(0, 0)
 
         district.buildings.append(maison)
         print district.buildings
