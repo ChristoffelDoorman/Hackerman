@@ -1,5 +1,4 @@
 # import files
-from classes import Map
 from helpers import calculate_score, move, overlap
 from algorithms import *
 
@@ -13,8 +12,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import copy
 
-# create map class as district
-district = Map(320, 360)
+# create map class as distr
+
+X_DIMENSION = 360
+Y_DIMENSION = 320
 
 def main(iterations, buildings, map_score):
 
@@ -49,7 +50,7 @@ def check_move(building, buildings, direction):
 
     move(building, direction, 0.5)
 
-    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > district.width) or (building.right_top[1] > district.height):
+    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
         return False, 0
 
     olap = True

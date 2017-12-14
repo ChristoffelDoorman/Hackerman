@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 # from classes import *
 # from helpers import *
 
-district = Map(320, 360)
+X_DIMENSION = 360
+Y_DIMENSION = 320
 
 def set_initial_map(total_houses):
 

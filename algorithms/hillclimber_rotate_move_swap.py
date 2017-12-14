@@ -1,6 +1,4 @@
 # import files
-from classes import Map
-from helpers import *
 from algorithms import *
 import visualisation.canvas_visualisation as visualisation
 import helpers.helper_functions as helpers
@@ -18,31 +16,28 @@ import copy
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
-def main(buildings, map_score):
+def main(iterations, buildings, map_score):
 
-    buildings, best_iteration = random_algorithm.main(20, 1)
+    for i in range(iterations):
+        buildings, best_iteration = random_algorithm.main(20, 1)
 
-    visualisation.print_canvas (buildings, 'test_test')
+        visualisation.print_canvas (buildings, 'test_test')
 
-    for building in buildings:
+        for building in buildings:
 
-        # 0 = move 1 = rotate 2 = swap
-        choice = random.randint(0, 2)
+            # 0 = move 1 = rotate 2 = swap
+            choice = random.randint(0, 2)
 
-        if building.name == 'house' and choice == 1:
-            hill_move(building)
+            if building.name == 'house' and choice == 1:
+                hill_move(building)
 
-        elif choice == 1:
-            rotate(building, buildings)
+            elif choice == 1:
+                rotate(building, buildings)
 
-        #elif choice == 2:
-            #swap....
+            elif choice == 2:
+                print "hier moet geswapt worden"
 
-        else:
-            hill_move(building)
-
-
-    visualisation.print_canvas (buildings, 'test_test2')
+    return buildings,
 
 def hill_move(building, buildings, map_score):
 
