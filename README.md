@@ -22,7 +22,7 @@
         visualisatie.Hier volgt een korte uitleg van deze files.
         
    __main__
-        ioahweiufd
+                ioahweiufd
         
                 
               
