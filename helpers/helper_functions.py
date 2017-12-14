@@ -10,7 +10,7 @@ import math
 import classes
 
 X_DIMENSION = 360
-y_DIMENSION = 320
+Y_DIMENSION = 320
 
 best_iteration = 0
 
@@ -246,6 +246,63 @@ def move(building, direction, step):
         building.right_bottom[1] -= step
 
     return building
+
+def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_stepsize):
+	move(building, x_direction, x_stepsize)
+	move(building, y_direction, y_stepsize)
+
+	if (building.left_bottom[0] < 0) \
+		or (building.left_bottom[1] < 0) \
+		or (building.right_top[0] > X_DIMENSION) \
+		or (building.right_top[1] > Y_DIMENSION):
+	        return False, 0
+
+	olap = True
+	for build in buildings:
+
+		if build == building:
+			continue
+
+		olap = overlap(build, building)
+
+		if olap:
+			move(building, - x_direction, x_stepsize)
+			move(building, - y_direction, y_stepsize)
+			return False, 0
+
+		if not olap:
+			score = calculate_score(buildings)
+			move(building, - x_direction, x_stepsize)
+			move(building, - y_direction, y_stepsize)
+			return True, score
+
+
+def check_move(building, buildings, direction, stepsize):
+
+    move(building, direction, stepsize)
+
+    if (building.left_bottom[0] < 0) \
+	or (building.left_bottom[1] < 0) \
+	or (building.right_top[0] > X_DIMENSION) \
+	or (building.right_top[1] > Y_DIMENSION):
+        return False, 0
+
+    olap = True
+    for build in buildings:
+
+        if build == building:
+            continue
+
+        olap = overlap(build, building)
+
+        if olap:
+            move(building, -direction, stepsize)
+            return False, 0
+
+    if not olap:
+        score = calculate_score(buildings)
+        move(building, -direction, stepsize)
+        return True, score
 
 
 # def swap(building1, building2):
