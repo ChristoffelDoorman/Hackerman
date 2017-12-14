@@ -1,4 +1,5 @@
 # Hackerman || Amstelhaegen
+Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 ### Een Algoritme draaien:
 
@@ -24,15 +25,13 @@
 **main**
         
         Main bevat een keuzen menu van alle algoritmen.            
-                        
-**Classes**
-        
-        
-**helpers**
-              
-                
-**visualisatie**        
-        
+          
+          
+          
+          
+**Classes**        
+**helpers**                
+**visualisatie**           
 **algoritmes**        
 
         
