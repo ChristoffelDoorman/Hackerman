@@ -71,7 +71,7 @@
                 
         def move
                 Beweegt het gevraagde gebouw, in de gevraagde richting, voor het gevraagde aantal stappen.
-                1 step is 1meter.
+                1 step is 1 meter.
                 direction 1 == naar rechts.
                 direction -1 == naar links.
                 direction 2 == naar boven.
