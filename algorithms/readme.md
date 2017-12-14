@@ -7,8 +7,8 @@
         Als je er vanuit gaat dat elke huis alleen precies op de hele meter kan staan, en 30 meter gemiddeld inneemt, 
         dan zijn er voor de 20-variant grofweg: 360*320 = 115.200 // 115.200 * 115.170 * 115.140 .... * 114.600 =
         +/- 1.6916e101 ofwel 1.691.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000
-        -000.000.000.000.000.000.000.000.000.000.000.000.000.000 mogelijkheden. Onvoorstelbaar veel, laat staan het aantal mogelijkheden 
-        van de 'echte' vraag, zonder de uitgangspunten die de som vermakkelijken.
+        -000.000.000.000.000.000.000.000.000.000.000.000.000.000 mogelijkheden. Onvoorstelbaar veel, laat staan 
+        het aantal mogelijkheden van de 'echte' vraag, zonder de uitgangspunten die de som vermakkelijken.
 
         Of wel: 
         - Bruteforce is totaal onhaalbaar, omdat je onmogelijk alle opties af kunt gaan. Maar dat is dan ook
