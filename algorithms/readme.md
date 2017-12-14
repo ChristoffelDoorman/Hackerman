@@ -2,9 +2,20 @@
 ###### Tim Jansen, Jaap Meesters, Christoffel Doorman
 ------------------------------------------------
 
+### random_algorithm
+
+    Bouwt een random huis op een random plek tot alle huizen gebouwd zijn.  
+    Berekent de waarde van het totale canvas.
+    De meest waardevolle van de, via main.py, opgegeven aantal itteraties geeft hij terug.
+ 
+ **filosofie**
+    
+    1.6916e101 ofwel 1.691.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000
+                     000.000.000.000.000.000.000.000.000.000.000.000.000.000 mogelijkheden
 
 
-Algoritmen
+
+
 
 randomiser amstelhaegen_algoritme.py
 
