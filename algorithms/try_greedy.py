@@ -22,71 +22,123 @@ district = Map(320, 360)
 
 def main(total_houses):
     buildings = []
+
+    # set number of each building type
+    h_number = 0.6 * total_houses
+    b_number = 0.25 * total_houses
     m_number = 0.15 * total_houses
-    m_counter = 0
+
+    m_counter = 1
+    b_counter, h_counter = 0, 0
+
     top_value = 0
     best_x = 0
     best_y = 0
 
+
+    # bouw het eerste huis random, een maison wat die heeft de meeste waarde
     buildings, m_counter = m_build(buildings, m_counter)
 
     plaatje(buildings)
-    time.sleep(0.5)
 
-    maison = classes.Maison(0,0)
-    buildings.append(maison)
-    plaatje(buildings)
-    time.sleep(0.5)
-    direction = 'right'
 
-    while True:
-        helpers.move(maison, direction, 1)
-        # top_value, best_x, best_y = value(buildings, top_value, maison, best_x, best_y)
+    while (m_counter < m_number):
+        top_value = 0
+        best_x = 0
+        best_y = 0
 
-        #### de functie
+        print("Maison:{}".format(m_counter + 1))
+        print("")
 
-        for building in buildings:
-            overlapping = helpers.overlap(maison,building)
+        maison, buildings = build(buildings, classes.Maison)
+        top_value, best_x, best_y = walk_check(maison, buildings, top_value, best_x, best_y)
+        move_to_best(maison, best_x, best_y)
+        m_counter += 1
+        plaatje(buildings)
 
-            if overlapping:
-                break
+        print("best: {}: {},{}".format(top_value, best_x, best_y))
+        print("")
 
-            if not overlapping:
-                value = helpers.calculate_score(buildings)
+    while (b_counter < b_number):
+        top_value = 0
+        best_x = 0
+        best_y = 0
 
-            if value > top_value:
-                top_value = value
-                best_x = maison.left_bottom[0]
-                best_y = maison.left_bottom[1]
-                print top_value, best_x, best_y
+        print("Bungalow:{}".format(b_counter + 1))
+        print("")
 
-        # hier gebleven, top_value lijkt niet te kloppen, hij vindt er maar twee, en altijd op de y = 0 lijn,
-        # dus aan het begin, oplossing vinden, dan: deze functie in functie zetten, dan onpersoonlijkmaken,
-        # zodat ook huizen en bugalow die functie kunnen gebruiken,
-        # dan functie die huis neerzet op zijn beste plek
-        # wellicht ook het stappeen zetten in een functie omzetten,
-        # dan als dat voor de maison werkt pas bungalow en huizen!! maar dat is dan appel-eitje
+        bungalow, buildings = build(buildings, classes.Bungalow)
+        top_value, best_x, best_y = walk_check(bungalow, buildings, top_value, best_x, best_y)
+        move_to_best(bungalow, best_x, best_y)
+        b_counter += 1
+        plaatje(buildings)
 
-        #### de functie
+        print("best: {}: {},{}".format(top_value, best_x, best_y))
+        print("")
 
-        if maison.right_top[0] == 360:
-            helpers.move(maison, 'up', 1)
-            helpers.move(maison, 'left', 1)
-            direction = 'left'
-
-        if maison.left_bottom[0] == 0:
-            helpers.move(maison, 'up', 1)
-            helpers.move(maison, 'right', 1)
-            direction = 'right'
-
-        # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
-        if maison.left_top[1] == 320 and maison.right_bottom[0] == 359:
-            break
-
-    print("")
-    print top_value, best_x, best_y
     plaatje(buildings)
 
 
 def plaatje(buildings):
     visualisation.print_canvas(buildings, 'try_greedy')
+
+def check_value(buildings, edifice, top_value, best_x, best_y):
+
+    for building in buildings:
+        overlapping = helpers.overlap(edifice,building)
+
+        if overlapping:
+            return top_value, best_x, best_y
+            break
+
+        if not overlapping:
+            value = helpers.calculate_score(buildings)
+
+            if value > top_value:
+                top_value = value
+                best_x = edifice.left_bottom[0]
+                best_y = edifice.left_bottom[1]
+                #print top_value, best_x, best_y
+
+    return top_value, best_x, best_y
+
+def build(buildings, edifice):
+    # bouw het huis in de linker onderhoek,
+    edifice = edifice(0,0)
+    buildings.append(edifice)
+
+    return edifice, buildings
+
+def walk_check(edifice, buildings, top_value, best_x, best_y):
+
+    # zet direction op: naar rechts lopen
+    direction = 'right'
+
+    # begin met lopen
+    while True:
+        helpers.move(edifice, direction, 1)
+        top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
+
+        if edifice.right_top[0] == 360:
+            helpers.move(edifice, 'up', 1)
+            top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
+            helpers.move(edifice, 'left', 1)
+            top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
+            direction = 'left'
+
+        if edifice.left_bottom[0] == 0:
+            helpers.move(edifice, 'up', 1)
+            top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
+            helpers.move(edifice, 'right', 1)
+            top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
+            direction = 'right'
+
+        # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
+        if edifice.left_top[1] == 320 and edifice.right_bottom[0] == 359:
+            break
+
+    return top_value, best_x, best_y
+
+def move_to_best(edifice, best_x, best_y):
+    edifice.left_bottom[0] = best_x
+    edifice.left_bottom[1] = best_y
