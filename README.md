@@ -65,8 +65,8 @@
                 
         def calculate_score
                 Zegt voor alle gebouwen in de array:
-                Met hulp van closest_distance bereken de vrij-vrije ruimte van dat gebouw
-                Met hulp van de score functie in classes bereken de waarde van dat gebouw
+                Met hulp van closest_distance bereken de vrij-vrije ruimte van dat gebouw.
+                Met hulp van de score functie in classes bereken de waarde van dat gebouw.
                 Tel alle waardes van alle gebouwen bij elkaar op voor de totaalwaarde.
                 
         def move
