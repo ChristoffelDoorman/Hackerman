@@ -23,7 +23,7 @@
    Alle algoritmen zijn aan te roepen vanaf main.py. Deze algoritmen schakkelen op hun beurt de hulp in van: classes, helpers en
    visualisatie. Hier volgt een korte uitleg van deze files.
         
-**main**
+**Main**
         
       main.py
         Vraagt om de huizenvariant: 20, 40 of 60.
@@ -39,7 +39,7 @@
                 Bevatten een functie (def update) waarmee ze verplaatst kunnen worden.
                 Bevattten de functie score, die hun persoonlijke waarde kan berekenen.
         
-**helpers** 
+**Helpers** 
 
       helper_functions.py
         Hierin staan alle globale-basis-functies, deze kunnen door elk alogoritme naar wens
@@ -77,7 +77,7 @@
                 direction 2 == naar boven.
                 direction -2 == naar beneden.
         
-**visualisatie**    
+**Visualisatie**    
         
       canvas.visualisation.py
         Is puur voor de visualisatie van de data. 
@@ -101,7 +101,7 @@
                 Slaat het getekende plaatje op in een png bestand in de bijbehorende map (afhankelijk van het
                 algoritme en de huizenvariant) geeft een datum + tijd van printen mee. 
               
-**algoritmes**        
+**Algoritmes**        
 
         Hierin bevinden zich alle algoritmen, deze kunnen via main worden opgeroepen, en gecombineert worden.
         
