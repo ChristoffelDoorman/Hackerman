@@ -1,24 +1,33 @@
 # import files
-import classes
-import main
-import helpers
+from classes import Map
+from helpers import *
+from algorithms import *
+import visualisation.canvas_visualisation as visualisation
+import helpers.helper_functions as helpers
+
+# import files
 import random
 import copy
 import time
 
+# import modules
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import copy
+
 X_DIMENSION = 360
 Y_DIMENSION = 320
 
-def main(iterations, buildings, map_score):
+def main(buildings, map_score):
 
     buildings, best_iteration = random_algorithm.main(20, 1)
 
-    visualisation.print_canvas (best_buildings_random, 'test_test')
+    visualisation.print_canvas (buildings, 'test_test')
 
     for building in buildings:
         rotate(building, buildings)
 
-    visualisation.print_canvas (best_buildings_random, 'test_test2')
+    visualisation.print_canvas (buildings, 'test_test2')
     #
     # for i in range(iterations):
     #

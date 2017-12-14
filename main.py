@@ -1,4 +1,3 @@
-
 from algorithms import *
 import visualisation.canvas_visualisation as visualisation
 from helpers import calculate_score
@@ -85,4 +84,4 @@ if __name__ == "__main__":
 
         best_buildings_random, best_iteration = random_algorithm.main(20, 1)
 
-        best_buildings_hill, map_score = hillclimber_rotate_move_swap.main(best_buildings_random, best_iteration)
+        hillclimber_rotate_move_swap.main(best_buildings_random, best_iteration)
