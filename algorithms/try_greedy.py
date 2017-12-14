@@ -88,10 +88,12 @@ def check_value(buildings, edifice, top_value, best_x, best_y):
         overlapping = helpers.overlap(edifice,building)
 
         if overlapping:
+            print("overlapping {},{} : {},{}".format(edifice.left_bottom[0], edifice.left_bottom[1], building.left_bottom[0], building.left_bottom[0]))
             return top_value, best_x, best_y
             break
 
         if not overlapping:
+            print("NOT         {},{} : {},{}".format(edifice.left_bottom[0], edifice.left_bottom[1], building.left_bottom[0], building.left_bottom[0]))
             value = helpers.calculate_score(buildings)
 
             if value > top_value:
@@ -112,7 +114,7 @@ def build(buildings, edifice):
 def walk_check(edifice, buildings, top_value, best_x, best_y):
 
     # zet direction op: naar rechts lopen
-    direction = 'right'
+    direction = '1'
 
     # begin met lopen
     while True:
@@ -120,18 +122,18 @@ def walk_check(edifice, buildings, top_value, best_x, best_y):
         top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
 
         if edifice.right_top[0] == 360:
-            helpers.move(edifice, 'up', 1)
+            helpers.move(edifice, '2', 1)
             top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
-            helpers.move(edifice, 'left', 1)
+            helpers.move(edifice, '-1', 1)
             top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
-            direction = 'left'
+            direction = '-1'
 
         if edifice.left_bottom[0] == 0:
-            helpers.move(edifice, 'up', 1)
+            helpers.move(edifice, '2', 1)
             top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
-            helpers.move(edifice, 'right', 1)
+            helpers.move(edifice, '1', 1)
             top_value, best_x, best_y = check_value(buildings, edifice, top_value, best_x, best_y)
-            direction = 'right'
+            direction = '1'
 
         # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
         if edifice.left_top[1] == 320 and edifice.right_bottom[0] == 359:

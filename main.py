@@ -11,7 +11,7 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose number bigger than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random], [5: test] ")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random], [5: test], [6: greedy]")
 
     if algorithm_choice == 1:
         algorithm = "random"
@@ -86,4 +86,8 @@ if __name__ == "__main__":
 
         hillclimber_rotate_move_swap.main(best_buildings_random, best_iteration)
 
-    
+    elif algorithm_choice == 6:
+
+        algorithm = "try_greedy"
+
+        try_greedy.main(total_houses)

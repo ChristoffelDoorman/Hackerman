@@ -35,8 +35,8 @@ def main(buildings, map_score):
         elif choice == 1:
             rotate(building, buildings)
 
-        elif choice == 2:
-            swap....
+        #elif choice == 2:
+            #swap....
 
         else:
             hill_move(building)
