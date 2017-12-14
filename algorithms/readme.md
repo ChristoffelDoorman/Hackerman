@@ -1,4 +1,6 @@
-
+# Hackerman || Amstelhaegen || Algorithms
+###### Tim Jansen, Jaap Meesters, Christoffel Doorman
+------------------------------------------------
 
 
 
