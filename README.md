@@ -1,23 +1,25 @@
 # Hackerman || Amstelhaegen
 
+** **
+        
+
 **Een Algoritme draaien**
 
-        - start main op: 'python main.py'
+        1. Start main op: 'python main.py'
+        2. Kies de huizenvariant (20,40 of 60)
+        3. Kies een algoritme
+        4. Afhankelijk van je keuze: kies hoe vaak het algoritme te draaien
         
-        - kies de huizenvariant (20,40 of 60)
-        
-        - kies een algoritme
-        
-        - afhankelijk van je keuze kies hoe vaak het algoritme te draaien
-        
-        *Alle mogelijken combinaties van verschilende algoritmen zijn ook in het keuzesmenu te vinden.
+     *Alle mogelijken combinaties van verschilende algoritmen zijn ook in het keuzesmenu te vinden.
     
 **Om de uitkomst (data) van je algoritme te zien:**
 
-        - ga naar het mapje output
-        - kies het algortime dat je hebt gedraaid
-        - kies de huizenvariant
-        - zie op datum de uitkomst
+        1. ga naar het mapje output
+        2. kies het algortime dat je hebt gedraaid
+        3. kies de huizenvariant
+        4. zoek op datum de uitkomst
+        
+        
         
 
         
