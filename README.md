@@ -1,6 +1,6 @@
 # Hackerman || Amstelhaegen
 Tim Jansen | Jaap Meesters | Christoffel Doorman
-
+------------------------------------------------
 ### Een Algoritme draaien:
 
         1. Start main op: 'python main.py'
