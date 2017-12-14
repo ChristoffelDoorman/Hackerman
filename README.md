@@ -103,10 +103,16 @@
               
 **algoritmes**        
 
-        Hierin bevinden zich alle algoritmen, deze kunnen via main worden opgeroepen, en combineerd.
+        Hierin bevinden zich alle algoritmen, deze kunnen via main worden opgeroepen, en combineert.
         
+        random_algorithm.py
+        hillclimber_algorithm.py
+        hillclimber_random.py
+        hillclimber_rotate_move_swap_algorithm.py
+        expanding_universe_algorithm.py
+        greedy_algorithm.py     
         
-        Voor meer informatie over de Algoritmen, zie mapje: 'algorithms', readme.
+        Voor meer informatie over de Algoritmen, zie in mapje algorithms: readme.md.
     
         
 
