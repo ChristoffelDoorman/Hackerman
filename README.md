@@ -33,7 +33,34 @@
                    
 **Classes**
         
-**helpers**                
+      my_classes.py
+        Bevat alle classes: House, Bungalow, Maison, Water.
+                De x,y coordinaten die ze krijgen bepalen waar de linker-bodem-hoek staat
+                Bevatten een functie (def update) waarmee ze verplaatst kunnen worden.
+                Bevattten de functie score, die hun persoonlijke waarde kan berekenen.
+        
+**helpers** 
+
+      helper_functions.py
+        Hierin staan alle globale-basis-functies, deze kunnen door elk alogoritme naar wens
+        worden aangeroepen. 
+        
+        def pythagoras:
+                berekent de schuine aftand tussen twee huizen
+               
+        def overlap
+                Berekent of een huis overlapt met een ander huis, door te stellen dat hij per
+                definitie overlapt, tenzij: een van de 8 if's waar is. deze if's baseren zich
+                op het principe dat als gebouw 1 de linkerhoek x-as groter is dan gebouw 2 de
+                rechterhoek x-as, deze elkaar nooit kunnen raken, dit checkt hij voor alle hoeken
+                zowel x als y, vandaar 8 statements. Dit checkt hij voor alle gebouwen in de array.
+              
+        def h_build, b_build, m_build
+                kent het gevraagde huis een random waarde op de map toe, vraagt aan de functie overlap
+                of er overlap is, zo niet dan append hij het huis.
+         
+        def closest_distance
+        
 **visualisatie**           
 **algoritmes**        
 
