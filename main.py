@@ -1,4 +1,3 @@
-
 from algorithms import *
 import visualisation.canvas_visualisation as visualisation
 from helpers import calculate_score
@@ -12,7 +11,7 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose number bigger than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random] [5: Greedy] ")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random], [5: test] ")
 
     if algorithm_choice == 1:
         algorithm = "random"
@@ -40,7 +39,6 @@ if __name__ == "__main__":
         print best_iteration
 
         iterations_hill = input("How many iterations for hillclimber: ")
-
 
         best_buildings_hill, map_score = hillclimber_algorithm.main(iterations_hill, best_buildings_random, best_iteration)
 
@@ -81,14 +79,11 @@ if __name__ == "__main__":
         print map_score
 
     elif algorithm_choice == 5:
-        algorithm = "Greedy"
 
-        # iterations = input("How many iterations?: ")
+        algorithm = "move rotate swap"
 
-        #Greedy_algorithm.main(total_houses)
-        try_greedy.main(total_houses)
+        best_buildings_random, best_iteration = random_algorithm.main(20, 1)
 
-        # visualisation.print_canvas(buildings, 'try_greedy')
+        hillclimber_rotate_move_swap.main(best_buildings_random, best_iteration)
 
-        # visualisation.main(buildings, algorithm, 0, 0, False)
-        # visualisation.main(buildings, algorithm, total_houses, best_iteration, True)
+    
