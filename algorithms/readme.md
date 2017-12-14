@@ -54,7 +54,7 @@
 
 ### hillclimber_random_algorithm
 
-       Voor een, door gebruiker in main.py ingevoerde aantal iteraties:
+       Voor een, door de gebruiker in main.py ingevoerde aantal iteraties:
        Pakt een random huis, verplaats hem een random richting van 0.5. 
        Kijkt of het verplaatste huis overlapt met een ander huis, zo ja zet terug.  
        zo nee, append om de waarde te kunnen checken, waarde hoger: blijf daar staan.
@@ -63,7 +63,7 @@
        
 ### hillclimber_algorithm
 
-      Voor een, door gebruiker in main.py ingevoerde aantal iteraties:
+      Voor een, door de gebruiker in main.py ingevoerde aantal iteraties:
       Voor alle huizen in de map:
       Bekijk alle richtingen van het huis (stap 0.5) kies de richting met hoogste waarde, zonder overlap.
       Return de nieuwe score en buildings-array aan main.py
@@ -75,8 +75,18 @@
 ### greedy_algorithm
     
     Plaats een Maison (huis met het meest waarde), random op de map. 
-    Plaats 1 voor 1 alle ander Maisons, dan Bungalows en dan House's op de plek waar op dat moment de waarde het grootst is
-      
+    Plaats een voor een alle andere Maisons, dan Bungalows en dan House's op de plek waar op dat moment de waarde het grootst is.
+    
+### hillclimber_rotate_move_swap_algorithm
+
+    voor een, door de gebruiker in main.py ingevoerde aantal iteraties:
+    Voor alle huizen in de map:
+    kies random: 
+                - verplaats huis in een random richting 0.5 stap 
+                - draai het huis 90 graden
+                - swap het huis met een random ander huis
+    Check de totaal waarde. Als minder dan eerst: zet terug. Als meer: laat staan.
+     
 
     
     
