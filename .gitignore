@@ -1,9 +1,7 @@
 # Compiled source #
 ###################
 *.pyc
-*.png
 *.bat
 *.DS_Store
 output/random/20/random_20.png
 output/random/20/random_20.png
-*.png
