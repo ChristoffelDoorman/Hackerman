@@ -60,7 +60,7 @@
                 of er overlap is, zo niet dan append hij het huis.
          
         def closest_distance
-                Kijkt van het voor alle gebouwen in de array, welk gebouw het dichtst in de buurt staat
+                Kijkt voor alle gebouwen in de array, welk gebouw het dichtst in de buurt staat
                 of te wel hoeveel vrije ruimte dat gebouw heeft. Met behulp van def pythagoras
                 
         def calculate_score
