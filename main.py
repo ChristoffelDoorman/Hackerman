@@ -45,9 +45,9 @@ if __name__ == "__main__":
 
         map_score = calculate_score(buildings)
 
-        iterations_hill = input("How many iterations for hillclimber: ")
-
-        buildings, map_score = hillclimber_algorithm.main(iterations_hill, buildings, 0)
+        # iterations_hill = input("How many iterations for hillclimber: ")
+        #
+        # buildings, map_score = hillclimber_algorithm.main(iterations_hill, buildings, 0)
 
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
         visualisation.main(buildings, algorithm, total_houses, map_score, True)
