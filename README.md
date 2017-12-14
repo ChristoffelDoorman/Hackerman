@@ -5,7 +5,7 @@
 ### Een Algoritme draaien:
 
         1. Start main: 'python main.py'
-        2. Kies de huizenvariant (20,40 of 60)
+        2. Kies de huizenvariant (20, 40 of 60)
         3. Kies een algoritme
         4. Afhankelijk van je keuze: kies hoe vaak het algoritme te draaien
         
