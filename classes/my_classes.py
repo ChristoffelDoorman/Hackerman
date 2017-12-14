@@ -18,6 +18,12 @@ class House:
 	def __repr__(self):
 		return("x=%i, y=%i, type = house "%(self.left_bottom[0], self.left_bottom[1]))
 
+	def update(self, x, y):
+		self.left_bottom = [x, y]
+		self.left_top = [x, y + self.length]
+		self.right_top = [x + self.width, y + self.length]
+		self.right_bottom = [x + self.width, y]
+
 	# Dit is nog cumulatief, en dat mag niet!
 	def score(self, closest):
 		self.freeSpace = closest
@@ -42,6 +48,12 @@ class Bungalow:
 
 	def top_right(self):
 		return [self.x+self.width, self.y+self.length]
+
+	def update(self, x, y):
+		self.left_bottom = [x, y]
+		self.left_top = [x, y + self.length]
+		self.right_top = [x + self.width, y + self.length]
+		self.right_bottom = [x + self.width, y]
 
 	def __repr__(self):
 		return("x=%i, y=%i, type = bungalow, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
@@ -75,6 +87,12 @@ class Maison:
 	def __repr__(self):
 		return ("x=%i, y=%i, type = maison "%(self.left_bottom[0], self.left_bottom[1]))
 
+	def update(self, x, y):
+		self.left_bottom = [x, y]
+		self.left_top = [x, y + self.length]
+		self.right_top = [x + self.width, y + self.length]
+		self.right_bottom = [x + self.width, y]
+
 	def score(self, closest):
 		self.freeSpace = closest
 		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
@@ -96,21 +114,21 @@ class Water:
 	def __repr__(self):
 		return("x=%i, y=%i, type = water, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
 
-class Map:
-
-	#buildings = []
-
-	def __init__(self, height, width):
-		self.height = height
-		self.width = width
-		self.buildings = []
-		self.score = 0
-
-	def score(self, buildings):
-		total_value = 0
-
-		for current_building in buildings:
-			closest = closest_distance(current_building, buildings)
-			total_value += current_building.score(closest)
-
-		return total_value
+# class Map:
+#
+# 	#buildings = []
+#
+# 	def __init__(self, height, width):
+# 		self.height = height
+# 		self.width = width
+# 		self.buildings = []
+# 		self.score = 0
+#
+# 	def score(self, buildings):
+# 		total_value = 0
+#
+# 		for current_building in buildings:
+# 			closest = closest_distance(current_building, buildings)
+# 			total_value += current_building.score(closest)
+#
+# 		return total_value

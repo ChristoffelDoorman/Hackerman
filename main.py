@@ -1,9 +1,6 @@
-
 from algorithms import *
 import visualisation.canvas_visualisation as visualisation
 from helpers import calculate_score
-from classes import Map
-
 
 if __name__ == "__main__":
 
@@ -12,7 +9,7 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose number bigger than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random] ")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random], [5: test], [6: greedy]")
 
     if algorithm_choice == 1:
         algorithm = "random"
@@ -26,8 +23,6 @@ if __name__ == "__main__":
         # visualisation.main(buildings, algorithm, 0, 0, False)
         visualisation.main(buildings, algorithm, total_houses, best_iteration, True)
 
-        print "Volgens nieuwe Map.score= ", Map.score
-
     elif algorithm_choice == 2:
         algorithm = "hillclimber"
 
@@ -35,18 +30,13 @@ if __name__ == "__main__":
 
         best_buildings_random, best_iteration = random_algorithm.main(total_houses, iterations)
 
-        visualisation.print_canvas (best_buildings_random, 'random')
-
-        print best_iteration
+        visualisation.main(best_buildings_random, algorithm, total_houses, best_iteration, True)
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
+        best_buildings_hill, best_map_score = hillclimber_algorithm.main(iterations_hill, best_buildings_random, best_iteration)
 
-        best_buildings_hill, map_score = hillclimber_algorithm.main(iterations_hill, best_buildings_random, best_iteration)
-
-        print map_score
-
-        visualisation.print_canvas(best_buildings_hill, 'hill')
+        visualisation.main(best_buildings_hill, algorithm, total_houses, best_map_score, True)
 
     elif algorithm_choice == 3:
         algorithm = "expanding_universe"
@@ -59,9 +49,8 @@ if __name__ == "__main__":
         #
         # buildings, map_score = hillclimber_algorithm.main(iterations_hill, buildings, 0)
 
-        visualisation.print_canvas(buildings, 'expanding 60')
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
-        visualisation.main(buildings, algorithm, total_houses, map_score, False)
+        visualisation.main(buildings, algorithm, total_houses, map_score, True)
 
     elif algorithm_choice == 4:
         algorithm = "hillclimber_random"
@@ -70,12 +59,28 @@ if __name__ == "__main__":
 
         best_buildings_random, best_iteration = random_algorithm.main(total_houses, iterations)
 
-        visualisation.print_canvas (best_buildings_random, 'random_2')
-
-        print best_iteration
+        visualisation.main(best_buildings_random, algorithm, total_houses, best_iteration, True)
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
-        best_buildings_hill, map_score = hillclimber_random.main(iterations_hill, best_buildings_random, best_iteration)
+        best_buildings_hill, best_map_score = hillclimber_random.main(iterations_hill, best_buildings_random, best_iteration)
 
-        print map_score
+        visualisation.main(best_buildings_hill, algorithm, total_houses, best_map_score, True)
+
+    elif algorithm_choice == 5:
+
+        algorithm = "move rotate swap"
+
+        iterations = input("How many iterations random first?: ")
+
+        best_buildings_random, best_iteration = random_algorithm.main(total_houses, iterations)
+
+        iterations_hill = input("How many iterations Move rotate swap?: ")
+
+        hillclimber_rotate_move_swap.main(iterations_hill, best_buildings_random, best_iteration)
+
+    elif algorithm_choice == 6:
+
+        algorithm = "try_greedy"
+
+        try_greedy.main(total_houses)
