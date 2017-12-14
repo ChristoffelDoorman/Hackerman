@@ -1,21 +1,27 @@
 # Hackerman || Amstelhaegen || Algorithms
 ###### Tim Jansen, Jaap Meesters, Christoffel Doorman
 ------------------------------------------------
+ 
+### filosofie
+        
+        Als je er vanuit gaat dat elke huis alleen precies op de hele meter kan staan, en 30 meter gemiddeld inneemt, 
+        dan zijn er voor de 20-variant grofweg: 360*320 = 115.200 // 115.200 * 115.170 * 115.140 .... * 114.600 =
+        +/- 1.6916e101 ofwel 1.691.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000
+        -000.000.000.000.000.000.000.000.000.000.000.000.000.000 mogelijkheden. Onvoorstelbaar veel, laat staan het aantal mogelijkheden 
+        van de 'echte' vraag, zonder de uitgangspunten die de som vermakkelijken.
+
+        Of wel: 
+        - Bruteforce is totaal onhaalbaar, omdat je onmogelijk alle opties af kunt gaan. Maar dat is dan ook
+          waarom deze case in het vak Heuristieken zit. 
+        - De kans dat je een beetje in de buurt komt bij de beste oplossing met bijvooreeld 1 miljoen keer 
+          random is kleiner dan de kans dat je De Lotto wint.
+
 
 ### random_algorithm
 
-    Bouwt een random huis op een random plek tot alle huizen gebouwd zijn.  
-    Berekent de waarde van het totale canvas.
-    De meest waardevolle van de, via main.py, opgegeven aantal itteraties geeft hij terug.
- 
- **filosofie**
-    
-    1.6916e101 ofwel 1.691.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000.000
-                     000.000.000.000.000.000.000.000.000.000.000.000.000.000 mogelijkheden
-
-
-
-
+        Bouwt een random huis op een random plek tot alle huizen gebouwd zijn.  
+        Berekent de waarde van het totale canvas.
+        De meest waardevolle van de, via main.py, opgegeven aantal itteraties geeft hij terug.
 
 randomiser amstelhaegen_algoritme.py
 
