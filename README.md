@@ -103,7 +103,7 @@
               
 **algoritmes**        
 
-        Hierin bevinden zich alle algoritmen, deze kunnen via main worden opgeroepen, en combineert.
+        Hierin bevinden zich alle algoritmen, deze kunnen via main worden opgeroepen, en gecombineert worden.
         
         random_algorithm.py
         hillclimber_algorithm.py
