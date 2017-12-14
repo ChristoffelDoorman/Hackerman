@@ -145,7 +145,7 @@ def walk_check(building):
                     best_y = building.left_bottom[1]
                     print best_x, best_y
 
-        return top_score, best_x, best_y
+        # return top_score, best_x, best_y
 
     # while (b_counter < b_number):
     #     top_value = 0

@@ -38,7 +38,7 @@ def h_build(buildings, h_counter):
 
 
 	# xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-	yrandom = random.randint(0, y_DIMENSION - classes.House.length)
+	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
 	if not buildings:
@@ -63,7 +63,7 @@ def h_build(buildings, h_counter):
 def b_build(buildings, b_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
-	yrandom = random.randint(0, y_DIMENSION - classes.Bungalow.length)
+	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	choice = random.getrandbits(1)
@@ -95,7 +95,7 @@ def b_build(buildings, b_counter):
 def m_build(buildings, m_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
-	yrandom = random.randint(0, y_DIMENSION - classes.Maison.length)
+	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 
 	# random: length, width = width, length
@@ -143,8 +143,8 @@ def closest_distance(current_building, buildings):
 
         # area midden boven
 		elif (building.right_bottom[1] > current_building.left_top[1]
-			and building.right_bottom[0] > current_building.left_top[0]
-			and building.left_bottom[0] < current_building.right_top[0]):
+			and building.right_bottom[0] >= current_building.left_top[0]
+			and building.left_bottom[0] <= current_building.right_top[0]):
 
 			# calculate distance
 			distance = building.right_bottom[1] - current_building.right_top[1]
@@ -161,8 +161,8 @@ def closest_distance(current_building, buildings):
 
         # area midden rechts
 		elif (building.left_bottom[0] > current_building.right_top[0]
-			and building.left_bottom[1] < current_building.right_top[1]
-			and building.left_top[1] > current_building.right_bottom[1]):
+			and building.left_bottom[1] <= current_building.right_top[1]
+			and building.left_top[1] >= current_building.right_bottom[1]):
 
 			# calculate distance
 			distance = building.left_bottom[0] - current_building.right_bottom[0]
@@ -179,8 +179,8 @@ def closest_distance(current_building, buildings):
 
 		# area midden onder
 		elif (building.right_top[1] < current_building.left_bottom[1]
-			and building.right_top[0] > current_building.left_bottom[0]
-			and building.left_top[0] < current_building.right_bottom[0]):
+			and building.right_top[0] >= current_building.left_bottom[0]
+			and building.left_top[0] <= current_building.right_bottom[0]):
 
 			# calculate distance
 			distance = current_building.right_top[1] - building.right_bottom[1]
@@ -195,10 +195,10 @@ def closest_distance(current_building, buildings):
 			building.right_top[0], building.right_top[1])
 
 
-        # area midden rechts
+        # area midden links
 		elif (building.right_bottom[0] < current_building.left_bottom[0]
-			and building.right_bottom[1] < current_building.left_top[1]
-			and building.right_top[1] > current_building.left_bottom[1]):
+			and building.right_bottom[1] <= current_building.left_top[1]
+			and building.right_top[1] >= current_building.left_bottom[1]):
 
 			# calculate distance
 			distance = current_building.left_bottom[0] - building.right_bottom[0]
