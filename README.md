@@ -21,16 +21,18 @@
 ### infrastructuur:
         
    Alle algoritmen zijn aan te roepen vanaf main.py. Deze algoritmen schakkelen op hun beurt de hulp in van: classes, helpers en
-   visualisatie.Hier volgt een korte uitleg van deze files.
+   visualisatie. Hier volgt een korte uitleg van deze files.
         
 **main**
         
-        Main bevat een keuzen menu van alle algoritmen.            
-          
-          
-          
-          
-**Classes**        
+      main.py
+        Vraagt om de huizenvariant: 20, 40 of 60.
+        Bevat een keuzemenu van alle algoritmen.
+        Vraagt hoevaak hij het algoritme moet laten draaien.
+        Roept Visualisation op om de verkregen data op te slaan. 
+                   
+**Classes**
+        
 **helpers**                
 **visualisatie**           
 **algoritmes**        
