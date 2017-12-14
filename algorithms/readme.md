@@ -15,6 +15,8 @@
           waarom deze case in het vak Heuristieken zit. 
         - De kans dat je een beetje in de buurt komt bij de beste oplossing met bijvooreeld 1 miljoen keer 
           random is kleiner dan de kans dat je De Lotto wint.
+          
+        
 
 
 ### random_algorithm
