@@ -79,9 +79,9 @@
     
 ### hillclimber_rotate_move_swap_algorithm
 
-    voor een, door de gebruiker in main.py ingevoerde aantal iteraties:
+    Voor een, door de gebruiker in main.py ingevoerde aantal iteraties:
     Voor alle huizen in de map:
-    kies random: 
+    Kies random: 
                 - verplaats huis in een random richting 0.5 stap 
                 - draai het huis 90 graden
                 - swap het huis met een random ander huis
