@@ -1,5 +1,5 @@
 # Hackerman || Amstelhaegen
-Tim Jansen, Jaap Meesters, Christoffel Doorman
+Tim Jansen | Jaap Meesters | Christoffel Doorman
 
 ### Een Algoritme draaien:
 
