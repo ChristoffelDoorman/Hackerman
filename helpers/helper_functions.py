@@ -10,7 +10,7 @@ import math
 import classes
 
 X_DIMENSION = 360
-y_DIMENSION = 320
+Y_DIMENSION = 320
 
 best_iteration = 0
 
@@ -38,7 +38,7 @@ def h_build(buildings, h_counter):
 
 
 	# xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-	yrandom = random.randint(0, y_DIMENSION - classes.House.length)
+	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
 	if not buildings:
@@ -63,7 +63,7 @@ def h_build(buildings, h_counter):
 def b_build(buildings, b_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
-	yrandom = random.randint(0, y_DIMENSION - classes.Bungalow.length)
+	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	choice = random.getrandbits(1)
@@ -95,7 +95,7 @@ def b_build(buildings, b_counter):
 def m_build(buildings, m_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
-	yrandom = random.randint(0, y_DIMENSION - classes.Maison.length)
+	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 
 	# random: length, width = width, length
@@ -143,8 +143,8 @@ def closest_distance(current_building, buildings):
 
         # area midden boven
 		elif (building.right_bottom[1] > current_building.left_top[1]
-			and building.right_bottom[0] > current_building.left_top[0]
-			and building.left_bottom[0] < current_building.right_top[0]):
+			and building.right_bottom[0] >= current_building.left_top[0]
+			and building.left_bottom[0] <= current_building.right_top[0]):
 
 			# calculate distance
 			distance = building.right_bottom[1] - current_building.right_top[1]
@@ -161,8 +161,8 @@ def closest_distance(current_building, buildings):
 
         # area midden rechts
 		elif (building.left_bottom[0] > current_building.right_top[0]
-			and building.left_bottom[1] < current_building.right_top[1]
-			and building.left_top[1] > current_building.right_bottom[1]):
+			and building.left_bottom[1] <= current_building.right_top[1]
+			and building.left_top[1] >= current_building.right_bottom[1]):
 
 			# calculate distance
 			distance = building.left_bottom[0] - current_building.right_bottom[0]
@@ -179,8 +179,8 @@ def closest_distance(current_building, buildings):
 
 		# area midden onder
 		elif (building.right_top[1] < current_building.left_bottom[1]
-			and building.right_top[0] > current_building.left_bottom[0]
-			and building.left_top[0] < current_building.right_bottom[0]):
+			and building.right_top[0] >= current_building.left_bottom[0]
+			and building.left_top[0] <= current_building.right_bottom[0]):
 
 			# calculate distance
 			distance = current_building.right_top[1] - building.right_bottom[1]
@@ -195,10 +195,10 @@ def closest_distance(current_building, buildings):
 			building.right_top[0], building.right_top[1])
 
 
-        # area midden rechts
+        # area midden links
 		elif (building.right_bottom[0] < current_building.left_bottom[0]
-			and building.right_bottom[1] < current_building.left_top[1]
-			and building.right_top[1] > current_building.left_bottom[1]):
+			and building.right_bottom[1] <= current_building.left_top[1]
+			and building.right_top[1] >= current_building.left_bottom[1]):
 
 			# calculate distance
 			distance = current_building.left_bottom[0] - building.right_bottom[0]
@@ -250,6 +250,63 @@ def move(building, direction, step):
         building.right_bottom[1] -= step
 
     return building
+
+def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_stepsize):
+	move(building, x_direction, x_stepsize)
+	move(building, y_direction, y_stepsize)
+
+	if (building.left_bottom[0] < 0) \
+		or (building.left_bottom[1] < 0) \
+		or (building.right_top[0] > X_DIMENSION) \
+		or (building.right_top[1] > Y_DIMENSION):
+	        return False, 0
+
+	olap = True
+	for build in buildings:
+
+		if build == building:
+			continue
+
+		olap = overlap(build, building)
+
+		if olap:
+			move(building, - x_direction, x_stepsize)
+			move(building, - y_direction, y_stepsize)
+			return False, 0
+
+		if not olap:
+			score = calculate_score(buildings)
+			move(building, - x_direction, x_stepsize)
+			move(building, - y_direction, y_stepsize)
+			return True, score
+
+
+def check_move(building, buildings, direction, stepsize):
+
+    move(building, direction, stepsize)
+
+    if (building.left_bottom[0] < 0) \
+	or (building.left_bottom[1] < 0) \
+	or (building.right_top[0] > X_DIMENSION) \
+	or (building.right_top[1] > Y_DIMENSION):
+        return False, 0
+
+    olap = True
+    for build in buildings:
+
+        if build == building:
+            continue
+
+        olap = overlap(build, building)
+
+        if olap:
+            move(building, -direction, stepsize)
+            return False, 0
+
+    if not olap:
+        score = calculate_score(buildings)
+        move(building, -direction, stepsize)
+        return True, score
 
 
 # def swap(building1, building2):
