@@ -1,3 +1,5 @@
+import numpy as np
+
 class House:
 	name = 'house'
 	length = 20

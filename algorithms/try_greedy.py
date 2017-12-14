@@ -15,6 +15,7 @@ import copy
 import classes
 import time
 import helpers
+import numpy as np
 
 district = classes.Map(360, 320)
 
@@ -34,7 +35,7 @@ def main(total_houses):
 
     while (m_counter < 5):
 
-        maison = classes.Maison(0, 0)
+        maison = classes.Maison(-23, 0)
 
         district.buildings.append(maison)
         print district.buildings
@@ -97,55 +98,54 @@ def walk_check(building):
 
         helpers.move(building, direction, 1)
         # # print building
+
+        if building.right_top[0] >= 360:
+            helpers.move(building, 2, 1)
+            direction = -1
+            continue
+            # possible = check_possible(building)
+            # if not possible:
+            #     direction = 1
+            #     continue
+            #
+            # top_value, best_x, best_y = check_value(district.buildings, building, top_value, best_x, best_y)
+            # helpers.move(building, -1, 1)
+            # top_value, best_x, best_y = check_value(buildings, building, top_value, best_x, best_y)
+
+
+        if building.left_bottom[0] <= 0:
+            helpers.move(building, 2, 1)
+            direction = 1
+            continue
+            # possible = check_possible(building)
+            # if not possible:
+            #     direction = 1
+            #     continue
+            #
+            # top_value, best_x, best_y = check_value(district.buildings, building, top_value, best_x, best_y)
+            # helpers.move(building, 1, 1)
+            # top_value, best_x, best_y = check_value(buildings, building, top_value, best_x, best_y)
+
+
+        # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
+        if building.right_top[1] >= 320 and building.right_top[0] >= 359:
+            return top_score, best_x, best_y
+
         possible = check_possible(building)
 
         if possible:
-            if building.right_top[0] >= 360:
-                helpers.move(building, 2, 1)
-                direction = -1
-                continue
-                # possible = check_possible(building)
-                # if not possible:
-                #     direction = 1
-                #     continue
-                #
-                # top_value, best_x, best_y = check_value(district.buildings, building, top_value, best_x, best_y)
-                # helpers.move(building, -1, 1)
-                # top_value, best_x, best_y = check_value(buildings, building, top_value, best_x, best_y)
+            score = helpers.calculate_score(district.buildings)
+            # print score
+            if score > top_score:
+                # print value
+                top_score = score
+                # print "top value", top_value
+                best_x = building.left_bottom[0]
+
+                best_y = building.left_bottom[1]
+                print best_x, best_y
 
 
-            if building.left_bottom[0] <= 0:
-                helpers.move(building, 2, 1)
-                direction = 1
-                continue
-                # possible = check_possible(building)
-                # if not possible:
-                #     direction = 1
-                #     continue
-                #
-                # top_value, best_x, best_y = check_value(district.buildings, building, top_value, best_x, best_y)
-                # helpers.move(building, 1, 1)
-                # top_value, best_x, best_y = check_value(buildings, building, top_value, best_x, best_y)
-
-
-            # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
-            if building.right_top[1] >= 320 and building.right_top[0] >= 359:
-                return top_score, best_x, best_y
-
-            possible = check_possible(building)
-            if possible:
-                score = helpers.calculate_score(district.buildings)
-                # print score
-                if score > top_score:
-                    # print value
-                    top_score = score
-                    # print "top value", top_value
-                    best_x = building.left_bottom[0]
-
-                    best_y = building.left_bottom[1]
-                    print best_x, best_y
-
-        return top_score, best_x, best_y
 
     # while (b_counter < b_number):
     #     top_value = 0
