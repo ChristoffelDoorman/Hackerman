@@ -114,21 +114,21 @@ class Water:
 	def __repr__(self):
 		return("x=%i, y=%i, type = water, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
 
-class Map:
-
-	#buildings = []
-
-	def __init__(self, height, width):
-		self.height = height
-		self.width = width
-		self.buildings = []
-		self.score = 0
-
-	def score(self, buildings):
-		total_value = 0
-
-		for current_building in buildings:
-			closest = closest_distance(current_building, buildings)
-			total_value += current_building.score(closest)
-
-		return total_value
+# class Map:
+#
+# 	#buildings = []
+#
+# 	def __init__(self, height, width):
+# 		self.height = height
+# 		self.width = width
+# 		self.buildings = []
+# 		self.score = 0
+#
+# 	def score(self, buildings):
+# 		total_value = 0
+#
+# 		for current_building in buildings:
+# 			closest = closest_distance(current_building, buildings)
+# 			total_value += current_building.score(closest)
+#
+# 		return total_value

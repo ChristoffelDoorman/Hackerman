@@ -9,7 +9,8 @@ import math
 
 import classes
 
-district = classes.Map(320, 360)
+X_DIMENSION = 360
+y_DIMENSION = 320
 
 best_iteration = 0
 
@@ -32,8 +33,8 @@ def overlap(building1, building2):
 def h_build(buildings, h_counter):
 
 
-	xrandom = random.randint(0, district.width - classes.House.width)
-	yrandom = random.randint(0, district.height - classes.House.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
+	yrandom = random.randint(0, y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
 	if not buildings:
@@ -57,8 +58,8 @@ def h_build(buildings, h_counter):
 
 def b_build(buildings, b_counter):
 
-	xrandom = random.randint(0, district.width - classes.Bungalow.width)
-	yrandom = random.randint(0, district.height - classes.Bungalow.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
+	yrandom = random.randint(0, y_DIMENSION - classes.Bungalow.length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	choice = random.getrandbits(1)
@@ -89,8 +90,8 @@ def b_build(buildings, b_counter):
 
 def m_build(buildings, m_counter):
 
-	xrandom = random.randint(0, district.width - classes.Maison.width)
-	yrandom = random.randint(0, district.height - classes.Maison.length)
+	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
+	yrandom = random.randint(0, y_DIMENSION - classes.Maison.length)
 	maison = classes.Maison(xrandom, yrandom)
 
 	# random: length, width = width, length
@@ -219,26 +220,26 @@ def calculate_score(buildings):
 
 def move(building, direction, step):
 
-    if direction == 'left':
+    if direction == -1:
 
         building.left_bottom[0] -= step
         building.left_top[0] -= step
         building.right_top[0] -= step
         building.right_bottom[0] -= step
 
-    if direction == 'up':
+    if direction == 2:
         building.left_bottom[1] += step
         building.left_top[1] += step
         building.right_top[1] += step
         building.right_bottom[1] += step
 
-    if direction == 'right':
+    if direction == 1:
         building.left_bottom[0] += step
         building.left_top[0] += step
         building.right_top[0] += step
         building.right_bottom[0] += step
 
-    if direction == 'down':
+    if direction == -2:
         building.left_bottom[1] -= step
         building.left_top[1] -= step
         building.right_top[1] -= step

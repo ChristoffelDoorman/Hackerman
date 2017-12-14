@@ -3,7 +3,6 @@
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 # import files
-from classes import Map
 from helpers import h_build, b_build, m_build, calculate_score
 import visualisation
 
@@ -19,8 +18,8 @@ import copy
 import classes
 import helpers
 
-district = Map(320, 360)
-
+X_DIMENSION = 360
+Y_DIMENSION = 320
 
 def main(total_houses):
 

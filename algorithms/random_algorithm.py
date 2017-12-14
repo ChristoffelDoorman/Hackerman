@@ -3,7 +3,6 @@
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 # import files
-from classes import Map
 from helpers import h_build, b_build, m_build, calculate_score
 import visualisation
 
@@ -17,9 +16,8 @@ import timeit
 import math
 import copy
 
-
-district = Map(320, 360)
-
+X_DIMENSION = 360
+Y_DIMENSION = 320
 
 def main(total_houses, iterations):
 
@@ -27,9 +25,9 @@ def main(total_houses, iterations):
 
     for i in range(iterations):
 
-        # fill building array with a house at a random point
+        # create buildings array
         buildings = []
-
+        
         # set number of each building type
         h_number = 0.6 * total_houses
         b_number = 0.25 * total_houses
@@ -55,7 +53,7 @@ def main(total_houses, iterations):
 
         # calculate closest distance to buildings
         total_value = calculate_score(buildings)
-
+        print total_value
 
         if (total_value > best_iteration):
             best_buildings = copy.deepcopy(buildings)

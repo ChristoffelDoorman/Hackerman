@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from datetime import datetime
+import os
 from os import path
-
 
 def draw_canvas():
 
@@ -12,7 +12,6 @@ def draw_canvas():
     ax1.set_ylim(0, 320)
 
     return ax1, fig1
-
 
 def drawBuilding(ax1, building, x, y, edgecolor):
 
@@ -43,12 +42,14 @@ def print_canvas(buildings, file_name):
 
     fig1.savefig(path.join(outpath,"test_{}.png".format(file_name)), dpi=90, bbox_inches='tight')
 
-def main(buildings, output_file, total_houses, best_iteration, save_in_file):
+def main(buildings, algorithm, total_houses, best_iteration, save_in_folder):
 
     ax1, fig1 = draw_canvas()
     plt.suptitle("The total value is: {:,}".format(best_iteration))
 
-    outpath = ("output/{}/{}".format(output_file, total_houses))
+    outpath = ("output/{}/{}".format(algorithm, total_houses))
+    if not os.path.exists(outpath):
+        os.makedirs(outpath)
 
     for building in buildings:
         if building.name == 'house':
@@ -58,9 +59,9 @@ def main(buildings, output_file, total_houses, best_iteration, save_in_file):
         if building.name == 'maison':
             drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'green')
 
-    # safe figure
-    if save_in_file:
-        fig1.savefig(path.join(outpath,"{}_{}.png".format(output_file, total_houses)), dpi=90, bbox_inches='tight')
+    timestamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 
-    else:
-        fig1.savefig(output_file, dpi=90, bbox_inches='tight')
+    fig1.savefig(path.join(outpath,"{}_{}_{}.png".format(algorithm, total_houses, timestamp)), dpi=90, bbox_inches='tight')
+
+    if "banaan":
+        fig1.savefig(algorithm, dpi=90, bbox_inches='tight')
