@@ -120,7 +120,7 @@ class Map:
 	#buildings = []
 
 	def __init__(self, width, height):
-		self.width = height
+		self.width = width
 		self.height = height
 		self.buildings = []
 

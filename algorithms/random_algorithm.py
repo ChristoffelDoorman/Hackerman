@@ -55,7 +55,6 @@ def main(total_houses, iterations):
         # print total_value
 
         if (total_value > best_iteration):
-            best_district = classes.Map(360, 320)
             best_district.buildings = district.buildings
             best_iteration = total_value
 
