@@ -1,3 +1,10 @@
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file contains the expanding universe algorithm
+
 # import files
 from classes import *
 from helpers import overlap, move, check_position, check_move

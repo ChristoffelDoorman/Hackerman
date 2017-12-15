@@ -1,3 +1,13 @@
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file contains the classes of the buildings, the water and a map class.
+
+import helpers
+
+
 class House:
 	name = 'house'
 	length = 20
@@ -108,7 +118,6 @@ class Water:
 	def __repr__(self):
 		return("x=%i, y=%i, type = water, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
 
-import helpers
 
 class Map:
 

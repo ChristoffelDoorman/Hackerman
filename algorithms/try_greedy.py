@@ -1,3 +1,10 @@
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file contains the greedy algorithm.
+
 # import files
 from helpers import h_build, b_build, m_build, calculate_score, move, overlap, check_move
 import visualisation

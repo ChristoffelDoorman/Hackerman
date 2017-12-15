@@ -1,3 +1,10 @@
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file contains all functions neccesary for the algoritms.
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import random
@@ -19,7 +26,6 @@ def pythagoras(x1, y1, x2, y2):
 
 	return distance
 
-
 def overlap(building1, building2):
 	overlap = True
 
@@ -32,7 +38,6 @@ def overlap(building1, building2):
 
 	# print "dit overlapt"
 	return overlap
-
 
 def h_build(buildings, h_counter):
 
@@ -58,7 +63,6 @@ def h_build(buildings, h_counter):
 		h_counter += 1
 
 	return buildings, h_counter
-
 
 def b_build(buildings, b_counter):
 
@@ -91,7 +95,6 @@ def b_build(buildings, b_counter):
 
 	return buildings, b_counter
 
-
 def m_build(buildings, m_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
@@ -123,7 +126,6 @@ def m_build(buildings, m_counter):
 		m_counter += 1
 
 	return buildings, m_counter
-
 
 def closest_distance(current_building, buildings):
 
@@ -210,7 +212,6 @@ def closest_distance(current_building, buildings):
 
 	return closest
 
-
 def calculate_score(buildings):
 
 	total_value = 0
@@ -220,7 +221,6 @@ def calculate_score(buildings):
 		total_value += current_building.score(closest)
 
 	return total_value
-
 
 def move(building, direction, step):
 
@@ -280,7 +280,6 @@ def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_
 			move(building, - y_direction, y_stepsize)
 			return True, score
 
-
 def check_move2(building, district, direction, stepsize):
 
     move(building, direction, stepsize)
@@ -333,15 +332,3 @@ def check_move(building, district, direction, stepsize):
     if not olap:
         score = district.score()
         return True, score
-
-
-# def swap(building1, building2):
-    #
-	# building1, building2 = building2, buildings1
-    #
-	# building1.
-	# for building in buildings:
-    #
-	# 	if overlap(building, building1) or overlap(building, building2):
-	# 		building1, building2 = building2, building1
-# 		return buildings

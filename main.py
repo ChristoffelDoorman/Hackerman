@@ -1,3 +1,10 @@
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file runs all the algoritms, from input of user
+
 from algorithms import *
 from helpers import calculate_score
 import visualisation.canvas_visualisation as visualisation

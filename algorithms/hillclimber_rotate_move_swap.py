@@ -1,3 +1,11 @@
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file rotates, moves and swaps two houses randomly to check if score
+# has improved.
+
 # import files
 from helpers import move, overlap, check_move
 import classes
