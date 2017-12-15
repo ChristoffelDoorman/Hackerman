@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
-        best_district, total_score, end_time = hillclimber_algorithm.main(iterations_hill, district, 0)
+        best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, 0)
 
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
         visualisation.main(best_district.buildings, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "exp with hill")
