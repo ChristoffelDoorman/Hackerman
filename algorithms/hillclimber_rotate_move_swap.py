@@ -109,8 +109,8 @@ def check_swap(building1, building2, old_building1, old_building2, district):
         overlap2 = overlap(building, building2)
         overlap3 = overlap(building1, building2)
         overlap4 = overlap(building2, building1)
-        overlap5 = overlap(old_building1, building)
-        overlap6 = overlap(old_building2, building)
+        overlap5 = overlap(building, old_building1)
+        overlap6 = overlap(building, old_building2)
 
         if (building1.left_bottom[0] < 0) or (building1.left_bottom[1] < 0)	or (building1.right_top[0] > district.width) or (building1.right_top[1] > district.height):
             return False, 0
