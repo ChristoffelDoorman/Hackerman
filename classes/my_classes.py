@@ -65,11 +65,6 @@ class Bungalow:
 		return value
 
 
-	def rotate():
-
-		inheretence
-
-
 class Maison:
 	name = 'maison'
 	length = 34
@@ -117,7 +112,6 @@ import helpers
 
 class Map:
 
-	#buildings = []
 
 	def __init__(self, width, height):
 		self.width = width
@@ -131,13 +125,3 @@ class Map:
 			total_value += current_building.score(closest)
 
 		return total_value
-
-	# def score(self):
-	# 	total_value = 0
-    #
-	# 	for current_building in self.buildings:
-	# 		print current_building
-	# 		closest = closest_distance(current_building, self.buildings)
-	# 		total_value += current_building.score(closest)
-    #
-	# 	return total_value

@@ -334,6 +334,42 @@ def check_move2(building, district, direction, stepsize):
         move(building, -direction, stepsize)
         return True, score
 
+def print_txt(buildings, total_houses):
+
+    text_file = open("probeersel,{}.txt".format(total_houses), "w+")
+
+    for building in buildings:
+        if building.name == 'maison':
+            build = "mais"
+        elif building.name == 'bungalow':
+            build = "bung"
+        elif building.name == 'house':
+            b = "hous"
+
+
+        text_file.write("{} {} {}\n".format(build, building.left_bottom[0], building.left_bottom[1]))
+    text_file.close()
+
+def read_file():
+
+    with open('probeersel,20.txt', 'r') as f:
+        data = f.readlines()
+
+    for line in data:
+        words = line.split()
+        build = words[0]
+        x = int(words[1])
+        y = int(words[2])
+
+        if build == 'mais':
+            maison = classes.Maison(x, y)
+            district.buildings.append(maison)
+        elif build == 'bung':
+            bungalow = classes.Bungalow(x, y)
+            district.buildings.append(bungalow)
+        elif build == 'hous':
+            house = classes.House(x, y)
+            district.buildings.append(house)
 
 # def swap(building1, building2):
     #
