@@ -1,5 +1,5 @@
 # import files
-from helpers import move, overlap, check_move
+from helpers import move, overlap, check_move2
 import classes
 
 # import modules
@@ -22,7 +22,7 @@ def main(iterations_hill, district, map_score):
 
             for direction in directions:
 
-                possible, move_score = check_move(building, district, direction, 0.5)
+                possible, move_score = check_move2(building, district, direction, 0.5)
 
                 if possible and move_score > map_score:
                     # print 'move score: ', move_score
