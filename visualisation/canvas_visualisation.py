@@ -42,12 +42,21 @@ def print_canvas(buildings, file_name):
 
     fig1.savefig(path.join(outpath,"test_{}.png".format(file_name)), dpi=90, bbox_inches='tight')
 
-def main(buildings, algorithm, total_houses, best_iteration, save_in_folder):
+def main(buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, name):
+
+
 
     ax1, fig1 = draw_canvas()
-    plt.suptitle("The total value is: {:,}".format(best_iteration))
+    plt.suptitle("The total value is: ${:,}".format(best_iteration))
+    plt.title("{} seconds".format(end_time), loc='left')
+    plt.title("{} iterations".format(iterations), loc='right')
 
-    outpath = ("output/{}/{}".format(algorithm, total_houses))
+    if variation == 0:
+        outpath = ("output/{}/{}".format(algorithm, total_houses))
+
+    else:
+        outpath = ("output/{}/{}/{}".format(algorithm, variation, total_houses))
+
     if not os.path.exists(outpath):
         os.makedirs(outpath)
 
@@ -61,7 +70,4 @@ def main(buildings, algorithm, total_houses, best_iteration, save_in_folder):
 
     timestamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 
-    fig1.savefig(path.join(outpath,"{}_{}_{}.png".format(algorithm, total_houses, timestamp)), dpi=90, bbox_inches='tight')
-
-    if "banaan":
-        fig1.savefig(algorithm, dpi=90, bbox_inches='tight')
+    fig1.savefig(path.join(outpath,"{}_{}_{}_{}.png".format(algorithm, total_houses, timestamp, name)), dpi=90, bbox_inches='tight')

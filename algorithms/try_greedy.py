@@ -1,5 +1,5 @@
 # import files
-from helpers import h_build, b_build, m_build, calculate_score, move, overlap
+from helpers import h_build, b_build, m_build, move, overlap
 import visualisation
 import visualisation.canvas_visualisation as visualisation
 

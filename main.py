@@ -1,6 +1,5 @@
 from algorithms import *
 import visualisation.canvas_visualisation as visualisation
-from helpers import calculate_score
 
 if __name__ == "__main__":
 
@@ -9,34 +8,48 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose number bigger than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: hillclimber random], [5: test], [6: greedy]")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm]")
 
     if algorithm_choice == 1:
         algorithm = "random"
         iterations = input("How many iterations?: ")
 
-        buildings, best_iteration = random_algorithm.main(total_houses, iterations)
-    	# stop = timeit.default_timer()
-    	# print "De tijd is: ", stop - start
-        # print ("best iteration is", best_iteration)
-
-        # visualisation.main(buildings, algorithm, 0, 0, False)
-        visualisation.main(buildings, algorithm, total_houses, best_iteration, True)
+        best_district, best_iteration, end_time = random_algorithm.main(total_houses, iterations)
+        visualisation.main(best_district.buildings, algorithm, total_houses, best_iteration, end_time, iterations, 0)
 
     elif algorithm_choice == 2:
         algorithm = "hillclimber"
 
+        choice = input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]")
+
         iterations = input("How many iterations random first?: ")
-
-        best_buildings_random, best_iteration = random_algorithm.main(total_houses, iterations)
-
-        visualisation.main(best_buildings_random, algorithm, total_houses, best_iteration, True)
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
-        best_buildings_hill, best_map_score = hillclimber_algorithm.main(iterations_hill, best_buildings_random, best_iteration)
+        best_district_random, best_iteration, end_time = random_algorithm.main(total_houses, iterations)
 
-        visualisation.main(best_buildings_hill, algorithm, total_houses, best_map_score, True)
+        if choice == 1:
+            variation = "random"
+
+            visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
+
+            best_district_hill, best_map_score, end_time = hillclimber_random.main(iterations_hill, best_district_random, best_iteration)
+
+        elif choice == 2:
+            variation = "systematic"
+
+            visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
+
+            best_district_hill, best_map_score, end_time = hillclimber_algorithm.main(iterations_hill, best_district_random, best_iteration)
+
+        elif choice == 3:
+            variation = "Move_rotate_swap"
+
+            visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
+
+            best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, best_district_random, best_iteration)
+
+        visualisation.main(best_district_hill.buildings, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
 
     elif algorithm_choice == 3:
         algorithm = "expanding_universe"
@@ -50,36 +63,9 @@ if __name__ == "__main__":
         buildings, total_score = hillclimber_algorithm.main(iterations_hill, buildings, 0)
 
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
-        visualisation.main(buildings, algorithm, total_score, map_score, True)
+        visualisation.main(buildings, algorithm, total_houses, best_iteration, end_time, iterations)
 
     elif algorithm_choice == 4:
-        algorithm = "hillclimber_random"
-
-        iterations = input("How many iterations random first?: ")
-
-        best_buildings_random, best_iteration = random_algorithm.main(total_houses, iterations)
-
-        visualisation.main(best_buildings_random, algorithm, total_houses, best_iteration, True)
-
-        iterations_hill = input("How many iterations for hillclimber: ")
-
-        best_buildings_hill, best_map_score = hillclimber_random.main(iterations_hill, best_buildings_random, best_iteration)
-
-        visualisation.main(best_buildings_hill, algorithm, total_houses, best_map_score, True)
-
-    elif algorithm_choice == 5:
-
-        algorithm = "move rotate swap"
-
-        iterations = input("How many iterations random first?: ")
-
-        best_buildings_random, best_iteration = random_algorithm.main(total_houses, iterations)
-
-        iterations_hill = input("How many iterations Move rotate swap?: ")
-
-        hillclimber_rotate_move_swap.main(iterations_hill, best_buildings_random, best_iteration)
-
-    elif algorithm_choice == 6:
 
         algorithm = "try_greedy"
 

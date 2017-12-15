@@ -3,7 +3,7 @@
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 # import files
-from helpers import h_build, b_build, m_build, calculate_score
+from helpers import h_build, b_build, m_build
 import visualisation
 
 # import modules

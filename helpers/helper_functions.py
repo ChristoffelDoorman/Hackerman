@@ -37,7 +37,7 @@ def overlap(building1, building2):
 def h_build(buildings, h_counter):
 
 
-	# xrandom = random.randint(0, X_DIMENSION - classes.House.width)
+	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
@@ -281,7 +281,7 @@ def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_
 			return True, score
 
 
-def check_move(building, buildings, direction, stepsize):
+def check_move(building, district, direction, stepsize):
 
     move(building, direction, stepsize)
 
@@ -292,7 +292,7 @@ def check_move(building, buildings, direction, stepsize):
         return False, 0
 
     olap = True
-    for build in buildings:
+    for build in district.buildings:
 
         if build == building:
             continue
@@ -304,7 +304,7 @@ def check_move(building, buildings, direction, stepsize):
             return False, 0
 
     if not olap:
-        score = calculate_score(buildings)
+        score = district.score()
         move(building, -direction, stepsize)
         return True, score
 
@@ -318,4 +318,4 @@ def check_move(building, buildings, direction, stepsize):
     #
 	# 	if overlap(building, building1) or overlap(building, building2):
 	# 		building1, building2 = building2, building1
-	# 		return buildings
+# 		return buildings

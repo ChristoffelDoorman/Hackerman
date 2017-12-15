@@ -1,71 +1,40 @@
 # import files
-from helpers import calculate_score, move, overlap, check_move
+from helpers import move, overlap, check_move
+import classes
 
 # import modules
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import copy
+import time
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
-
-def main(iterations_hill, buildings, map_score):
+def main(iterations_hill, district, map_score):
 
     # left, up, right, down
     directions = [-1, 2, 1, -2]
-    best_direction = None
     total_score = map_score
-    best_buildings = buildings
+    best_district = classes.Map(360, 320)
+    start_time = time.time()
 
     # print "total score begin: ", total_score
     for i in range(iterations_hill):
 
-        for building in buildings:
+        for building in district.buildings:
 
             best_direction = None
 
             for direction in directions:
 
-                possible, move_score = check_move(building, buildings, direction, 0.5)
+                possible, move_score = check_move(building, district, direction, 0.5)
 
                 if possible and move_score > map_score:
                     # print 'move score: ', move_score
                     best_direction = direction
+
                     map_score = move_score
 
-                else:
-                    continue
-
-                move(building, best_direction, 0.5)
-
-        print i
+                    move(building, best_direction, 0.5)
 
         if map_score > total_score:
-            best_buildings = copy.deepcopy(buildings)
+            total_score = map_score
+            best_district.buildings = district.buildings
 
-
-    return best_buildings, total_score
-
-# def check_move(building, buildings, direction):
-#
-#     move(building, direction, 0.5)
-#
-#     if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
-#         return False, 0
-#
-#     olap = True
-#     for build in buildings:
-#
-#         if build == building:
-#             continue
-#
-#         olap = overlap(build, building)
-#
-#         if olap:
-#             move(building, -direction, 0.5)
-#             return False, 0
-#
-#     if not olap:
-#         score = calculate_score(buildings)
-#         move(building, -direction, 0.5)
-#         return True, score
+    end_time = time.time() - start_time
+    return best_district, total_score, end_time
