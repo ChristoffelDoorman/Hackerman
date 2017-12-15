@@ -22,6 +22,7 @@ def main(total_houses, iterations):
 
     best_iteration = 0
     start_time = time.time()
+    best_district = classes.Map(360, 320)
 
     for i in range(iterations):
 
