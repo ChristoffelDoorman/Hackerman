@@ -1,4 +1,5 @@
 from algorithms import *
+from helpers import calculate_score
 import visualisation.canvas_visualisation as visualisation
 
 if __name__ == "__main__":
@@ -54,16 +55,17 @@ if __name__ == "__main__":
     elif algorithm_choice == 3:
         algorithm = "expanding_universe"
 
-        buildings = expanding_universe.main(total_houses)
+        district = expanding_universe.main(total_houses)
 
-        map_score = calculate_score(buildings)
+        map_score = calculate_score(district.buildings)
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
-        buildings, total_score = hillclimber_algorithm.main(iterations_hill, buildings, 0)
+        best_district, total_score, end_time = hillclimber_algorithm.main(iterations_hill, district, 0)
 
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
-        visualisation.main(buildings, algorithm, total_houses, best_iteration, end_time, iterations)
+        visualisation.main(best_district.buildings, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "exp with hill")
+        # visualisation.main(buildings, algorithm, total_houses, best_iteration, end_time, iterations)
 
     elif algorithm_choice == 4:
 
