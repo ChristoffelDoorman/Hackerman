@@ -28,7 +28,10 @@ def main(total_houses):
     m_counter, b_counter, h_counter = 0, 0, 0
 
     # bouw het eerste huis random, een maison wat die heeft de meeste waarde
-    district.buildings, m_counter = m_build(district.buildings, m_counter)
+    # district.buildings, m_counter = m_build(district.buildings, m_counter)
+    maison = classes.Maison(0,0)
+    district.buildings.append(maison)
+    m_counter = 1
     # print district.buildings
 
     while (m_counter < m_number):
@@ -39,6 +42,8 @@ def main(total_houses):
         top_score, best_x, best_y = walk_check(maison)
         maison.update(best_x, best_y)
         m_counter += 1
+        visualisation.main(district.buildings, "test", "test", top_score, True)
+
 
     while (b_counter < b_number):
 
@@ -48,6 +53,8 @@ def main(total_houses):
         top_score, best_x, best_y = walk_check(bungalow)
         bungalow.update(best_x, best_y)
         b_counter += 1
+        visualisation.main(district.buildings, "test", "test", top_score, True)
+
 
     while (h_counter < h_number):
 
@@ -57,6 +64,8 @@ def main(total_houses):
         top_score, best_x, best_y = walk_check(house)
         house.update(best_x, best_y)
         h_counter += 1
+        visualisation.main(district.buildings, "test", "test", top_score, True)
+
 
     visualisation.main(district.buildings, "test", "test", top_score, True)
 
