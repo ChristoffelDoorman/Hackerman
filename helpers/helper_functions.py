@@ -280,7 +280,7 @@ def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_
 			move(building, - y_direction, y_stepsize)
 			return True, score
 
-def check_move2(building, district, direction, stepsize):
+def check_move(building, district, direction, stepsize):
 
     move(building, direction, stepsize)
 
