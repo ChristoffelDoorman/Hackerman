@@ -304,10 +304,9 @@ def check_move2(building, district, direction, stepsize):
 
     if not olap:
         score = district.score()
-        move(building, -direction, stepsize)
         return True, score
 
-def check_move(building, district, direction, stepsize):
+def check_move2(building, district, direction, stepsize):
 
     move(building, direction, stepsize)
 
@@ -331,4 +330,5 @@ def check_move(building, district, direction, stepsize):
 
     if not olap:
         score = district.score()
+        move(building, -direction, stepsize)
         return True, score

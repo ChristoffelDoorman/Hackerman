@@ -25,7 +25,7 @@ def main(total_houses, iterations):
     best_district = classes.Map(360, 320)
 
     for i in range(iterations):
-
+        
         district = classes.Map(360, 320)
 
         # set number of each building type

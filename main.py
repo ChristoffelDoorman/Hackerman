@@ -23,7 +23,7 @@ if __name__ == "__main__":
         iterations = input("How many iterations?: ")
 
         best_district, best_iteration, end_time = random_algorithm.main(total_houses, iterations)
-        visualisation.main(best_district.buildings, algorithm, total_houses, best_iteration, end_time, iterations, 0)
+        visualisation.main(best_district.buildings, algorithm, total_houses, best_iteration, end_time, iterations, 0, 0)
 
     elif algorithm_choice == 2:
         algorithm = "hillclimber"
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
             visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
 
-            best_district_hill, best_map_score, end_time = hillclimber_random.main(iterations_hill, best_district_random, best_iteration)
+            best_district_hill, best_map_score, end_time = hillclimber_random.main(iterations_hill, best_district_random, best_iteration,)
 
         elif choice == 2:
             variation = "systematic"
