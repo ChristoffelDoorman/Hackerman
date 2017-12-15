@@ -22,6 +22,7 @@ def main(total_houses, iterations):
 
     best_iteration = 0
     start_time = time.time()
+    best_district = classes.Map(360, 320)
 
     for i in range(iterations):
 
@@ -55,7 +56,6 @@ def main(total_houses, iterations):
         # print total_value
 
         if (total_value > best_iteration):
-            best_district = classes.Map(360, 320)
             best_district.buildings = district.buildings
             best_iteration = total_value
 
