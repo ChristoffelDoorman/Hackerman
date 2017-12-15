@@ -102,7 +102,7 @@ def walk_check(building):
 
         possible = check_possible(building)
         if possible:
-            score = calculate_score(district.buildings)
+            score = district.score()
             # print score
             if score > top_score:
                 # print value
