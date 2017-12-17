@@ -98,15 +98,15 @@ def check_rotate(building, district, map_score):
     building.rotate()
 
     if overlap_canvas(building):
-		building.rotate()
+        building.rotate()
         return False, map_score
 
     for water in district.waters:
-		olap = overlap(building, water)
+        olap = overlap(building, water)
 
-		if olap:
-			building.rotate()
-			return False, map_score
+        if olap:
+            building.rotate()
+            return False, map_score
 
     for build in district.buildings:
 

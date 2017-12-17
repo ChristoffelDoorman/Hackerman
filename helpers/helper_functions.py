@@ -48,13 +48,14 @@ def overlap(building1, building2):
 
 def overlap_canvas(building):
 
+	olap = False
 	if (building.left_bottom[0] < 0) \
 	or (building.left_bottom[1] < 0) \
 	or (building.right_top[0] > X_DIMENSION) \
 	or (building.right_top[1] > Y_DIMENSION):
-        return True
-	else:
-		return False
+		olap = True
+
+	return olap
 
 def h_build(district, h_counter):
 
@@ -68,7 +69,7 @@ def h_build(district, h_counter):
 		if olap:
 			return district, h_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		district.buildings.append(house)
 		h_counter += 1
 		return district, h_counter
@@ -105,9 +106,9 @@ def b_build(district, b_counter):
 		if olap:
 			return district, b_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		district.buildings.append(bungalow)
-		h_counter += 1
+		b_counter += 1
 		return district, b_counter
 
 	for building in district.buildings:
@@ -143,7 +144,7 @@ def m_build(district, m_counter):
 		if olap:
 			return district, m_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		m_counter += 1
 		district.buildings.append(maison)
 		return district, m_counter
