@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
         best_district_random, best_iteration, end_time = random_algorithm.main(total_houses, iterations)
 
-        if choice == 1:
+        if choice == 1: 
             variation = "random"
 
             visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
