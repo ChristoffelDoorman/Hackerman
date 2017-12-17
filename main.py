@@ -14,7 +14,7 @@ if __name__ == "__main__":
     total_houses = input("Total number of houses?: ")
 
     while total_houses < 7:
-        total_houses = input("Choose number bigger than 7: ")
+        total_houses = input("Choose an integer number greater than 7: ")
 
     algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm]")
 
