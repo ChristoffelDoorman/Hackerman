@@ -363,9 +363,9 @@ def check_move(building, district, direction, stepsize):
 #         move(building, -direction, stepsize)
 #         return True, score
 
-def print_txt(buildings, total_houses):
+def print_txt(buildings):
 
-    text_file = open("probeersel,{}.txt".format(total_houses), "w+")
+    text_file = open("1m-beste.txt", "w+")
 
     for building in buildings:
         if building.name == 'maison':
@@ -373,7 +373,7 @@ def print_txt(buildings, total_houses):
         elif building.name == 'bungalow':
             build = "bung"
         elif building.name == 'house':
-            b = "hous"
+            build = "hous"
 
         text_file.write("{} {} {}\n".format(build, building.left_bottom[0], building.left_bottom[1]))
 
