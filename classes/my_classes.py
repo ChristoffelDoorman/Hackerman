@@ -9,8 +9,6 @@ import helpers
 
 class House:
 	name = 'house'
-	length = 20
-	width = 20
 	price = 285000
 	marginalValue = 1.03
 
@@ -18,6 +16,8 @@ class House:
 		# self.price = 285.000
 		# self.marginalValue = 1.03
 		# self.location = (x, y)
+		self.length = 20
+		self.width = 20
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
@@ -42,12 +42,12 @@ class House:
 
 class Bungalow:
 	name = 'bungalow'
-	length = 21
-	width = 26
 	price = 399000
 	marginalValue = 1.04
 
 	def __init__(self, x, y):
+		self.length = 21
+		self.width = 26
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
@@ -68,7 +68,7 @@ class Bungalow:
 		self.update(self.left_bottom[0], self.left_bottom[1])
 
 	def __repr__(self):
-		return ("x=%i, y=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1]))
+		return ("x=%i, y=%i, width=%i, length=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1], self.width, self.length))
 
 	def score(self, closest):
 		self.freeSpace = closest
@@ -79,12 +79,12 @@ class Bungalow:
 
 class Maison:
 	name = 'maison'
-	length = 34
-	width = 33
 	price = 610000
 	marginalValue = 1.06
 
 	def __init__(self, x, y):
+		self.length = 34
+		self.width = 33
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
