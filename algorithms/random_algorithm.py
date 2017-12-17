@@ -3,7 +3,7 @@
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 # import files
-from helpers import h_build, b_build, m_build, add_water
+from helpers import h_build, b_build, m_build
 import visualisation
 import classes
 
@@ -23,7 +23,8 @@ def main(total_houses, iterations):
     best_iteration = 0
     start_time = time.time()
     best_district = classes.Map(360, 320)
-
+    best_district.add_water(1)
+    print best_district.waters
     for i in range(iterations):
 
         district = classes.Map(360, 320)
@@ -37,7 +38,7 @@ def main(total_houses, iterations):
         h_counter, b_counter, m_counter = 0, 0, 0
 
         # add water to map
-        district = add_water(district, 1)
+    	district.add_water(1)
 
         # build houses until maximum is reached
         while len(district.buildings) < total_houses:

@@ -342,34 +342,3 @@ def check_move2(building, district, direction, stepsize):
         score = district.score()
         move(building, -direction, stepsize)
         return True, score
-
-def add_water(district, variation):
-
-	# one water stroke in the middle of the map
-	if variation == 1:
-		water1 = classes.Water(100, 88.5, 161, 143)
-		district.waters.append(water1)
-
-	# # two strokes of water parralel positioned at 1/4 of the length from the top and bottom
-	# elif variation == 2:
-	# 	water1 = classes.Water(x, y, width, length)
-	# 	water2 = classes.Water(x, y, width, length)
-    #
-	# # two strokes of water parralel positioned at 1/3 of the length from the top and bottom
-	# elif variation == 3:
-	# 	water1 = classes.Water(x, y, width, length)
-	# 	water2 = classes.Water(x, y, width, length)
-    #
-	# # four strokes of water parralel for x and parralel for y positioned at 1/4 of the respective width and length from the outside of the map
-	# elif variation == 4:
-	# 	water1 = classes.Water(x, y, width, length)
-	# 	water2 = classes.Water(x, y, width, length)
-	# 	water3 = classes.Water(x, y, width, length)
-	# 	water4 = classes.Water(x, y, width, length)
-    #
-	# # four pooles of water positioned at 1/4 of diagonal to the inside of the corners of the map
-	# elif variation == 5:
-	# 	water1 = classes.Water(x, y, width, length)
-	# 	water2 = classes.Water(x, y, width, length)
-	# 	water3 = classes.Water(x, y, width, length)
-	# 	water4 = classes.Water(x, y, width, length)
