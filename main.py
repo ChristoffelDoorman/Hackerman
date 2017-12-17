@@ -12,7 +12,7 @@ import visualisation.canvas_visualisation as visualisation
 if __name__ == "__main__":
 
     total_houses = input("Total number of houses?: ")
-    water_type = input("Choose your water type? [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]")
+    water_type = input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]")
 
     while total_houses < 7:
         total_houses = input("Choose an integer number greater than 7: ")
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         elif choice == 3:
             variation = "Move_rotate_swap"
 
-            visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
+            visualisation.main(best_district_random, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
 
             best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, best_district_random, best_iteration, water_type)
 

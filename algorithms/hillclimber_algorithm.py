@@ -7,7 +7,7 @@
 # has improved.
 
 # import files
-from helpers import move, overlap, check_move2
+from helpers import move, overlap, check_move
 import classes
 
 # import modules
@@ -30,14 +30,16 @@ def main(iterations_hill, district, map_score, water_type):
 
             for direction in directions:
 
-                possible, move_score = check_move2(building, district, direction, 0.5)
+                possible, move_score = check_move(building, district, direction, 0.5)
+                move(building, -direction, 0.5)
 
                 if possible and move_score > map_score:
                     # print 'move score: ', move_score
                     best_direction = direction
                     map_score = move_score
 
-            move(building, best_direction, 0.5)
+            if best_direction != None:
+                move(building, best_direction, 0.5)
 
         if map_score > total_score:
             total_score = map_score
