@@ -65,7 +65,7 @@ class Bungalow:
 
 	def rotate(self):
 		self.length, self.width = self.width, self.length
-	    self.update(self.left_bottom[0], self.left_bottom[1])
+		self.update(self.left_bottom[0], self.left_bottom[1])
 
 	def __repr__(self):
 		return ("x=%i, y=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1]))
@@ -101,7 +101,7 @@ class Maison:
 
 	def rotate(self):
 		self.length, self.width = self.width, self.length
-	    self.update(self.left_bottom[0], self.left_bottom[1])
+		self.update(self.left_bottom[0], self.left_bottom[1])
 
 	def score(self, closest):
 		self.freeSpace = closest

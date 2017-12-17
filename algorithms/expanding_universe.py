@@ -83,16 +83,16 @@ def set_initial_map(total_houses):
 
         district.buildings.append(bungalow)
 
-    xw3 = (district.width - grid_size) * (House.width / 2) - 40.232 - Bungalow.width
+    xw3 = (district.width / 2) - ((grid_size / 2) * House.width) - 40.232 - Bungalow.width
     yw3 = 88.5
-    xw4 = district.widht - xw3
+    xw4 = district.width - xw3
 
     # water1 = Water(, y, 151.789, 37.947)
     # water2 = Water(x, y, 151.789, 37.947)
     water3 = Water(xw3, yw3, 40.232, 143.045)
-    district.waters(water3)
+    district.waters.append(water3)
     water4 = Water(xw4, yw3, 40.232, 143.045)
-    district.waters(water4)
+    district.waters.append(water4)
 
 
     # place maisons around bungalows
