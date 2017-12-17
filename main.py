@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
         best_district_random, best_iteration, end_time = random_algorithm.main(total_houses, iterations)
 
-        if choice == 1: 
+        if choice == 1:
             variation = "random"
 
             visualisation.main(best_district_random.buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
@@ -71,7 +71,7 @@ if __name__ == "__main__":
         best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, 0)
 
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
-        visualisation.main(best_district.buildings, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "exp with hill")
+        visualisation.main(best_district, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "exp with hill")
         # visualisation.main(buildings, algorithm, total_houses, best_iteration, end_time, iterations)
 
     elif algorithm_choice == 4:
