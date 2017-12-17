@@ -158,7 +158,7 @@ def check_swap(building1, building2, district):
     # if olap:
     #     print "ze overlappen met elkaar", olap
     #     return False, 0
-	olap1, olap2 = True, True
+    olap1, olap2 = True, True
     for water in district.waters:
         olap1 = overlap(building1, water)
         olap2 = overlap(building2, water)
