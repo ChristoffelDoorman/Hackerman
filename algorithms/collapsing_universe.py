@@ -38,7 +38,7 @@ def set_initial_map(total_houses):
     counter = 0
     for i in range(grid_size):
 
-        x = (district.width - (house_width * (grid_size - (2.2 * i)))) / 2
+        x = (district.width - (house_width * (grid_size - (2.5 * i)))) / 2
 
 
         for j in range(grid_size):
@@ -46,7 +46,7 @@ def set_initial_map(total_houses):
             if counter == h_number:
                 break
 
-            y = (district.height + (house_length * (grid_size - 2.2 - (2 * j)))) / 2
+            y = (district.height + (house_length * (grid_size - 2 - (2.5 * j)))) / 2
 
             counter += 1
             house = House(x, y)
