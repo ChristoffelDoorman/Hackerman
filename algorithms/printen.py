@@ -13,7 +13,7 @@ import classes
 import time
 import helpers
 
-district = classes.Map(360, 320)
+district = classes.Map(360, 320, 2)
 
 def main():
 
@@ -40,5 +40,5 @@ def main():
     # visualisation.print_canvas(district.buildings, "Jaap")
 
     value = district.score()
-    
+
     return district.buildings, value
