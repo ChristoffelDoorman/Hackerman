@@ -18,7 +18,12 @@ import classes
 
 X_DIMENSION = 360
 Y_DIMENSION = 320
-
+house_length = 20
+house_width = 20
+bungalow_length = 21
+bungalow_width = 26
+maison_length = 34
+maison_width = 33
 best_iteration = 0
 
 def pythagoras(x1, y1, x2, y2):
@@ -35,15 +40,27 @@ def overlap(building1, building2):
 
 	if (building1.left_bottom[0] == building2.left_bottom[0] and building1.left_bottom[1] == building2.left_bottom[1]):
 		overlap = True
+
 		# print "dit ligt op elkaar"
 
 	# print "dit overlapt"
 	return overlap
 
+def overlap_canvas(building):
+
+	olap = False
+	if (building.left_bottom[0] < 0) \
+	or (building.left_bottom[1] < 0) \
+	or (building.right_top[0] > X_DIMENSION) \
+	or (building.right_top[1] > Y_DIMENSION):
+		olap = True
+
+	return olap
+
 def h_build(district, h_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
+	xrandom = random.randint(0, X_DIMENSION - house_width)
+	yrandom = random.randint(0, Y_DIMENSION - house_length)
 	house = classes.House(xrandom, yrandom)
 
 	for water in district.waters:
@@ -52,8 +69,9 @@ def h_build(district, h_counter):
 		if olap:
 			return district, h_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		district.buildings.append(house)
+		h_counter += 1
 		return district, h_counter
 
 	for building in district.buildings:
@@ -71,12 +89,15 @@ def h_build(district, h_counter):
 
 def b_build(district, b_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
+	xrandom = random.randint(0, X_DIMENSION - bungalow_width)
+	yrandom = random.randint(0, Y_DIMENSION - bungalow_length)
 	bungalow = classes.Bungalow(xrandom, yrandom)
 
 	choice = random.getrandbits(1)
 	if choice:
+		bungalow.rotate()
+
+	if overlap_canvas(bungalow):
 		bungalow.rotate()
 
 	for water in district.waters:
@@ -85,8 +106,9 @@ def b_build(district, b_counter):
 		if olap:
 			return district, b_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		district.buildings.append(bungalow)
+		b_counter += 1
 		return district, b_counter
 
 	for building in district.buildings:
@@ -104,13 +126,16 @@ def b_build(district, b_counter):
 
 def m_build(district, m_counter):
 
-	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
-	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
+	xrandom = random.randint(0, X_DIMENSION - maison_width)
+	yrandom = random.randint(0, Y_DIMENSION - maison_length)
 	maison = classes.Maison(xrandom, yrandom)
 
 	# random: length, width = width, length
 	choice = random.getrandbits(1)
 	if choice:
+		maison.rotate()
+
+	if overlap_canvas(maison):
 		maison.rotate()
 
 	for water in district.waters:
@@ -119,7 +144,8 @@ def m_build(district, m_counter):
 		if olap:
 			return district, m_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
+		m_counter += 1
 		district.buildings.append(maison)
 		return district, m_counter
 

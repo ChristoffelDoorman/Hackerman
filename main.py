@@ -57,6 +57,7 @@ if __name__ == "__main__":
             visualisation.main(best_district_random, algorithm, total_houses, best_iteration, end_time, iterations, variation, "randomfirst")
 
             best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, best_district_random, best_iteration, water_type)
+            # print best_district_hill.buildings
 
         visualisation.main(best_district_hill, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
 
