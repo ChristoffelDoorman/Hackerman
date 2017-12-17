@@ -17,7 +17,7 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose an integer number greater than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm] [5: re-using]")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm], [5: re-using], [6: collapsing universe]: ")
 
     if algorithm_choice == 1:
         algorithm = "random"
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
         iterations_hill = input("How many iterations for hillclimber: ")
 
-        best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, 0)
+        best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, map_score, water_type)
 
         # visualisation.main(buildings, algorithm, total_houses, map_score, False)
         visualisation.main(best_district, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "exp with hill")
@@ -106,3 +106,19 @@ if __name__ == "__main__":
             best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, buildings, value)
 
         visualisation.main(best_district_hill.buildings, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
+
+
+    elif algorithm_choice == 6:
+
+        algorithm = "collapsing_universe"
+
+        district = collapsing_universe.main(total_houses)
+
+        map_score = calculate_score(district.buildings)
+
+        iterations_hill = input("How many iterations for hillclimber: ")
+
+        best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, map_score, 0)
+
+        # visualisation.main(buildings, algorithm, total_houses, map_score, False)
+        visualisation.main(best_district, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "collaps with hill")

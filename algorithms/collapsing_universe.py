@@ -16,16 +16,17 @@ import matplotlib.pyplot as plt
 # from classes import *
 # from helpers import *
 
-district = Map(360, 320, 1)
 house_length = 20
 house_width = 20
 bungalow_length = 21
 bungalow_width = 26
 maison_length = 34
 maison_width = 33
-best_iteration = 0
 
 def set_initial_map(total_houses):
+
+    district = Map(360, 320, 0)
+
 
     # set number of each building type
     h_number = int(0.6 * total_houses)
@@ -66,45 +67,45 @@ def set_initial_map(total_houses):
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] >= district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, -1 , 1)
-                    bungalow = move(bungalow, 2, 1)
+                    bungalow = move(bungalow, -1 , 10)
+                    bungalow = move(bungalow, 2, 10)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] < district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, -1, 1)
-                    bungalow = move(bungalow, -2, 1)
+                    bungalow = move(bungalow, -1, 10)
+                    bungalow = move(bungalow, -2, 10)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] <= district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, 1, 1)
-                    bungalow = move(bungalow, -2, 1)
+                    bungalow = move(bungalow, 1, 10)
+                    bungalow = move(bungalow, -2, 10)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] > district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, 1, 1)
-                    bungalow = move(bungalow, 2, 1)
+                    bungalow = move(bungalow, 1, 10)
+                    bungalow = move(bungalow, 2, 10)
                     olap = overlap(bungalow, building)
 
         district.buildings.append(bungalow)
 
-    yw1 = (district.height / 2) + ((grid_size / 2) * house_width) + bungalow_length
-    yw2 = district.height - yw1 - 43
-    xw1 = 110
-    xw3 = (district.width / 2) - ((grid_size / 2) * house_width) - 40.232 - bungalow_width
-    yw3 = 88.5
-    xw4 = district.width - xw3 - 20
-
-    water1 = Water(xw1, yw1, 151.789, 37.947)
-    district.waters.append(water1)
-    water2 = Water(xw1, yw2, 151.789, 37.947)
-    district.waters.append(water2)
-    water3 = Water(xw3, yw3, 40.232, 143.045)
-    district.waters.append(water3)
-    water4 = Water(xw4, yw3, 40.232, 143.045)
-    district.waters.append(water4)
+    # yw1 = (district.height / 2) + ((grid_size / 2) * house_width) + bungalow_length
+    # yw2 = district.height - yw1 - 43
+    # xw1 = 110
+    # xw3 = (district.width / 2) - ((grid_size / 2) * house_width) - 40.232 - bungalow_width
+    # yw3 = 88.5
+    # xw4 = district.width - xw3 - 20
+    #
+    # water1 = Water(xw1, yw1, 151.789, 37.947)
+    # district.waters.append(water1)
+    # water2 = Water(xw1, yw2, 151.789, 37.947)
+    # district.waters.append(water2)
+    # water3 = Water(xw3, yw3, 40.232, 143.045)
+    # district.waters.append(water3)
+    # water4 = Water(xw4, yw3, 40.232, 143.045)
+    # district.waters.append(water4)
 
 
     # place maisons around bungalows
@@ -121,65 +122,30 @@ def set_initial_map(total_houses):
 
             # buildings linksboven
             if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] >= district.height / 2) and olap:
-                while olap:
+                while maison.left_top[0] >= 0 and maison.left_top[1] <= district.height:
                     maison = move(maison, -1, 1)
                     maison = move(maison, 2, 1)
-                    olap = overlap(maison, building)
 
             # buildings linksonder
             if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] < district.height / 2) and olap:
-                while olap:
+                while maison.left_bottom[0] >= 0 and maison.left_bottom[1] >=0:
                     maison = move(maison, -1, 1)
                     maison = move(maison, -2, 1)
-                    olap = overlap(maison, building)
 
             # buildings rechtsonder
             if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] <= district.height / 2) and olap:
-                while olap:
+                while maison.right_bottom[0] <= district.width and maison.right_bottom[1] >= 0:
                     maison = move(maison, 1, 1)
                     maison = move(maison, -2, 1)
-                    olap = overlap(maison, building)
 
             # buildings rechtsboven
             if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] > district.height / 2) and olap:
-                while olap:
+                while maison.right_top[0] <= district.width and maison.right_top[1] <= district.height:
                     maison = move(maison, 1, 1)
                     maison = move(maison, 2, 1)
-                    olap = overlap(maison, building)
 
-        for water in district.waters:
-            olap = overlap(maison, water)
-
-            # buildings linksboven
-            if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] >= district.height / 2) and olap:
-                while olap:
-                    maison = move(maison, -1, 1)
-                    maison = move(maison, 2, 1)
-                    olap = overlap(maison, water)
-
-            # buildings linksonder
-            if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] < district.height / 2) and olap:
-                while olap:
-                    maison = move(maison, -1, 1)
-                    maison = move(maison, -2, 1)
-                    olap = overlap(maison, water)
-
-            # buildings rechtsonder
-            if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] <= district.height / 2) and olap:
-                while olap:
-                    maison = move(maison, 1, 1)
-                    maison = move(maison, -2, 1)
-                    olap = overlap(maison, water)
-
-            # buildings rechtsboven
-            if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] > district.height / 2) and olap:
-                while olap:
-                    maison = move(maison, 1, 1)
-                    maison = move(maison, 2, 1)
-                    olap = overlap(maison, water)
 
         district.buildings.append(maison)
-
 
     return district
 
@@ -282,8 +248,8 @@ def main(total_houses):
 
     district = set_initial_map(total_houses)
 
-    for building in district.buildings:
-        expand(building, district.buildings, 10, 1)
+    # for building in district.buildings:
+    #     expand(building, district.buildings, 10, 1)
 
     # for building in buildings:
     #     if building.name == "maison":
@@ -296,6 +262,5 @@ def main(total_houses):
     # for building in buildings:
     #     if building.name == "house":
     #         expand(building, 20)
-
 
     return district
