@@ -58,8 +58,9 @@ def main(district, algorithm, total_houses, best_iteration, end_time, iterations
     if not os.path.exists(outpath):
         os.makedirs(outpath)
 
+    print district.waters
     for water in district.waters:
-        drawBuilding(ax1, building, water.left_bottom[0], water.left_bottom[1], 'blue')
+        drawBuilding(ax1, water, water.left_bottom[0], water.left_bottom[1], 'blue')
 
     for building in district.buildings:
         if building.name == 'house':

@@ -29,7 +29,7 @@ def main(iterations_hill, district, map_score):
 
         if possible and move_score > map_score:
             map_score = move_score
-            best_district.buildings = district.buildings
+            best_district = district
 
         else:
             move(building, -direction, 0.5)
