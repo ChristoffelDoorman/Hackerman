@@ -7,7 +7,6 @@
 
 import helpers
 
-
 class House:
 	name = 'house'
 	length = 20
@@ -23,7 +22,6 @@ class House:
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
-
 
 	def __repr__(self):
 		return("x=%i, y=%i, type = house "%(self.left_bottom[0], self.left_bottom[1]))
@@ -65,6 +63,10 @@ class Bungalow:
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
+	def rotate(self):
+		self.length, self.width = self.width, self.length
+	    self.update(self.left_bottom[0], self.left_bottom[1])
+
 	def __repr__(self):
 		return ("x=%i, y=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1]))
 
@@ -97,6 +99,10 @@ class Maison:
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
+	def rotate(self):
+		self.length, self.width = self.width, self.length
+	    self.update(self.left_bottom[0], self.left_bottom[1])
+
 	def score(self, closest):
 		self.freeSpace = closest
 		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
@@ -124,6 +130,7 @@ class Map:
 		self.width = width
 		self.height = height
 		self.buildings = []
+		self.waters = []
 
 	def score(self):
 		total_value = 0

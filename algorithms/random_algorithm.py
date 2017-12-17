@@ -25,7 +25,7 @@ def main(total_houses, iterations):
     best_district = classes.Map(360, 320)
 
     for i in range(iterations):
-        
+
         district = classes.Map(360, 320)
 
         # set number of each building type
@@ -43,13 +43,13 @@ def main(total_houses, iterations):
             building_type = random.randint(1, 3)
 
             if building_type == 1 and h_counter < h_number:
-                district.buildings, h_counter = h_build(district.buildings, h_counter)
+                district, h_counter = h_build(district, h_counter)
 
             if building_type == 2 and b_counter < b_number:
-                district.buildings, b_counter = b_build(district.buildings, b_counter)
+                district, b_counter = b_build(district, b_counter)
 
             if building_type == 3 and m_counter < m_number:
-                district.buildings, m_counter = m_build(district.buildings, m_counter)
+                district, m_counter = m_build(district, m_counter)
 
         # calculate closest distance to buildings
         total_value = district.score()

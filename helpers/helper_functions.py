@@ -32,6 +32,7 @@ def overlap(building1, building2):
 	if (building1.left_bottom[0] > building2.right_bottom[0] or building2.left_bottom[0] > building1.right_bottom[0]
 		or building1.left_bottom[1] > building2.left_top[1] or building2.left_bottom[1] > building1.left_top[1]):
 		overlap = False
+
 	if (building1.left_bottom[0] == building2.left_bottom[0] and building1.left_bottom[1] == building2.left_bottom[1]):
 		overlap = True
 		# print "dit ligt op elkaar"
@@ -39,32 +40,36 @@ def overlap(building1, building2):
 	# print "dit overlapt"
 	return overlap
 
-def h_build(buildings, h_counter):
-
+def h_build(district, h_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.House.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.House.length)
 	house = classes.House(xrandom, yrandom)
 
-	if not buildings:
-		buildings.append(house)
-		return buildings, h_counter
+	for water in district.waters:
+		olap = overlap(house, water)
 
-	olap = True
-	for building in buildings:
+		if olap:
+			return district, h_counter
+
+	if not district.buildings:
+		district.buildings.append(house)
+		return district, h_counter
+
+	for building in district.buildings:
 		olap = overlap(house, building)
 
 		if olap:
-			break
+			return district, h_counter
 
 	if not olap:
-		buildings.append(house)
+		district.append(house)
 		# drawBuilding(house, house.left_bottom[0], house.left_bottom[1], 'red')
 		h_counter += 1
 
-	return buildings, h_counter
+	return district, h_counter
 
-def b_build(buildings, b_counter):
+def b_build(district, b_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Bungalow.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Bungalow.length)
@@ -72,30 +77,32 @@ def b_build(buildings, b_counter):
 
 	choice = random.getrandbits(1)
 	if choice:
-		bungalow.length, bungalow.width = bungalow.width, bungalow.length
-		bungalow.left_top[1] = yrandom + bungalow.length
-		bungalow.right_top = [xrandom + bungalow.width, yrandom + bungalow.length]
-		bungalow.right_bottom[0] = xrandom + bungalow.width
+		bungalow.rotate()
 
-	if not buildings:
-		buildings.append(bungalow)
-		return buildings, b_counter
+	for water in district.waters:
+		olap = overlap(house, water)
 
-	olap = True
-	for building in buildings:
+		if olap:
+			return district, b_counter
+
+	if not district.buildings:
+		district.buildings.append(bungalow)
+		return district, b_counter
+
+	for building in district:
 		olap = overlap(bungalow, building)
 
 		if olap:
-			break
+			return district, b_counter
 
 	if not olap:
-		buildings.append(bungalow)
+		district.buildings.append(bungalow)
 		# drawBuilding(bungalow, bungalow.left_bottom[0], bungalow.left_bottom[1], 'blue')
 		b_counter += 1
 
 	return buildings, b_counter
 
-def m_build(buildings, m_counter):
+def m_build(district, m_counter):
 
 	xrandom = random.randint(0, X_DIMENSION - classes.Maison.width)
 	yrandom = random.randint(0, Y_DIMENSION - classes.Maison.length)
@@ -104,28 +111,31 @@ def m_build(buildings, m_counter):
 	# random: length, width = width, length
 	choice = random.getrandbits(1)
 	if choice:
-		maison.length, maison.width = maison.width, maison.length
-		maison.left_top[1] = yrandom + maison.length
-		maison.right_top = [xrandom + maison.width, yrandom + maison.length]
-		maison.right_bottom[0] = xrandom + maison.width
+		maison.rotate()
 
-	if not buildings:
-		buildings.append(maison)
-		return buildings, m_counter
+	for water in district.waters:
+		olap = overlap(house, water)
+
+		if olap:
+			return district, m_counter
+
+	if not district.buildings:
+		district.buildings.append(maison)
+		return district, m_counter
 
 	olap = True
-	for building in buildings:
+	for building in district.buildings:
 		olap = overlap(maison, building)
 
 		if olap:
-			break
+			return district, m_counter
 
 	if not olap:
-		buildings.append(maison)
+		district.buildings.append(maison)
 		# drawBuilding(maison, maison.left_bottom[0], maison.left_bottom[1], 'green')
 		m_counter += 1
 
-	return buildings, m_counter
+	return district, m_counter
 
 def closest_distance(current_building, buildings):
 
@@ -251,7 +261,7 @@ def move(building, direction, step):
 
     return building
 
-def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_stepsize):
+def check_position(building, district, x_direction, y_direction, x_stepsize, y_stepsize):
 	move(building, x_direction, x_stepsize)
 	move(building, y_direction, y_stepsize)
 
@@ -262,7 +272,7 @@ def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_
 	        return False, 0
 
 	olap = True
-	for build in buildings:
+	for build in district.buildings:
 
 		if build == building:
 			continue
@@ -275,7 +285,7 @@ def check_position(building, buildings, x_direction, y_direction, x_stepsize, y_
 			return False, 0
 
 		if not olap:
-			score = calculate_score(buildings)
+			score = district.score()
 			move(building, - x_direction, x_stepsize)
 			move(building, - y_direction, y_stepsize)
 			return True, score
@@ -337,26 +347,29 @@ def add_water(district, variation):
 
 	# one water stroke in the middle of the map
 	if variation == 1:
-		water1 = classes.Water(x, y, width, length)
+		water1 = classes.Water(100, 88.5, 161, 143)
+		district.waterss.append(water1)
 
-	# two strokes of water parralel positioned at 1/4 of the length from the top and bottom
-	elif variation == 2:
-		water1 = classes.Water(x, y, width, length)
-		water2 = classes.Water(x, y, width, length)
-
-	# two strokes of water parralel positioned at 1/3 of the length from the top and bottom
-	elif variation == 3:
-		water1 = classes.Water(x, y, width, length)
-		water2 = classes.Water(x, y, width, length)
-
-	elif variation == 4:
-		water1 = classes.Water(x, y, width, length)
-		water2 = classes.Water(x, y, width, length)
-		water3 = classes.Water(x, y, width, length)
-		water4 = classes.Water(x, y, width, length)
-
-	elif variation == 5:
-		water1 = classes.Water(x, y, width, length)
-		water2 = classes.Water(x, y, width, length)
-		water3 = classes.Water(x, y, width, length)
-		water4 = classes.Water(x, y, width, length)
+	# # two strokes of water parralel positioned at 1/4 of the length from the top and bottom
+	# elif variation == 2:
+	# 	water1 = classes.Water(x, y, width, length)
+	# 	water2 = classes.Water(x, y, width, length)
+    #
+	# # two strokes of water parralel positioned at 1/3 of the length from the top and bottom
+	# elif variation == 3:
+	# 	water1 = classes.Water(x, y, width, length)
+	# 	water2 = classes.Water(x, y, width, length)
+    #
+	# # four strokes of water parralel for x and parralel for y positioned at 1/4 of the respective width and length from the outside of the map
+	# elif variation == 4:
+	# 	water1 = classes.Water(x, y, width, length)
+	# 	water2 = classes.Water(x, y, width, length)
+	# 	water3 = classes.Water(x, y, width, length)
+	# 	water4 = classes.Water(x, y, width, length)
+    #
+	# # four pooles of water positioned at 1/4 of diagonal to the inside of the corners of the map
+	# elif variation == 5:
+	# 	water1 = classes.Water(x, y, width, length)
+	# 	water2 = classes.Water(x, y, width, length)
+	# 	water3 = classes.Water(x, y, width, length)
+	# 	water4 = classes.Water(x, y, width, length)

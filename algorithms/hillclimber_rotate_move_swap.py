@@ -74,7 +74,7 @@ def hill_move(building, district, map_score):
 
     return map_score
 
-def rotate(building, district, map_score):
+def check_rotate(building, district, map_score):
 
     building.length, building.width = building.width, building.length
     building.update(building.left_bottom[0], building.left_bottom[1])
