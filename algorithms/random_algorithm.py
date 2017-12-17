@@ -3,7 +3,7 @@
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 # import files
-from helpers import h_build, b_build, m_build
+from helpers import h_build, b_build, m_build, add_water
 import visualisation
 import classes
 
@@ -35,6 +35,9 @@ def main(total_houses, iterations):
 
         # create counters to count number of each building
         h_counter, b_counter, m_counter = 0, 0, 0
+
+        # add water to map
+        district = add_water(district, 1)
 
         # build houses until maximum is reached
         while len(district.buildings) < total_houses:

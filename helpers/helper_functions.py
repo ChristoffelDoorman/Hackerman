@@ -63,7 +63,7 @@ def h_build(district, h_counter):
 			return district, h_counter
 
 	if not olap:
-		district.append(house)
+		district.buildings.append(house)
 		# drawBuilding(house, house.left_bottom[0], house.left_bottom[1], 'red')
 		h_counter += 1
 
@@ -80,7 +80,7 @@ def b_build(district, b_counter):
 		bungalow.rotate()
 
 	for water in district.waters:
-		olap = overlap(house, water)
+		olap = overlap(bungalow, water)
 
 		if olap:
 			return district, b_counter
@@ -89,7 +89,7 @@ def b_build(district, b_counter):
 		district.buildings.append(bungalow)
 		return district, b_counter
 
-	for building in district:
+	for building in district.buildings:
 		olap = overlap(bungalow, building)
 
 		if olap:
@@ -100,7 +100,7 @@ def b_build(district, b_counter):
 		# drawBuilding(bungalow, bungalow.left_bottom[0], bungalow.left_bottom[1], 'blue')
 		b_counter += 1
 
-	return buildings, b_counter
+	return district, b_counter
 
 def m_build(district, m_counter):
 
@@ -114,7 +114,7 @@ def m_build(district, m_counter):
 		maison.rotate()
 
 	for water in district.waters:
-		olap = overlap(house, water)
+		olap = overlap(maison, water)
 
 		if olap:
 			return district, m_counter
@@ -348,7 +348,7 @@ def add_water(district, variation):
 	# one water stroke in the middle of the map
 	if variation == 1:
 		water1 = classes.Water(100, 88.5, 161, 143)
-		district.waterss.append(water1)
+		district.waters.append(water1)
 
 	# # two strokes of water parralel positioned at 1/4 of the length from the top and bottom
 	# elif variation == 2:
