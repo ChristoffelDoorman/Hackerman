@@ -17,7 +17,7 @@ import time
 
 def main(iterations, district, map_score):
 
-    best_district = classes.Map(360, 320)
+    best_district = classes.Map(360, 320, 1)
     total_score = map_score
     start_time = time.time()
 

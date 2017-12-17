@@ -20,7 +20,7 @@ import classes
 import time
 import helpers
 
-district = classes.Map(360, 320)
+district = classes.Map(360, 320, 1)
 
 def main(total_houses):
 

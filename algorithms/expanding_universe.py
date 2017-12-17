@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # from classes import *
 # from helpers import *
 
-district = Map(360, 320)
+district = Map(360, 320, 1)
 
 def set_initial_map(total_houses):
 

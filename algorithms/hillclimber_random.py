@@ -13,9 +13,9 @@ import classes
 import random
 import time
 
-def main(iterations_hill, district, map_score):
+def main(iterations_hill, district, map_score, water_type):
 
-    best_district = classes.Map(360, 320)
+    best_district = classes.Map(360, 320, water_type)
 
     start_time = time.time()
 

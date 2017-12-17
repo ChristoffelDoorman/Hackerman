@@ -2,7 +2,7 @@
 # Group: H@ckerman
 # Assignment: Amsterlhaegen
 # Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
-# 
+#
 # This file moves buildings left, right, top and bottom to check if score
 # has improved.
 
@@ -13,12 +13,12 @@ import classes
 # import modules
 import time
 
-def main(iterations_hill, district, map_score):
+def main(iterations_hill, district, map_score, water_type):
 
     # left, up, right, down
     directions = [-1, 2, 1, -2]
     total_score = map_score
-    best_district = classes.Map(360, 320)
+    best_district = classes.Map(360, 320, water_type)
     start_time = time.time()
 
     # print "total score begin: ", total_score
@@ -35,10 +35,9 @@ def main(iterations_hill, district, map_score):
                 if possible and move_score > map_score:
                     # print 'move score: ', move_score
                     best_direction = direction
-
                     map_score = move_score
 
-                    move(building, best_direction, 0.5)
+            move(building, best_direction, 0.5)
 
         if map_score > total_score:
             total_score = map_score

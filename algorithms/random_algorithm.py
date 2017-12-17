@@ -16,29 +16,29 @@ import locale
 import time
 import math
 import copy
+import math
 
 
-def main(total_houses, iterations):
+def main(total_houses, iterations, water_type):
 
     best_iteration = 0
     start_time = time.time()
-    best_district = classes.Map(360, 320)
-    best_district.add_water(1)
-    print best_district.waters
+    best_district = classes.Map(360, 320, water_type)
+    # best_district.add_water(1)
     for i in range(iterations):
 
-        district = classes.Map(360, 320)
+        district = classes.Map(360, 320, water_type)
 
         # set number of each building type
-        h_number = 0.6 * total_houses
-        b_number = 0.25 * total_houses
-        m_number = 0.15 * total_houses
+        h_number = math.floor(0.6 * total_houses)
+        b_number = math.floor(0.25 * total_houses)
+        m_number = math.floor(0.15 * total_houses)
 
         # create counters to count number of each building
         h_counter, b_counter, m_counter = 0, 0, 0
 
         # add water to map
-    	district.add_water(1)
+    	district.add_water(2)
 
         # build houses until maximum is reached
         while len(district.buildings) < total_houses:

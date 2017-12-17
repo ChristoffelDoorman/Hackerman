@@ -271,7 +271,14 @@ def check_position(building, district, x_direction, y_direction, x_stepsize, y_s
 		or (building.right_top[1] > Y_DIMENSION):
 	        return False, 0
 
-	olap = True
+	for water in district.waters:
+		olap = overlap(building, water)
+
+		if olap:
+			move(building, - x_direction, x_stepsize)
+			move(building, - y_direction, y_stepsize)
+			return False, 0
+
 	for build in district.buildings:
 
 		if build == building:
@@ -300,7 +307,13 @@ def check_move(building, district, direction, stepsize):
 	or (building.right_top[1] > Y_DIMENSION):
         return False, 0
 
-    olap = True
+    for water in district.waters:
+		olap = overlap(building, water)
+
+		if olap:
+			move(building, -direction, stepsize)
+			return False, 0
+
     for build in district.buildings:
 
         if build == building:
@@ -326,7 +339,13 @@ def check_move2(building, district, direction, stepsize):
 	or (building.right_top[1] > Y_DIMENSION):
         return False, 0
 
-    olap = True
+	for water in district.waters:
+		olap = overlap(building, water)
+
+		if olap:
+			move(building, -direction, stepsize)
+			return False, 0
+
     for build in district.buildings:
 
         if build == building:
