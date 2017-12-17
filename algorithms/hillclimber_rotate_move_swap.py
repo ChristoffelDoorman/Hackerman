@@ -40,14 +40,14 @@ def main(iterations, district, map_score, water_type):
             else:
                 move(building, -direction, 0.5)
 
-        elif 12 <= choice <= 14  and not building.name == 'house':
-            # print choice
-            possible, move_score = check_rotate(building, district)
-            if possible and move_score > map_score:
-                map_score = move_score
-
-            else:
-                building.rotate()
+        # elif 12 <= choice <= 14  and not building.name == 'house':
+        #     # print choice
+        #     possible, move_score = check_rotate(building, district)
+        #     if possible and move_score > map_score:
+        #         map_score = move_score
+        #
+        #     else:
+        #         building.rotate()
 
         elif choice == 15:
             # print "keuze is 2"
@@ -98,6 +98,7 @@ def check_rotate(building, district):
     if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > district.width) or (building.right_top[1] > district.height):
         return False, 0
 
+	olap = True
     for water in district.waters:
         olap = overlap(building, water)
 
@@ -105,6 +106,7 @@ def check_rotate(building, district):
             building.rotate()
             return False, 0
 
+	olap = True
     for build in district.buildings:
 
         if build == building:
@@ -156,7 +158,7 @@ def check_swap(building1, building2, district):
     # if olap:
     #     print "ze overlappen met elkaar", olap
     #     return False, 0
-
+	olap1, olap2 = True, True
     for water in district.waters:
         olap1 = overlap(building1, water)
         olap2 = overlap(building2, water)
