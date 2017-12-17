@@ -40,17 +40,22 @@ def overlap(building1, building2):
 
 	if (building1.left_bottom[0] == building2.left_bottom[0] and building1.left_bottom[1] == building2.left_bottom[1]):
 		overlap = True
+
 		# print "dit ligt op elkaar"
 
 	# print "dit overlapt"
 	return overlap
 
-# def overlap_canvas(building, district):
+# def overlap_canvas(building):
 #
-# 	if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > district.width) or (building.right_top[1] > district.height):
-# 		return True
-# 	else:
-# 		return False
+# 	olap = False
+# 	if (building.left_bottom[0] < 0) \
+# 	or (building.left_bottom[1] < 0) \
+# 	or (building.right_top[0] > X_DIMENSION) \
+# 	or (building.right_top[1] > Y_DIMENSION):
+# 		olap = True
+#
+# 	return olap
 
 def h_build(district, h_counter):
 
@@ -64,8 +69,9 @@ def h_build(district, h_counter):
 		if olap:
 			return district, h_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		district.buildings.append(house)
+		h_counter += 1
 		return district, h_counter
 
 	for building in district.buildings:
@@ -91,15 +97,15 @@ def b_build(district, b_counter):
 	if choice:
 		bungalow.rotate()
 
-
 	for water in district.waters:
 		olap = overlap(bungalow, water)
 
 		if olap:
 			return district, b_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
 		district.buildings.append(bungalow)
+		b_counter += 1
 		return district, b_counter
 
 	for building in district.buildings:
@@ -132,7 +138,8 @@ def m_build(district, m_counter):
 		if olap:
 			return district, m_counter
 
-	if not district.buildings:
+	if len(district.buildings) == 0:
+		m_counter += 1
 		district.buildings.append(maison)
 		return district, m_counter
 
@@ -376,9 +383,9 @@ def check_move(building, district, direction, stepsize):
 #         move(building, -direction, stepsize)
 #         return True, score
 
-def print_txt(buildings, total_houses):
+def print_txt(buildings):
 
-    text_file = open("probeersel,{}.txt".format(total_houses), "w+")
+    text_file = open("1m-beste.txt", "w+")
 
     for building in buildings:
         if building.name == 'maison':
@@ -386,7 +393,7 @@ def print_txt(buildings, total_houses):
         elif building.name == 'bungalow':
             build = "bung"
         elif building.name == 'house':
-            b = "hous"
+            build = "hous"
 
         text_file.write("{} {} {}\n".format(build, building.left_bottom[0], building.left_bottom[1]))
 
