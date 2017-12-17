@@ -83,16 +83,22 @@ def set_initial_map(total_houses):
 
         district.buildings.append(bungalow)
 
+    yw1 = (district.height / 2) + ((grid_size / 2) * House.width) + Bungalow.length
+    yw2 = district.height - yw1 - 43
+    xw1 = 110
     xw3 = (district.width / 2) - ((grid_size / 2) * House.width) - 40.232 - Bungalow.width
     yw3 = 88.5
-    xw4 = district.width - xw3
+    xw4 = district.width - xw3 - 20
 
-    # water1 = Water(, y, 151.789, 37.947)
-    # water2 = Water(x, y, 151.789, 37.947)
+    water1 = Water(xw1, yw1, 151.789, 37.947)
+    district.waters.append(water1)
+    water2 = Water(xw1, yw2, 151.789, 37.947)
+    district.waters.append(water2)
     water3 = Water(xw3, yw3, 40.232, 143.045)
     district.waters.append(water3)
     water4 = Water(xw4, yw3, 40.232, 143.045)
     district.waters.append(water4)
+    # print district.waters
 
 
     # place maisons around bungalows
@@ -107,29 +113,64 @@ def set_initial_map(total_houses):
         for building in district.buildings:
             olap = overlap(maison, building)
 
+            # buildings linksboven
             if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] >= district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     maison = move(maison, -1, 1)
                     maison = move(maison, 2, 1)
                     olap = overlap(maison, building)
 
+            # buildings linksonder
             if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] < district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     maison = move(maison, -1, 1)
                     maison = move(maison, -2, 1)
                     olap = overlap(maison, building)
 
+            # buildings rechtsonder
             if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] <= district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     maison = move(maison, 1, 1)
                     maison = move(maison, -2, 1)
                     olap = overlap(maison, building)
 
+            # buildings rechtsboven
             if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] > district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     maison = move(maison, 1, 1)
                     maison = move(maison, 2, 1)
                     olap = overlap(maison, building)
+
+        for water in district.waters:
+            olap = overlap(maison, water)
+
+            # buildings linksboven
+            if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] >= district.height / 2) and olap:
+                while olap:
+                    maison = move(maison, -1, 1)
+                    maison = move(maison, 2, 1)
+                    olap = overlap(maison, water)
+
+            # buildings linksonder
+            if (maison.left_bottom[0] <= district.width / 2) and (maison.left_bottom[1] < district.height / 2) and olap:
+                while olap:
+                    maison = move(maison, -1, 1)
+                    maison = move(maison, -2, 1)
+                    olap = overlap(maison, water)
+
+            # buildings rechtsonder
+            if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] <= district.height / 2) and olap:
+                while olap:
+                    maison = move(maison, 1, 1)
+                    maison = move(maison, -2, 1)
+                    olap = overlap(maison, water)
+
+            # buildings rechtsboven
+            if (maison.left_bottom[0] > district.width / 2) and (maison.left_bottom[1] > district.height / 2) and olap:
+                while olap:
+                    maison = move(maison, 1, 1)
+                    maison = move(maison, 2, 1)
+                    olap = overlap(maison, water)
 
         district.buildings.append(maison)
 
@@ -236,7 +277,7 @@ def main(total_houses):
     district = set_initial_map(total_houses)
 
     for building in district.buildings:
-        expand(building, district.buildings, 25, 1)
+        expand(building, district.buildings, 10, 1)
 
     # for building in buildings:
     #     if building.name == "maison":
