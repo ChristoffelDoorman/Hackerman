@@ -16,7 +16,7 @@ if __name__ == "__main__":
     while total_houses < 7:
         total_houses = input("Choose an integer number greater than 7: ")
 
-    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm]")
+    algorithm_choice = input("Which algorithm? [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm] [5: re-using]")
 
     if algorithm_choice == 1:
         algorithm = "random"
@@ -79,3 +79,28 @@ if __name__ == "__main__":
         algorithm = "try_greedy"
 
         try_greedy.main(total_houses)
+
+    elif algorithm_choice == 5:
+
+        buildings, value = printen.main()
+
+        choice = input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]")
+
+        iterations_hill = input("How many iterations for hillclimber: ")
+
+        if choice == 1:
+            variation = "random"
+
+            best_district_hill, best_map_score, end_time = hillclimber_random.main(iterations_hill, buildings, value)
+
+        elif choice == 2:
+            variation = "systematic"
+
+            best_district_hill, best_map_score, end_time = hillclimber_algorithm.main(iterations_hill, buildings, value)
+
+        elif choice == 3:
+            variation = "Move_rotate_swap"
+
+            best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, buildings, value)
+
+        visualisation.main(best_district_hill.buildings, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
