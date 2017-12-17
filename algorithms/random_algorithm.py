@@ -11,7 +11,6 @@ import classes
 import matplotlib.pyplot as plt
 import random
 import pdb
-import numpy as np
 import locale
 import time
 import math

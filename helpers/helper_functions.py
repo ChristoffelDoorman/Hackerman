@@ -46,16 +46,16 @@ def overlap(building1, building2):
 	# print "dit overlapt"
 	return overlap
 
-def overlap_canvas(building):
-
-	olap = False
-	if (building.left_bottom[0] < 0) \
-	or (building.left_bottom[1] < 0) \
-	or (building.right_top[0] > X_DIMENSION) \
-	or (building.right_top[1] > Y_DIMENSION):
-		olap = True
-
-	return olap
+# def overlap_canvas(building):
+#
+# 	olap = False
+# 	if (building.left_bottom[0] < 0) \
+# 	or (building.left_bottom[1] < 0) \
+# 	or (building.right_top[0] > X_DIMENSION) \
+# 	or (building.right_top[1] > Y_DIMENSION):
+# 		olap = True
+#
+# 	return olap
 
 def h_build(district, h_counter):
 
@@ -97,9 +97,6 @@ def b_build(district, b_counter):
 	if choice:
 		bungalow.rotate()
 
-	if overlap_canvas(bungalow):
-		bungalow.rotate()
-
 	for water in district.waters:
 		olap = overlap(bungalow, water)
 
@@ -133,9 +130,6 @@ def m_build(district, m_counter):
 	# random: length, width = width, length
 	choice = random.getrandbits(1)
 	if choice:
-		maison.rotate()
-
-	if overlap_canvas(maison):
 		maison.rotate()
 
 	for water in district.waters:

@@ -33,7 +33,7 @@ def main(iterations_hill, district, map_score, water_type):
                 possible, move_score = check_move(building, district, direction, 0.5)
                 move(building, -direction, 0.5)
 
-                if possible and move_score > map_score:
+                if possible and move_score >= map_score:
                     # print 'move score: ', move_score
                     best_direction = direction
                     map_score = move_score
