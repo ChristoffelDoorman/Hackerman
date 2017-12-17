@@ -42,9 +42,7 @@ def print_canvas(buildings, file_name):
 
     fig1.savefig(path.join(outpath,"test_{}.png".format(file_name)), dpi=90, bbox_inches='tight')
 
-def main(buildings, algorithm, total_houses, best_iteration, end_time, iterations, variation, name):
-
-
+def main(district, algorithm, total_houses, best_iteration, end_time, iterations, variation, name):
 
     ax1, fig1 = draw_canvas()
     plt.suptitle("The total value is: ${:,}".format(best_iteration))
@@ -60,7 +58,10 @@ def main(buildings, algorithm, total_houses, best_iteration, end_time, iteration
     if not os.path.exists(outpath):
         os.makedirs(outpath)
 
-    for building in buildings:
+    for water in district.waters:
+        drawBuilding(ax1, building, water.left_bottom[0], water.left_bottom[1], 'blue')
+
+    for building in district.buildings:
         if building.name == 'house':
             drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')
         if building.name == 'bungalow':
