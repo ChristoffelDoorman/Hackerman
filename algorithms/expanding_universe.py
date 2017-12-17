@@ -93,6 +93,7 @@ def set_initial_map(total_houses):
     district.waters.append(water3)
     water4 = Water(xw4, yw3, 40.232, 143.045)
     district.waters.append(water4)
+    # print district.waters
 
 
     # place maisons around bungalows
