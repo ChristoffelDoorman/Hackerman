@@ -107,20 +107,18 @@ class Maison:
 class Water:
 	name = 'water'
 
-	def __init__(self, x, y, length, width):
-		self.length = length
+	def __init__(self, x, y, width, length):
 		self.width = width
+		self.length = length
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
 	def __repr__(self):
-		return("x=%i, y=%i, type = water, length=%i, width=%i, linksonder=%i, rechtsboven=%i "%(self.left_bottom[0], self.left_bottom[1], self.length, self.width, self.left_bottom[0], self.right_top[0]))
-
+		return ("x=%i, y=%i, type = water "%(self.left_bottom[0], self.left_bottom[1]))
 
 class Map:
-
 
 	def __init__(self, width, height):
 		self.width = width
