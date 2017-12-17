@@ -37,9 +37,6 @@ def main(total_houses, iterations, water_type):
         # create counters to count number of each building
         h_counter, b_counter, m_counter = 0, 0, 0
 
-        # add water to map
-    	district.add_water(2)
-
         # build houses until maximum is reached
         while len(district.buildings) < total_houses:
             # print district.buildings

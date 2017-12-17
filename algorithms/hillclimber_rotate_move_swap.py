@@ -26,15 +26,16 @@ def main(iterations, district, map_score, water_type):
         building = random.choice(district.buildings)
 
         # 0 = move 1 = rotate 2 = swap random.randint(2)
-        choice = random.randint(0, 10)
+        choice = random.randint(0, 15)
 
-        if choice < 7:
+        if choice < 12:
             map_score = hill_move(building, district, map_score)
 
-        elif 7 < choice <= 9  and not building.name == 'house':
+        elif 12 <= choice <= 14  and not building.name == 'house':
+            print choice
             map_score = check_rotate(building, district, map_score)
 
-        elif choice == 10:
+        elif choice == 15:
             # print "keuze is 2"
             building1 = random.choice(district.buildings)
             building2 = random.choice(district.buildings)
@@ -96,12 +97,16 @@ def check_rotate(building, district, map_score):
 
     building.rotate()
 
+    if overlap_canvas(building):
+		building.rotate()
+        return False, map_score
+
     for water in district.waters:
 		olap = overlap(building, water)
 
 		if olap:
 			building.rotate()
-			return map_score
+			return False, map_score
 
     for build in district.buildings:
 
@@ -112,7 +117,7 @@ def check_rotate(building, district, map_score):
 
         if olap:
             building.rotate()
-            return map_score
+            return False, map_score
 
     if not olap:
 
