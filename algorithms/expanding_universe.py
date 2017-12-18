@@ -97,13 +97,13 @@ def set_initial_map(total_houses):
     yw3 = 88.5
     xw4 = district.width - xw3 - 20
 
-    water1 = Water(xw1, yw1, 151.789, 37.947)
+    water1 = Water(104, 40, 151.789, 37.947)
     district.waters.append(water1)
-    water2 = Water(xw1, yw2, 151.789, 37.947)
+    water2 = Water(104, 243, 151.789, 37.947)
     district.waters.append(water2)
-    water3 = Water(xw3, yw3, 40.232, 143.045)
+    water3 = Water(50, 89, 40.232, 143.045)
     district.waters.append(water3)
-    water4 = Water(xw4, yw3, 40.232, 143.045)
+    water4 = Water(270, 89, 40.232, 143.045)
     district.waters.append(water4)
 
 

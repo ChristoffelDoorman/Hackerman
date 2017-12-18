@@ -157,19 +157,11 @@ class Map:
 
 		# two strokes of water parralel positioned at 1/3 of the length from the top and bottom
 		elif water_type == 3:
-			water1 = Water(x, y, width, length)
-			water2 = Water(x, y, width, length)
-
-		# four strokes of water parralel for x and parralel for y positioned at 1/4 of the respective width and length from the outside of the map
-		elif water_type == 4:
-			water1 = Water(x, y, width, length)
-			water2 = Water(x, y, width, length)
-			water3 = Water(x, y, width, length)
-			water4 = Water(x, y, width, length)
-
-		# four pooles of water positioned at 1/4 of diagonal to the inside of the corners of the map
-		elif water_type == 5:
-			water1 = Water(x, y, width, length)
-			water2 = Water(x, y, width, length)
-			water3 = Water(x, y, width, length)
-			water4 = Water(x, y, width, length)
+		    water1 = Water(104, 40, 151.789, 37.947)
+		    self.waters.append(water1)
+		    water2 = Water(104, 243, 151.789, 37.947)
+		    self.waters.append(water2)
+		    water3 = Water(50, 89, 40.232, 143.045)
+		    self.waters.append(water3)
+		    water4 = Water(270, 89, 40.232, 143.045)
+		    self.waters.append(water4)

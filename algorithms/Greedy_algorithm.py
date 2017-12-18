@@ -31,33 +31,30 @@ def main(total_houses):
     b_number = int(0.25 * total_houses)
     m_number = int(0.15 * total_houses)
 
-    # bouw het eerste huis random, een maison wat die heeft de meeste waarde
+    # build random maison
     while len(district.buildings) == 0:
         district, m_counter = m_build(district, 0)
-    # maison = classes.Maison(0,0)
-    # district.buildings.append(maison)
-    # print district.buildings
 
+    # first, build all maisons
     for i in range(m_number - 1):
 
         maison = classes.Maison(0, 0)
-
         district.buildings.append(maison)
         top_score, best_x, best_y = walk_check(maison, district)
         maison.update(best_x, best_y)
 
+    # second, build all bungalows
     for i in range(b_number):
 
         bungalow = classes.Bungalow(0, 0)
-
         district.buildings.append(bungalow)
         top_score, best_x, best_y = walk_check(bungalow, district)
         bungalow.update(best_x, best_y)
 
+    # third, build all houses
     for i in range(h_number):
 
         house = classes.House(0, 0)
-
         district.buildings.append(house)
         top_score, best_x, best_y = walk_check(house, district)
         house.update(best_x, best_y)
@@ -72,9 +69,11 @@ def check_possible(building, district):
 
     for build in district.buildings:
 
+        # don't check if building overlaps with itself
         if build == building:
             continue
 
+        # check if building overlaps with other buildings
         olap = overlap(build, building)
 
         if olap:
@@ -85,42 +84,39 @@ def check_possible(building, district):
 
 def walk_check(building, district):
 
-    # zet direction op: naar rechts lopen
+    # begin to walk in positive x direction
     direction = 1
     top_score = 0
     best_x = 0
     best_y = 0
     best_scores = {}
-    # begin met lopen
+
+    # start walking
     while True:
 
         move(building, direction, 1)
 
+        # if right edge reached, move 1 up and start moving to left edge
         if building.right_top[0] >= 360:
             move(building, 2, 1)
             direction = -1
             continue
 
+        # if left edge reached, move 1 up and start moving to right edge again
         if building.left_bottom[0] <= 0:
             move(building, 2, 1)
             direction = 1
             continue
 
+        # if possible and score is better, remember location
         possible = check_possible(building, district)
         if possible:
             score = district.score()
-            # print score
             if score > top_score:
-                # print value
                 top_score = score
-                # print "top value", top_value
-
                 best_x = building.left_bottom[0]
-
                 best_y = building.left_bottom[1]
-                # print "beste: ", best_x, best_y
 
-        # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
         if building.right_top[1] >= 320 and building.right_top[0] >= 359:
 
             return top_score, best_x, best_y
