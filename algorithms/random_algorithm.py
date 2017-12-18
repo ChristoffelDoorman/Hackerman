@@ -3,8 +3,8 @@
 # Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
 
 # import files
-from helpers import h_build, b_build, m_build
-import visualisation
+from helpers.helper_functions import h_build, b_build, m_build
+import visualisation.canvas_visualisation
 import classes
 
 # import modules

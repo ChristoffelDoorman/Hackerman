@@ -6,29 +6,28 @@
 # This file runs all the algoritms, from input of user
 
 from algorithms import *
-from helpers import calculate_score, print_txt
-import helpers
+from helpers.helper_functions import calculate_score, print_txt
 import visualisation.canvas_visualisation as visualisation
 
 
 if __name__ == "__main__":
 
-    total_houses = input("Total number of houses?: ")
-    water_type = input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]")
+    total_houses = eval(input("Total number of houses?: "))
+    water_type = eval(input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]"))
 
     while total_houses < 7:
 
-        total_houses = input("Choose an integer number greater than 7: ")
+        total_houses = eval(input("Choose an integer number greater than 7: "))
 
-    algorithm_choice = input("Which algorithm? [0: own input file] [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm], [5: collapsing universe]: ")
+    algorithm_choice = eval(input("Which algorithm? [0: own input file] [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm], [5: collapsing universe]: "))
 
     if algorithm_choice == 0:
 
         district, map_score = helpers.load_district.main()
         algorithm = "hillclimber"
 
-        choice = input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]")
-        iterations_hill = input("How many iterations for hillclimber: ")
+        choice = eval(input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]"))
+        iterations_hill = eval(input("How many iterations for hillclimber: "))
 
         if choice == 1:
             variation = "random"
@@ -52,14 +51,14 @@ if __name__ == "__main__":
             best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, district, map_score, 0)
 
         else:
-            print "choose a valid option"
+            print("choose a valid option")
 
         visualisation.main(best_district_hill, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
         print_txt(best_district_hill, algorithm, total_houses, variation)
 
     elif algorithm_choice == 1:
         algorithm = "random"
-        iterations = input("How many iterations?: ")
+        iterations = eval(input("How many iterations?: "))
 
         best_district, best_iteration, end_time = random_algorithm.main(total_houses, iterations, water_type)
         visualisation.main(best_district, algorithm, total_houses, best_iteration, end_time, iterations, 0, 0)
@@ -67,11 +66,11 @@ if __name__ == "__main__":
     elif algorithm_choice == 2:
         algorithm = "hillclimber"
 
-        choice = input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]")
+        choice = eval(input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]"))
 
-        iterations = input("How many iterations random first?: ")
+        iterations = eval(input("How many iterations random first?: "))
 
-        iterations_hill = input("How many iterations for hillclimber: ")
+        iterations_hill = eval(input("How many iterations for hillclimber: "))
 
         best_district_random, best_iteration, end_time = random_algorithm.main(total_houses, iterations, water_type)
 
@@ -97,7 +96,7 @@ if __name__ == "__main__":
             best_district_hill, best_map_score, end_time = hillclimber_rotate_move_swap.main(iterations_hill, best_district_random, best_iteration, water_type)
 
         else:
-            print "choose a valid option"
+            print("choose a valid option")
 
         visualisation.main(best_district_hill, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
         print_txt(best_district_hill, algorithm, total_houses, variation)
@@ -109,7 +108,7 @@ if __name__ == "__main__":
 
         map_score = calculate_score(district.buildings)
 
-        iterations_hill = input("How many iterations for hillclimber: ")
+        iterations_hill = eval(input("How many iterations for hillclimber: "))
 
         best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, map_score, water_type)
 
@@ -129,11 +128,11 @@ if __name__ == "__main__":
 
         map_score = calculate_score(district.buildings)
 
-        iterations_hill = input("How many iterations for hillclimber: ")
+        iterations_hill = eval(input("How many iterations for hillclimber: "))
 
         best_district, total_score, end_time = hillclimber_random.main(iterations_hill, district, map_score, 0)
 
         visualisation.main(best_district, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "collaps with hill")
 
     else:
-        print "choose a valid option"
+        print("choose a valid option")

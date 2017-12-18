@@ -1,1 +1,1 @@
-import canvas_visualisation
+from visualisation import canvas_visualisation

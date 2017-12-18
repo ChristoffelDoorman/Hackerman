@@ -6,8 +6,7 @@
 # This file contains the greedy algorithm.
 
 # import files
-from helpers import h_build, b_build, m_build, calculate_score, move, overlap, check_move
-import visualisation
+from helpers.helper_functions import h_build, b_build, m_build, calculate_score, move, overlap, check_move
 import visualisation.canvas_visualisation as visualisation
 
 # import modules
@@ -123,5 +122,5 @@ def walk_check(building):
 
         # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
         if building.right_top[1] >= 320 and building.right_top[0] >= 359:
-            print "return: ", best_x, best_y
+            print(("return: ", best_x, best_y))
             return top_score, best_x, best_y

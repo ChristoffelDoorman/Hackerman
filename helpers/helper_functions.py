@@ -302,7 +302,7 @@ def check_position(building, district, x_direction, y_direction, x_stepsize, y_s
     move(building, y_direction, y_stepsize)
 
     if overlap_canvas(building):
-		return False, 0
+        return False, 0
 
     olap = True
     for water in district.waters:
@@ -337,7 +337,7 @@ def check_move(building, district, direction, stepsize):
     move(building, direction, stepsize)
 
     if overlap_canvas(building):
-		return False, 0
+        return False, 0
 
     olap = True
     for water in district.waters:

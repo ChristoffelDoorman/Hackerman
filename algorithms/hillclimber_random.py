@@ -6,7 +6,7 @@
 # This file moves buildings randomly to check if score has improved.
 
 # import files
-from helpers import move, overlap, check_move
+from helpers.helper_functions import move, overlap, check_move
 import classes
 
 # import files
@@ -38,5 +38,5 @@ def main(iterations_hill, district, map_score, water_type):
     if not best_district.buildings:
         return district, map_score, end_time
 
-    print best_district
+    print(best_district)
     return best_district, map_score, end_time
