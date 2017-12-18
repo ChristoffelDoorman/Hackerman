@@ -13,6 +13,9 @@ import numpy as np
 import locale
 import timeit
 import math
+import os
+from os import path
+from datetime import datetime
 
 import classes
 
@@ -46,16 +49,13 @@ def overlap(building1, building2):
 	# print "dit overlapt"
 	return overlap
 
-# def overlap_canvas(building):
-#
-# 	olap = False
-# 	if (building.left_bottom[0] < 0) \
-# 	or (building.left_bottom[1] < 0) \
-# 	or (building.right_top[0] > X_DIMENSION) \
-# 	or (building.right_top[1] > Y_DIMENSION):
-# 		olap = True
-#
-# 	return olap
+def overlap_canvas(building):
+
+	olap = True
+	if building.left_bottom[0] >= 0 and building.left_bottom[1] >= 0 and building.right_top[0] <= X_DIMENSION and building.right_top[1] <= Y_DIMENSION:
+		olap = False
+
+	return olap
 
 def h_build(district, h_counter):
 
@@ -96,6 +96,8 @@ def b_build(district, b_counter):
 	choice = random.getrandbits(1)
 	if choice:
 		bungalow.rotate()
+		if overlap_canvas(bungalow):
+			bungalow.rotate()
 
 	for water in district.waters:
 		olap = overlap(bungalow, water)
@@ -131,6 +133,8 @@ def m_build(district, m_counter):
 	choice = random.getrandbits(1)
 	if choice:
 		maison.rotate()
+		if overlap_canvas(maison):
+			maison.rotate()
 
 	for water in district.waters:
 		olap = overlap(maison, water)
@@ -157,16 +161,28 @@ def m_build(district, m_counter):
 
 	return district, m_counter
 
+def distance_to_edge(current_building):
+	# distance until left side of canvas
+	distance_left = current_building.left_bottom[0]
+	distance_up = Y_DIMENSION - current_building.left_top[1]
+	distance_right = X_DIMENSION - current_building.right_bottom[0]
+	distance_down = current_building.right_bottom[1]
+
+	distance = min(distance_left, distance_up, distance_right, distance_down)
+	return distance
+
 def closest_distance(current_building, buildings):
 
 	distance = 500
+
+	# distance = distance_to_edge(current_building)
 	closest = distance
 
 	for building in buildings:
 
         # area linksboven
-		if (building.right_bottom[0] < current_building.left_top[0]
-		 	and building.right_bottom[1] > current_building.left_top[1]):
+		if (building.right_bottom[0] <= current_building.left_top[0]
+		 	and building.right_bottom[1] >= current_building.left_top[1]):
 
             # calculate distance
 			distance = pythagoras(current_building.left_top[0], current_building.left_top[1],
@@ -174,7 +190,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden boven
-		elif (building.right_bottom[1] > current_building.left_top[1]
+		elif (building.right_bottom[1] >= current_building.left_top[1]
 			and building.right_bottom[0] >= current_building.left_top[0]
 			and building.left_bottom[0] <= current_building.right_top[0]):
 
@@ -183,8 +199,8 @@ def closest_distance(current_building, buildings):
 
 
         # area rechtsboven
-		elif (building.left_bottom[0] > current_building.right_top[0]
-		 	and building.right_bottom[1] > current_building.left_top[1]):
+		elif (building.left_bottom[0] >= current_building.right_top[0]
+		 	and building.right_bottom[1] >= current_building.left_top[1]):
 
 			# calculate distance
 			distance = pythagoras(current_building.right_top[0], current_building.right_top[1],
@@ -192,7 +208,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden rechts
-		elif (building.left_bottom[0] > current_building.right_top[0]
+		elif (building.left_bottom[0] >= current_building.right_top[0]
 			and building.left_bottom[1] <= current_building.right_top[1]
 			and building.left_top[1] >= current_building.right_bottom[1]):
 
@@ -201,8 +217,8 @@ def closest_distance(current_building, buildings):
 
 
         # area rechtsonder
-		elif (building.left_top[0] > current_building.right_bottom[0]
-		 	and building.right_top[1] < current_building.right_bottom[1]):
+		elif (building.left_top[0] >= current_building.right_bottom[0]
+		 	and building.right_top[1] <= current_building.right_bottom[1]):
 
 			# calculate distance
 			distance = pythagoras(current_building.right_bottom[0], current_building.right_bottom[1],
@@ -210,17 +226,17 @@ def closest_distance(current_building, buildings):
 
 
 		# area midden onder
-		elif (building.right_top[1] < current_building.left_bottom[1]
+		elif (building.right_top[1] <= current_building.left_bottom[1]
 			and building.right_top[0] >= current_building.left_bottom[0]
 			and building.left_top[0] <= current_building.right_bottom[0]):
 
 			# calculate distance
-			distance = current_building.right_top[1] - building.right_bottom[1]
+			distance = current_building.right_bottom[1] - building.right_top[1]
 
 
         # area linksonder
-		elif (building.right_top[0] < current_building.left_bottom[0]
-		 	and building.right_top[1] < current_building.left_bottom[1]):
+		elif (building.right_top[0] <= current_building.left_bottom[0]
+		 	and building.right_top[1] <= current_building.left_bottom[1]):
 
 			# calculate distance
 			distance = pythagoras(current_building.left_bottom[0], current_building.left_bottom[1],
@@ -228,7 +244,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden links
-		elif (building.right_bottom[0] < current_building.left_bottom[0]
+		elif (building.right_bottom[0] <= current_building.left_bottom[0]
 			and building.right_bottom[1] <= current_building.left_top[1]
 			and building.right_top[1] >= current_building.left_bottom[1]):
 
@@ -282,60 +298,54 @@ def move(building, direction, step):
     return building
 
 def check_position(building, district, x_direction, y_direction, x_stepsize, y_stepsize):
-	move(building, x_direction, x_stepsize)
-	move(building, y_direction, y_stepsize)
+    move(building, x_direction, x_stepsize)
+    move(building, y_direction, y_stepsize)
 
-	if (building.left_bottom[0] < 0) \
-		or (building.left_bottom[1] < 0) \
-		or (building.right_top[0] > X_DIMENSION) \
-		or (building.right_top[1] > Y_DIMENSION):
-	        return False, 0
+    if overlap_canvas(building):
+		return False, 0
 
-	olap = True
-	for water in district.waters:
-		olap = overlap(building, water)
+    olap = True
+    for water in district.waters:
+        olap = overlap(building, water)
 
-		if olap:
-			move(building, - x_direction, x_stepsize)
-			move(building, - y_direction, y_stepsize)
-			return False, 0
+        if olap:
+            move(building, - x_direction, x_stepsize)
+            move(building, - y_direction, y_stepsize)
+            return False, 0
 
-	olap = True
-	for build in district.buildings:
+    olap = True
+    for build in district.buildings:
 
-		if build == building:
-			continue
+        if build == building:
+            continue
 
-		olap = overlap(build, building)
+        olap = overlap(build, building)
 
-		if olap:
-			move(building, - x_direction, x_stepsize)
-			move(building, - y_direction, y_stepsize)
-			return False, 0
+        if olap:
+            move(building, - x_direction, x_stepsize)
+            move(building, - y_direction, y_stepsize)
+            return False, 0
 
-		if not olap:
-			score = district.score()
-			move(building, - x_direction, x_stepsize)
-			move(building, - y_direction, y_stepsize)
-			return True, score
+        if not olap:
+            score = district.score()
+            move(building, - x_direction, x_stepsize)
+            move(building, - y_direction, y_stepsize)
+            return True, score
 
 def check_move(building, district, direction, stepsize):
 
     move(building, direction, stepsize)
 
-    if (building.left_bottom[0] < 0) \
-	or (building.left_bottom[1] < 0) \
-	or (building.right_top[0] > X_DIMENSION) \
-	or (building.right_top[1] > Y_DIMENSION):
-        return False, 0
+    if overlap_canvas(building):
+		return False, 0
 
     olap = True
     for water in district.waters:
-		olap = overlap(building, water)
+        olap = overlap(building, water)
 
-		if olap:
-			move(building, -direction, stepsize)
-			return False, 0
+        if olap:
+            move(building, -direction, stepsize)
+            return False, 0
 
     olap = True
     for build in district.buildings:
@@ -353,51 +363,32 @@ def check_move(building, district, direction, stepsize):
         score = district.score()
         return True, score
 
-# def check_move2(building, district, direction, stepsize):
-#
-#     move(building, direction, stepsize)
-#
-#     if (building.left_bottom[0] < 0) \
-# 	or (building.left_bottom[1] < 0) \
-# 	or (building.right_top[0] > X_DIMENSION) \
-# 	or (building.right_top[1] > Y_DIMENSION):
-#         return False, 0
-#
-# 	for water in district.waters:
-# 		olap = overlap(building, water)
-#
-# 		if olap:
-# 			move(building, -direction, stepsize)
-# 			return False, 0
-#
-#     for build in district.buildings:
-#
-#         if build == building:
-#             continue
-#
-#         olap = overlap(build, building)
-#
-#         if olap:
-#             move(building, -direction, stepsize)
-#             return False, 0
-#
-#     if not olap:
-#         score = district.score()
-#         move(building, -direction, stepsize)
-#         return True, score
 
-def print_txt(buildings):
+def print_txt(district, algorithm, total_houses, variation):
 
-    text_file = open("1m-beste.txt", "w+")
+    time_stamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 
-    for building in buildings:
+    if variation == 0:
+        outpath = ("output/{}/{}".format(algorithm, total_houses))
+    else:
+        outpath = ("output/{}/{}/{}".format(algorithm, variation, total_houses))
+
+    if not os.path.exists(outpath):
+        os.makedirs(outpath)
+
+    text_file = open(path.join(outpath,"{}_{}_{}_{}.txt".format(algorithm, total_houses, time_stamp, variation)), "w+")
+
+    for building in district.buildings:
         if building.name == 'maison':
-            build = "mais"
+            build = "maison"
         elif building.name == 'bungalow':
-            build = "bung"
+            build = "bungalow"
         elif building.name == 'house':
-            build = "hous"
-
+            build = "house"
         text_file.write("{} {} {}\n".format(build, building.left_bottom[0], building.left_bottom[1]))
+
+    for water in district.waters:
+        build = 'water'
+        text_file.write("{} {} {}\n".format(build, water.left_bottom[0], water.left_bottom[1]))
 
     text_file.close()

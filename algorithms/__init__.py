@@ -6,4 +6,4 @@ import Greedy_algorithm
 import try_greedy
 import hillclimber_rotate_move_swap
 import collapsing_universe
-import printen
+import load_district
