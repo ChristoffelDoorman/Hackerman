@@ -7,12 +7,15 @@
 
 from algorithms import *
 from helpers.helper_functions import calculate_score, print_txt
+from helpers import load_district
 import visualisation.canvas_visualisation as visualisation
 
 
 if __name__ == "__main__":
 
-    total_houses = eval(input("Total number of houses?: "))
+    total_houses = eval(input("Total number of houses?: ")
+    print(type(total_houses))
+    print(total_houses)
     water_type = eval(input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]"))
 
     while total_houses < 7:
@@ -23,7 +26,7 @@ if __name__ == "__main__":
 
     if algorithm_choice == 0:
 
-        district, map_score = helpers.load_district.main()
+        district, map_score = load_district.main()
         algorithm = "hillclimber"
 
         choice = eval(input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]"))

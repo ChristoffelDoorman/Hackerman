@@ -6,7 +6,7 @@
 # This file contains the expanding universe algorithm
 
 # import files
-import classes
+from classes.my_classes import *
 from helpers.helper_functions import overlap, move, check_position, check_move
 
 import math

@@ -5,7 +5,7 @@
 #
 # This file contains the classes of the buildings, the water and a map class.
 
-import helpers
+from helpers.helper_functions import closest_distance
 
 class House:
 	name = 'house'
@@ -13,9 +13,6 @@ class House:
 	marginalValue = 1.03
 
 	def __init__(self, x, y):
-		# self.price = 285.000
-		# self.marginalValue = 1.03
-		# self.location = (x, y)
 		self.length = 20
 		self.width = 20
 		self.left_bottom = [x, y]
@@ -136,7 +133,7 @@ class Map:
 	def score(self):
 		total_value = 0
 		for current_building in self.buildings:
-			closest = helpers.closest_distance(current_building, self.buildings)
+			closest = closest_distance(current_building, self.buildings)
 			total_value += current_building.score(closest)
 
 		return total_value
