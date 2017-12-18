@@ -9,7 +9,8 @@ house 0 22
 house 22 22
 house 44 22
 house 66 22
-house 0 44house 22 44
+house 0 44
+house 22 44
 house 44 44
 house 66 44
 bungalow 89 0

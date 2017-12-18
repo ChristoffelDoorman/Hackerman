@@ -28,17 +28,17 @@ def main(iterations, district, map_score, water_type):
         building = random.choice(district.buildings)
 
         # 0 = move 1 = rotate 2 = swap random.randint(2)
-        choice = random.randint(0, 15)
+        choice = random.randint(0, 2)
         #
-        if choice < 12:
+        if choice == 0:
             map_score = hill_move(building, district, map_score)
 
-        elif 12 <= choice <= 14 and not building.name == 'house':
+        elif choice == 1 and not building.name == 'house':
 
             building.rotate()
             building, map_score = check_rotate(building, district, map_score)
 
-        elif choice <= 15:
+        elif choice == 2:
             # print "keuze is 2"
             building1 = random.choice(district.buildings)
             building2 = random.choice(district.buildings)

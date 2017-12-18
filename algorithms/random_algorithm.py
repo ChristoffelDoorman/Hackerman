@@ -26,7 +26,7 @@ def main(total_houses, iterations, water_type):
     # best_district.add_water(1)
     for i in range(iterations):
 
-        print i
+        # print i
         district = classes.Map(360, 320, water_type)
 
         # set number of each building type
@@ -42,7 +42,7 @@ def main(total_houses, iterations, water_type):
         while len(district.buildings) < total_houses:
 
             if time.time() > timeout:
-                print "timed out"
+                # print "timed out"
                 break
             # print district.buildings
 	        # choose random building type

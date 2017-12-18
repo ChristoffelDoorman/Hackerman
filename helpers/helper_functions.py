@@ -161,9 +161,21 @@ def m_build(district, m_counter):
 
 	return district, m_counter
 
+def distance_to_edge(current_building):
+	# distance until left side of canvas
+	distance_left = current_building.left_bottom[0]
+	distance_up = Y_DIMENSION - current_building.left_top[1]
+	distance_right = X_DIMENSION - current_building.right_bottom[0]
+	distance_down = current_building.right_bottom[1]
+
+	distance = min(distance_left, distance_up, distance_right, distance_down)
+	return distance
+
 def closest_distance(current_building, buildings):
 
 	distance = 500
+
+	# distance = distance_to_edge(current_building)
 	closest = distance
 
 	for building in buildings:
@@ -354,38 +366,6 @@ def check_move(building, district, direction, stepsize):
         score = district.score()
         return True, score
 
-# def check_move2(building, district, direction, stepsize):
-#
-#     move(building, direction, stepsize)
-#
-#     if (building.left_bottom[0] < 0) \
-# 	or (building.left_bottom[1] < 0) \
-# 	or (building.right_top[0] > X_DIMENSION) \
-# 	or (building.right_top[1] > Y_DIMENSION):
-#         return False, 0
-#
-# 	for water in district.waters:
-# 		olap = overlap(building, water)
-#
-# 		if olap:
-# 			move(building, -direction, stepsize)
-# 			return False, 0
-#
-#     for build in district.buildings:
-#
-#         if build == building:
-#             continue
-#
-#         olap = overlap(build, building)
-#
-#         if olap:
-#             move(building, -direction, stepsize)
-#             return False, 0
-#
-#     if not olap:
-#         score = district.score()
-#         move(building, -direction, stepsize)
-#         return True, score
 
 def print_txt(district, algorithm, total_houses, variation):
 
