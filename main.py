@@ -13,9 +13,13 @@ import visualisation.canvas_visualisation as visualisation
 
 if __name__ == "__main__":
 
-    total_houses = eval(input("Total number of houses?: ")
-    print(type(total_houses))
-    print(total_houses)
+    total_houses = eval(input("Total number of houses?: "))
+    # print(type(total_houses))
+    # while not type(total_houses).is_integer():
+    #     total_houses = eval(input("Please return an integer: "))
+    #
+    # print(type(total_houses))
+    # print(total_houses)
     water_type = eval(input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]"))
 
     while total_houses < 7:
