@@ -140,11 +140,11 @@ class Map:
 
 	def add_water(self, water_type):
 
-		# one water stroke in the middle of the map
 		if water_type == 0:
 			water = Water(320, 360, 0, 0)
 			self.waters.append(water)
 
+		# one water stroke in the middle of the map
 		if water_type == 1:
 			water = Water(100, 88.5, 161, 143)
 			self.waters.append(water)
@@ -155,7 +155,7 @@ class Map:
 			water2 = Water(70, 52.5, 220, 55)
 			self.waters.extend((water1, water2))
 
-		# two strokes of water parralel positioned at 1/3 of the length from the top and bottom
+		# two horizontal and two vertical strokes of water parralel positioned of one another
 		elif water_type == 3:
 		    water1 = Water(104, 40, 151.789, 37.947)
 		    self.waters.append(water1)
