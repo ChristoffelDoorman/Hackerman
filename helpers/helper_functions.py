@@ -180,9 +180,6 @@ def closest_distance(current_building, buildings):
 
 	for building in buildings:
 
-		# if building.right_top[0] == current_building.left_top[0] and building.right_top[1] == current_building.right_top[1]:
-		# 	return 0
-
         # area linksboven
 		if (building.right_bottom[0] <= current_building.left_top[0]
 		 	and building.right_bottom[1] >= current_building.left_top[1]):
