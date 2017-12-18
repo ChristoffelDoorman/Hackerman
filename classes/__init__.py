@@ -1,1 +1,1 @@
-from my_classes import House, Bungalow, Maison, Water, Map
+from classes.my_classes import House, Bungalow, Maison, Water, Map

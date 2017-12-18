@@ -6,8 +6,8 @@
 # This file contains the expanding universe algorithm
 
 # import files
-from classes import *
-from helpers import overlap, move, check_position, check_move
+from classes.my_classes import House, Bungalow, Maison, Water, Map
+from helpers.helper_functions import overlap, move, check_position, check_move
 
 import math
 import matplotlib.pyplot as plt

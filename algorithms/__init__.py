@@ -1,7 +1,1 @@
-import expanding_universe
-import hillclimber_algorithm
-import random_algorithm
-import hillclimber_random
-import greedy_algorithm
-import hillclimber_rotate_move_swap
-import collapsing_universe
+from algorithms import expanding_universe, hillclimber_algorithm, random_algorithm, hillclimber_random, greedy_algorithm, hillclimber_rotate_move_swap, collapsing_universe

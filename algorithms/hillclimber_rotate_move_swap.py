@@ -7,7 +7,7 @@
 # has improved.
 
 # import files
-from helpers import move, overlap, check_move, overlap_canvas
+from helpers.helper_functions import move, overlap, check_move, overlap_canvas
 import classes
 import visualisation.canvas_visualisation as visualisation
 

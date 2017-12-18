@@ -6,7 +6,7 @@
 # This file moves buildings randomly to check if score has improved.
 
 # import files
-from helpers import move, overlap, check_move
+from helpers.helper_functions import move, overlap, check_move
 import classes
 
 # import files
