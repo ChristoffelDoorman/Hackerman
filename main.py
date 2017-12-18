@@ -57,12 +57,17 @@ if __name__ == "__main__":
         visualisation.main(best_district_hill, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
         print_txt(best_district_hill, algorithm, total_houses, variation)
 
+
     elif algorithm_choice == 1:
         algorithm = "random"
         iterations = input("How many iterations?: ")
 
         best_district, best_iteration, end_time = random_algorithm.main(total_houses, iterations, water_type)
+
         visualisation.main(best_district, algorithm, total_houses, best_iteration, end_time, iterations, 0, 0)
+
+        print_txt(best_district, algorithm, total_houses, 0)
+
 
     elif algorithm_choice == 2:
         algorithm = "hillclimber"
@@ -102,6 +107,7 @@ if __name__ == "__main__":
         visualisation.main(best_district_hill, algorithm, total_houses, best_map_score, end_time, iterations_hill, variation, "result")
         print_txt(best_district_hill, algorithm, total_houses, variation)
 
+
     elif algorithm_choice == 3:
         algorithm = "expanding_universe"
 
@@ -115,11 +121,18 @@ if __name__ == "__main__":
 
         visualisation.main(best_district, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "exp with hill")
 
+        print_txt(best_district, algorithm, total_houses, 0)
+
+
     elif algorithm_choice == 4:
 
         algorithm = "greedy"
 
-        greedy_algorithm.main(total_houses)
+        district, total_score, end_time = greedy_algorithm.main(total_houses)
+
+        visualisation.main(district, algorithm, total_houses, total_score, end_time, 0, 0, "greedy")
+        print_txt(district, algorithm, total_houses, 0)
+
 
     elif algorithm_choice == 5:
 
@@ -135,5 +148,6 @@ if __name__ == "__main__":
 
         visualisation.main(best_district, algorithm, total_houses, total_score, end_time, iterations_hill, 0, "collaps with hill")
 
+        print_txt(best_district, algorithm, total_houses, 0)
     else:
         print "choose a valid option"
