@@ -145,7 +145,8 @@ class Map:
 
 		# one water stroke in the middle of the map
 		if water_type == 0:
-			return
+			water = Water(320, 360, 0, 0)
+			self.waters.append(water)
 
 		if water_type == 1:
 			water = Water(100, 88.5, 161, 143)
