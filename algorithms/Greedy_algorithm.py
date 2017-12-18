@@ -19,9 +19,12 @@ import classes
 import time
 import helpers
 
-district = classes.Map(360, 320, 1)
-
 def main(total_houses):
+
+    # start a timer to calculate the runningtime of the algorithm
+    start_time = time.time()
+
+    district = classes.Map(360, 320, 0)
 
     # set number of each building type
     h_number = int(0.6 * total_houses)
@@ -29,7 +32,8 @@ def main(total_houses):
     m_number = int(0.15 * total_houses)
 
     # bouw het eerste huis random, een maison wat die heeft de meeste waarde
-    district.buildings, m_counter = m_build(district.buildings, 0)
+    while len(district.buildings) == 0:
+        district, m_counter = m_build(district, 0)
     # maison = classes.Maison(0,0)
     # district.buildings.append(maison)
     # print district.buildings
@@ -39,36 +43,32 @@ def main(total_houses):
         maison = classes.Maison(0, 0)
 
         district.buildings.append(maison)
-        top_score, best_x, best_y = walk_check(maison)
+        top_score, best_x, best_y = walk_check(maison, district)
         maison.update(best_x, best_y)
-        visualisation.main(district.buildings, "test", "test", top_score, True)
-
 
     for i in range(b_number):
 
         bungalow = classes.Bungalow(0, 0)
 
         district.buildings.append(bungalow)
-        top_score, best_x, best_y = walk_check(bungalow)
+        top_score, best_x, best_y = walk_check(bungalow, district)
         bungalow.update(best_x, best_y)
-        visualisation.main(district.buildings, "test", "test", top_score, True)
-
 
     for i in range(h_number):
 
         house = classes.House(0, 0)
 
         district.buildings.append(house)
-        top_score, best_x, best_y = walk_check(house)
+        top_score, best_x, best_y = walk_check(house, district)
         house.update(best_x, best_y)
-        visualisation.main(district.buildings, "test", "test", top_score, True)
+
+    end_time = time.time() - start_time
+    score = district.score()
+
+    return district, score, end_time
 
 
-    visualisation.main(district.buildings, "test", "test", top_score, True)
-
-
-
-def check_possible(building):
+def check_possible(building, district):
 
     for build in district.buildings:
 
@@ -83,7 +83,7 @@ def check_possible(building):
     if not olap:
         return True
 
-def walk_check(building):
+def walk_check(building, district):
 
     # zet direction op: naar rechts lopen
     direction = 1
@@ -106,7 +106,7 @@ def walk_check(building):
             direction = 1
             continue
 
-        possible = check_possible(building)
+        possible = check_possible(building, district)
         if possible:
             score = district.score()
             # print score
@@ -122,5 +122,5 @@ def walk_check(building):
 
         # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
         if building.right_top[1] >= 320 and building.right_top[0] >= 359:
-            print(("return: ", best_x, best_y))
+
             return top_score, best_x, best_y
