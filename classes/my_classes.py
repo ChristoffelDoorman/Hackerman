@@ -6,6 +6,7 @@
 # This file contains the classes of the buildings, the water and a map class.
 
 from helpers.helper_functions import closest_distance
+import math
 
 class House:
 	name = 'house'
@@ -20,22 +21,22 @@ class House:
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
-	def __repr__(self):
-		return("x=%i, y=%i, type = house "%(self.left_bottom[0], self.left_bottom[1]))
-
+	# updates the corner values based on the left_bottom x and y
 	def update(self, x, y):
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
-	# Dit is nog cumulatief, en dat mag niet!
+	# calculates the score of building based on the closest distance
 	def score(self, closest):
 		self.freeSpace = closest
-		value = 285000 + (285000 * 0.03 * (self.freeSpace / 2))
+		value = 285000 + (285000 * 0.03 * math.floor(self.freeSpace / 2))
 		self.value = value
 		return value
 
+	def __repr__(self):
+		return("x=%i, y=%i, type = house "%(self.left_bottom[0], self.left_bottom[1]))
 
 class Bungalow:
 	name = 'bungalow'
@@ -49,30 +50,28 @@ class Bungalow:
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
-		# self.score = 0
 
-	def top_right(self):
-		return [self.x+self.width, self.y+self.length]
-
+	# updates the corner values based on the left_bottom x and y
 	def update(self, x, y):
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
+	# rotates the building by swapping the width and length, and then updating the corners
 	def rotate(self):
 		self.length, self.width = self.width, self.length
 		self.update(self.left_bottom[0], self.left_bottom[1])
 
-	def __repr__(self):
-		return ("x=%i, y=%i, width=%i, length=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1], self.width, self.length))
-
+	# calculates the score of building based on the closest distance
 	def score(self, closest):
 		self.freeSpace = closest
-		value = 399000 + (399000 * 0.04 * (self.freeSpace / 2))
+		value = 399000 + (399000 * 0.04 * math.floor(self.freeSpace / 2))
 		self.value = value
 		return value
 
+	def __repr__(self):
+		return ("x=%i, y=%i, type = bungalow "%(self.left_bottom[0], self.left_bottom[1]))
 
 class Maison:
 	name = 'maison'
@@ -87,25 +86,27 @@ class Maison:
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
-	def __repr__(self):
-		return ("x=%i, y=%i, type = maison "%(self.left_bottom[0], self.left_bottom[1]))
-
+	# updates the corner values based on the left_bottom x and y
 	def update(self, x, y):
 		self.left_bottom = [x, y]
 		self.left_top = [x, y + self.length]
 		self.right_top = [x + self.width, y + self.length]
 		self.right_bottom = [x + self.width, y]
 
+	# rotates the building by swapping the width and length, and then updating the corners
 	def rotate(self):
 		self.length, self.width = self.width, self.length
 		self.update(self.left_bottom[0], self.left_bottom[1])
 
+	# calculates the score of building based on the closest distance
 	def score(self, closest):
 		self.freeSpace = closest
-		value = 610000 + (610000 * 0.06 * (self.freeSpace / 2))
+		value = 610000 + (610000 * 0.06 * math.floor(self.freeSpace / 2))
 		self.value = value
 		return value
 
+	def __repr__(self):
+		return ("x=%i, y=%i, type = maison "%(self.left_bottom[0], self.left_bottom[1]))
 
 class Water:
 	name = 'water'
@@ -130,6 +131,7 @@ class Map:
 		self.waters = []
 		self.add_water(water_type)
 
+	# calculates the score of the map by adding individual scores of buildings
 	def score(self):
 		total_value = 0
 		for current_building in self.buildings:
@@ -138,6 +140,7 @@ class Map:
 
 		return total_value
 
+	# adds water at init to the district based on the inputted water_type
 	def add_water(self, water_type):
 
 		if water_type == 0:
