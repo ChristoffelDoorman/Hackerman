@@ -122,7 +122,7 @@ class Water:
 		self.right_bottom = [x + self.width, y]
 
 	def __repr__(self):
-		return ("x=%i, y=%i, type = water "%(self.left_bottom[0], self.left_bottom[1]))
+		return ("x=%i, y=%i, linksboven=%i, type = water "%(self.left_bottom[0], self.left_bottom[1], self.left_top[1]))
 
 class Map:
 
@@ -142,10 +142,6 @@ class Map:
 		return total_value
 
 	def add_water(self, water_type):
-
-        # no water
-		if water_type == 0:
-			return
 
 		# one water stroke in the middle of the map
 		if water_type == 0:

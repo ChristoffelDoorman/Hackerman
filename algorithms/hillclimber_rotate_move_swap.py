@@ -9,6 +9,7 @@
 # import files
 from helpers import move, overlap, check_move
 import classes
+import visualisation.canvas_visualisation as visualisation
 
 # import files
 import random
@@ -22,48 +23,43 @@ def main(iterations, district, map_score, water_type):
     start_time = time.time()
 
     for i in range(iterations):
+        # print i
 
         building = random.choice(district.buildings)
 
         # 0 = move 1 = rotate 2 = swap random.randint(2)
-        choice = random.randint(0, 10)
-
-        if choice < 7:
+        choice = random.randint(0, 15)
+        #
+        if choice < 12:
             map_score = hill_move(building, district, map_score)
 
-        elif 7 < choice <= 9 and not building.name == 'house':
-            map_score = check_rotate(building, district, map_score)
+        elif 12 <= choice <= 14 and not building.name == 'house':
 
-        elif choice == 10:
+            building.rotate()
+            building, map_score = check_rotate(building, district, map_score)
+
+        elif choice <= 15:
             # print "keuze is 2"
             building1 = random.choice(district.buildings)
             building2 = random.choice(district.buildings)
+            # print building1, building2
             if building1 != building2:
 
                 # print "dit is de ongemovede score", district.score()
                 # print "ze zijn niet hetzelfde"
                 possible, move_score = check_swap(building1, building2, district)
 
-                # if possible:
-                #     print "MOGELIJK"
-                # else:
-                #     print "xx"
-
-                if possible and move_score > map_score:
+                if possible == True and (move_score > map_score):
                     map_score = move_score
+                    visualisation.print_canvas(district, 'swaptest')
 
-                    # print "building 1 na", building1
-                    # print "building 2 na", building2
                     # print "swap complete"
                 else:
+                    # visualisation.print_canvas(district, 'swaptest')
                     building1.left_bottom[0], building2.left_bottom[0] = building2.left_bottom[0], building1.left_bottom[0]
                     building1.left_bottom[1], building2.left_bottom[1] = building2.left_bottom[1], building1.left_bottom[1]
-                    building1.left_top[0], building2.left_top[0] = building2.left_top[0], building1.left_top[0]
-                    building1.left_top[1], building2.left_top[1] = building2.left_top[1], building1.left_top[1]
-                    building1.right_top[0], building2.right_top[0] = building2.right_top[0], building1.right_top[0]
-                    building1.right_top[1], building2.right_top[1] = building2.right_top[1], building1.right_top[1]
-                    building1.right_bottom[0], building2.right_bottom[0] = building2.right_bottom[0], building1.right_bottom[0]
-                    building1.right_bottom[1], building2.right_bottom[1] = building2.right_bottom[1], building1.right_bottom[1]
+                    building1.update(building1.left_bottom[0], building1.left_bottom[1])
+                    building2.update(building2.left_bottom[0], building2.left_bottom[1])
                     # building1.width, building2.width = building2.width, building1.width
                     # building1.length, building2.length = building2.length, building1.length
                     # print "geen hogere score"
@@ -94,7 +90,9 @@ def hill_move(building, district, map_score):
 
 def check_rotate(building, district, map_score):
 
-    building.rotate()
+    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > district.width) or (building.right_top[1] > district.height):
+        building.rotate()
+        return building, map_score
 
     olap = True
     for water in district.waters:
@@ -102,7 +100,7 @@ def check_rotate(building, district, map_score):
 
         if olap:
             building.rotate()
-            return map_score
+            return building, map_score
 
     olap = True
     for build in district.buildings:
@@ -114,10 +112,9 @@ def check_rotate(building, district, map_score):
 
         if olap:
             building.rotate()
-            return map_score
+            return building, map_score
 
     if not olap:
-
         move_score = district.score()
         if move_score > map_score:
             map_score = move_score
@@ -125,7 +122,7 @@ def check_rotate(building, district, map_score):
         else:
             building.rotate()
 
-        return map_score
+        return building, map_score
 
 def check_swap(building1, building2, district):
     # print "1", district.buildings
@@ -139,21 +136,21 @@ def check_swap(building1, building2, district):
     # building2.update(oldxy1.left_bottom[0], oldxy1.left_bottom[1])
     # print "1", district.buildings
     # print building1, building2
+    # print building1, building2, district
     building1.left_bottom[0], building2.left_bottom[0] = building2.left_bottom[0], building1.left_bottom[0]
     building1.left_bottom[1], building2.left_bottom[1] = building2.left_bottom[1], building1.left_bottom[1]
-    building1.left_top[0], building2.left_top[0] = building2.left_top[0], building1.left_top[0]
-    building1.left_top[1], building2.left_top[1] = building2.left_top[1], building1.left_top[1]
-    building1.right_top[0], building2.right_top[0] = building2.right_top[0], building1.right_top[0]
-    building1.right_top[1], building2.right_top[1] = building2.right_top[1], building1.right_top[1]
-    building1.right_bottom[0], building2.right_bottom[0] = building2.right_bottom[0], building1.right_bottom[0]
-    building1.right_bottom[1], building2.right_bottom[1] = building2.right_bottom[1], building1.right_bottom[1]
+    building1.update(building1.left_bottom[0], building1.left_bottom[1])
+    building2.update(building2.left_bottom[0], building2.left_bottom[1])
+    # print building1, building2, district
     # building1.width, building2.width = building2.width, building1.width
     # building1.length, building2.length = building2.length, building1.length
     # print building1, building2
-    if (building1.left_bottom[0] < 0) or (building1.left_bottom[1] < 0) or (building1.right_top[0] > district.width) or (building1.right_top[1] > district.height):
+    if (building1.left_bottom[0] < 0) or (building1.left_bottom[1] < 0) or (building1.right_top[0] > 360) or (building1.right_top[1] > 320):
+        print "buiten canvas"
         return False, 0
 
-    if (building2.left_bottom[0] < 0) or (building2.left_bottom[1] < 0) or (building2.right_top[0] > district.width) or (building2.right_top[1] > district.height):
+    if (building2.left_bottom[0] < 0) or (building2.left_bottom[1] < 0) or (building2.right_top[0] > 360) or (building2.right_top[1] > 320):
+        print "buiten canvas"
         return False, 0
     # print "2", district.buildings
     # print "dit is de gemovede score", district.score()
@@ -164,36 +161,40 @@ def check_swap(building1, building2, district):
     #     return False, 0
     olap1 = True
     olap2 = True
+
     for water in district.waters:
+        # print water
         olap1 = overlap(building1, water)
         olap2 = overlap(building2, water)
 
         if olap1 or olap2:
-            # print "overlap met water"
+            print "overlap met water"
             return False, 0
 
-    overlap1 = True
-    overlap2 = True
-    for building in district.buildings:
+    if not olap1 and not olap2:
 
-        if building == building1 or building == building2:
-            continue
+        overlap1 = True
+        overlap2 = True
 
-        overlap1 = overlap(building, building1)
-        # print overlap1
-        overlap2 = overlap(building, building2)
-        # print overlap2
+        for building in district.buildings:
 
-        if overlap1 or overlap2:
-            # print "overlap met gebouw"
-            return False, 0
+            if building == building1 or building == building2:
+                continue
 
-    if not overlap1 and not overlap2:
-        # print "GEEN OVERLAP"
-        move_score = district.score()
-        # print "dit is de gemovede score", move_score
-        # print "swapping"
-        return True, move_score
+            overlap1 = overlap(building, building1)
+            overlap2 = overlap(building, building2)
+            # print overlap2
+
+            if overlap1 or overlap2:
+                print "overlap met gebouw"
+                return False, 0
+
+        if not overlap1 and not overlap2:
+            # print "GEEN OVERLAP"
+            move_score = district.score()
+            # print "dit is de gemovede score", move_score
+            # print "swapping"
+            return True, move_score
 # def swap(building1, building2):
 #
 #     building1.update(building2.left_bottom[0], building2.left_bottom[1])
