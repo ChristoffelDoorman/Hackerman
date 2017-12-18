@@ -165,9 +165,12 @@ def closest_distance(current_building, buildings):
 
 	for building in buildings:
 
+		# if building.right_top[0] == current_building.left_top[0] and building.right_top[1] == current_building.right_top[1]:
+		# 	return 0
+
         # area linksboven
-		if (building.right_bottom[0] < current_building.left_top[0]
-		 	and building.right_bottom[1] > current_building.left_top[1]):
+		if (building.right_bottom[0] <= current_building.left_top[0]
+		 	and building.right_bottom[1] >= current_building.left_top[1]):
 
             # calculate distance
 			distance = pythagoras(current_building.left_top[0], current_building.left_top[1],
@@ -175,7 +178,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden boven
-		elif (building.right_bottom[1] > current_building.left_top[1]
+		elif (building.right_bottom[1] >= current_building.left_top[1]
 			and building.right_bottom[0] >= current_building.left_top[0]
 			and building.left_bottom[0] <= current_building.right_top[0]):
 
@@ -184,8 +187,8 @@ def closest_distance(current_building, buildings):
 
 
         # area rechtsboven
-		elif (building.left_bottom[0] > current_building.right_top[0]
-		 	and building.right_bottom[1] > current_building.left_top[1]):
+		elif (building.left_bottom[0] >= current_building.right_top[0]
+		 	and building.right_bottom[1] >= current_building.left_top[1]):
 
 			# calculate distance
 			distance = pythagoras(current_building.right_top[0], current_building.right_top[1],
@@ -193,7 +196,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden rechts
-		elif (building.left_bottom[0] > current_building.right_top[0]
+		elif (building.left_bottom[0] >= current_building.right_top[0]
 			and building.left_bottom[1] <= current_building.right_top[1]
 			and building.left_top[1] >= current_building.right_bottom[1]):
 
@@ -202,8 +205,8 @@ def closest_distance(current_building, buildings):
 
 
         # area rechtsonder
-		elif (building.left_top[0] > current_building.right_bottom[0]
-		 	and building.right_top[1] < current_building.right_bottom[1]):
+		elif (building.left_top[0] >= current_building.right_bottom[0]
+		 	and building.right_top[1] <= current_building.right_bottom[1]):
 
 			# calculate distance
 			distance = pythagoras(current_building.right_bottom[0], current_building.right_bottom[1],
@@ -211,17 +214,17 @@ def closest_distance(current_building, buildings):
 
 
 		# area midden onder
-		elif (building.right_top[1] < current_building.left_bottom[1]
+		elif (building.right_top[1] <= current_building.left_bottom[1]
 			and building.right_top[0] >= current_building.left_bottom[0]
 			and building.left_top[0] <= current_building.right_bottom[0]):
 
 			# calculate distance
-			distance = current_building.right_top[1] - building.right_bottom[1]
+			distance = current_building.right_bottom[1] - building.right_top[1]
 
 
         # area linksonder
-		elif (building.right_top[0] < current_building.left_bottom[0]
-		 	and building.right_top[1] < current_building.left_bottom[1]):
+		elif (building.right_top[0] <= current_building.left_bottom[0]
+		 	and building.right_top[1] <= current_building.left_bottom[1]):
 
 			# calculate distance
 			distance = pythagoras(current_building.left_bottom[0], current_building.left_bottom[1],
@@ -229,7 +232,7 @@ def closest_distance(current_building, buildings):
 
 
         # area midden links
-		elif (building.right_bottom[0] < current_building.left_bottom[0]
+		elif (building.right_bottom[0] <= current_building.left_bottom[0]
 			and building.right_bottom[1] <= current_building.left_top[1]
 			and building.right_top[1] >= current_building.left_bottom[1]):
 
