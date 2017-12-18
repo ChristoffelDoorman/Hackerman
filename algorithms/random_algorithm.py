@@ -20,13 +20,16 @@ import math
 
 def main(total_houses, iterations, water_type):
 
-    best_iteration = 0
-    start_time = time.time()
+    # initialize a new class for what will be the best district
     best_district = classes.Map(360, 320, water_type)
-    # best_district.add_water(1)
+
+    best_iteration = 0
+
+    # start a timer to calculate the runningtime of the algorithm
+    start_time = time.time()
+
     for i in range(iterations):
 
-        # print i
         district = classes.Map(360, 320, water_type)
 
         # set number of each building type
@@ -37,17 +40,19 @@ def main(total_houses, iterations, water_type):
         # create counters to count number of each building
         h_counter, b_counter, m_counter = 0, 0, 0
 
+        # if the following while loop is more than one second, it will timeout
         timeout = time.time() + 1
+
         # build houses until maximum is reached
         while len(district.buildings) < total_houses:
 
             if time.time() > timeout:
-                # print "timed out"
                 break
-            # print district.buildings
-	        # choose random building type
+
+            # add buildings to district in random order
             building_type = random.randint(1, 3)
 
+            # if building is successfully added, increment counter until total
             if building_type == 1 and h_counter < h_number:
                 district, h_counter = h_build(district, h_counter)
 
@@ -57,15 +62,14 @@ def main(total_houses, iterations, water_type):
             if building_type == 3 and m_counter < m_number:
                 district, m_counter = m_build(district, m_counter)
 
-        # calculate closest distance to buildings
+        # calculate the score of the district
         total_value = district.score()
-        # print total_value
 
+        # only change best buildings if value per iteration has increased
         if (total_value > best_iteration):
             best_district.buildings = district.buildings
             best_iteration = total_value
 
-	# stop = timeit.default_timer()
-	# print "De tijd is: ", stop - start
+    # calculate end time of algorithm and return the district and corresponding score
     end_time = time.time() - start_time
     return best_district, best_iteration, end_time
