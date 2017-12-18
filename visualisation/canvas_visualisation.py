@@ -27,12 +27,15 @@ def drawBuilding(ax1, building, x, y, edgecolor):
 	    )
 	)
 
-def print_canvas(buildings, file_name):
+def print_canvas(district, file_name):
     ax1, fig1 = draw_canvas()
 
     outpath =  "test/"
+    # draw all waters
+    for water in district.waters:
+        drawBuilding(ax1, water, water.left_bottom[0], water.left_bottom[1], 'blue')
 
-    for building in buildings:
+    for building in district.buildings:
         if building.name == 'house':
             drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')
         if building.name == 'bungalow':
@@ -41,6 +44,7 @@ def print_canvas(buildings, file_name):
             drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'green')
 
     fig1.savefig(path.join(outpath,"test_{}.png".format(file_name)), dpi=90, bbox_inches='tight')
+    plt.close(fig1)
 
 def main(district, algorithm, total_houses, best_iteration, end_time, iterations, variation, name):
 
@@ -58,9 +62,11 @@ def main(district, algorithm, total_houses, best_iteration, end_time, iterations
     if not os.path.exists(outpath):
         os.makedirs(outpath)
 
+    # draw all waters
     for water in district.waters:
         drawBuilding(ax1, water, water.left_bottom[0], water.left_bottom[1], 'blue')
 
+    # draw all buildings
     for building in district.buildings:
         if building.name == 'house':
             drawBuilding(ax1, building, building.left_bottom[0], building.left_bottom[1], 'red')

@@ -27,7 +27,7 @@ def main(iterations_hill, district, map_score, water_type):
 
         possible, move_score = check_move(building, district, direction, 0.5)
 
-        if possible and move_score > map_score:
+        if possible and move_score >= map_score:
             map_score = move_score
             best_district = district
 
@@ -35,4 +35,8 @@ def main(iterations_hill, district, map_score, water_type):
             move(building, -direction, 0.5)
 
     end_time = time.time() - start_time
+    if not best_district.buildings:
+        return district, map_score, end_time
+
+    print best_district
     return best_district, map_score, end_time

@@ -17,6 +17,13 @@ import matplotlib.pyplot as plt
 # from helpers import *
 
 district = Map(360, 320, 1)
+house_length = 20
+house_width = 20
+bungalow_length = 21
+bungalow_width = 26
+maison_length = 34
+maison_width = 33
+best_iteration = 0
 
 def set_initial_map(total_houses):
 
@@ -30,7 +37,7 @@ def set_initial_map(total_houses):
     counter = 0
     for i in range(grid_size):
 
-        x = (district.width - (House.width * (grid_size - (2.2 * i)))) / 2
+        x = (district.width - (house_width * (grid_size - (2.2 * i)))) / 2
 
 
         for j in range(grid_size):
@@ -38,55 +45,55 @@ def set_initial_map(total_houses):
             if counter == h_number:
                 break
 
-            y = (district.height + (House.length * (grid_size - 2.2 - (2 * j)))) / 2
+            y = (district.height + (house_length * (grid_size - 2.2 - (2 * j)))) / 2
 
             counter += 1
             house = House(x, y)
             district.buildings.append(house)
 
     # place bungalows around houses
-    r = (House.width / 2) * (grid_size + 1)
+    r = (house_width / 2) * (grid_size + 1)
     t = ((2 * math.pi) / (b_number))
 
     for i in range(b_number):
 
-        x = ((district.width - Bungalow.width) / 2) + r * math.cos(t * i)
-        y = ((district.height - Bungalow.length) / 2) + r * math.sin(t * i)
+        x = ((district.width - bungalow_width) / 2) + r * math.cos(t * i)
+        y = ((district.height - bungalow_length) / 2) + r * math.sin(t * i)
 
         bungalow = Bungalow(x, y)
         for building in district.buildings:
             olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] >= district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     bungalow = move(bungalow, -1 , 1)
                     bungalow = move(bungalow, 2, 1)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] < district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     bungalow = move(bungalow, -1, 1)
                     bungalow = move(bungalow, -2, 1)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] <= district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     bungalow = move(bungalow, 1, 1)
                     bungalow = move(bungalow, -2, 1)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] > district.height / 2) and olap:
-                while olap == True:
+                while olap:
                     bungalow = move(bungalow, 1, 1)
                     bungalow = move(bungalow, 2, 1)
                     olap = overlap(bungalow, building)
 
         district.buildings.append(bungalow)
 
-    yw1 = (district.height / 2) + ((grid_size / 2) * House.width) + Bungalow.length
+    yw1 = (district.height / 2) + ((grid_size / 2) * house_width) + bungalow_length
     yw2 = district.height - yw1 - 43
     xw1 = 110
-    xw3 = (district.width / 2) - ((grid_size / 2) * House.width) - 40.232 - Bungalow.width
+    xw3 = (district.width / 2) - ((grid_size / 2) * house_width) - 40.232 - bungalow_width
     yw3 = 88.5
     xw4 = district.width - xw3 - 20
 
@@ -98,16 +105,15 @@ def set_initial_map(total_houses):
     district.waters.append(water3)
     water4 = Water(xw4, yw3, 40.232, 143.045)
     district.waters.append(water4)
-    # print district.waters
 
 
     # place maisons around bungalows
-    r = (House.width / 2) * (grid_size + 1) + Bungalow.width
+    r = (house_width / 2) * (grid_size + 1) + bungalow_width
     t = ((2 * math.pi) / (m_number))
     for i in range(m_number):
 
-        x = ((district.width - Maison.width) / 2) + r * math.cos(t * i)
-        y = ((district.height - Maison.length) / 2) + r * math.sin(t * i)
+        x = ((district.width - maison_width) / 2) + r * math.cos(t * i)
+        y = ((district.height - maison_length) / 2) + r * math.sin(t * i)
 
         maison = Maison(x, y)
         for building in district.buildings:
