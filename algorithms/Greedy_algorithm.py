@@ -1,134 +1,127 @@
-# HEURISTIEKEN
-# Project: Amstelhaegen
-# Autors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+# Minor programmeren: heuristieken
+# Group: H@ckerman
+# Assignment: Amsterlhaegen
+# Authors: Tim Jansen, Jaap Meesters, Christoffel Doorman
+#
+# This file contains the greedy algorithm.
 
 # import files
-from helpers import h_build, b_build, m_build
+from helpers import h_build, b_build, m_build, calculate_score, move, overlap, check_move
 import visualisation
+import visualisation.canvas_visualisation as visualisation
 
 # import modules
 import matplotlib.pyplot as plt
 import random
 import pdb
 import numpy as np
-import locale
-import timeit
 import math
-import copy
 import classes
+import time
 import helpers
 
-X_DIMENSION = 360
-Y_DIMENSION = 320
+district = classes.Map(360, 320, 1)
 
 def main(total_houses):
 
-    #best_iteration = 0
-
-    #for i in range(iterations):
-
-    # de lijst voor de buildings
-    buildings = []
-
     # set number of each building type
-    h_number = 0.6 * total_houses
-    b_number = 0.25 * total_houses
-    m_number = 0.15 * total_houses
+    h_number = int(0.6 * total_houses)
+    b_number = int(0.25 * total_houses)
+    m_number = int(0.15 * total_houses)
 
-    # create counters to count number of each building
-    h_counter, b_counter, m_counter = 0, 0, 0
+    # bouw het eerste huis random, een maison wat die heeft de meeste waarde
+    district.buildings, m_counter = m_build(district.buildings, 0)
+    # maison = classes.Maison(0,0)
+    # district.buildings.append(maison)
+    # print district.buildings
 
-    # bouw het eerste huis random (Masoin, want die heeft de meeste waarde)
-    buildings, m_counter = m_build(buildings, m_counter)
+    for i in range(m_number - 1):
 
-    # bouw alle Maison's,
-    maison = classes.Maison(0,0)
-    while (m_counter < m_number):
-        buildings = greedy_check(maison, buildings)
-        m_counter += 1
+        maison = classes.Maison(0, 0)
 
-    # bouw alle Bungalow's
-    while (b_counter < b_number):
-        buildings = greedy_check(classes.Bungalow, buildings)
-        b_counter += 1
-
-    # bouw alle House's
-    while (h_counter < h_number):
-        buildings = greedy_check(classes.House, buildings)
-        h_counter += 1
+        district.buildings.append(maison)
+        top_score, best_x, best_y = walk_check(maison)
+        maison.update(best_x, best_y)
+        visualisation.main(district.buildings, "test", "test", top_score, True)
 
 
-    #return top_value
+    for i in range(b_number):
+
+        bungalow = classes.Bungalow(0, 0)
+
+        district.buildings.append(bungalow)
+        top_score, best_x, best_y = walk_check(bungalow)
+        bungalow.update(best_x, best_y)
+        visualisation.main(district.buildings, "test", "test", top_score, True)
 
 
-    # functie die checkt of de building niet op een andere building staat, zo niet check de waarde,
-    # is die het grootst? (tot nu toe), sla die waarde, plus de coordinaten op.
-    # met gebruik van helpers.overlap en helpers.calculate
-def value(buildings, top_value, edifice):
+    for i in range(h_number):
 
-    olap = True
-    for building in buildings:
-        olap = helpers.overlap(edifice,building)
+        house = classes.House(0, 0)
 
-    #if oplap:
-        #break
+        district.buildings.append(house)
+        top_score, best_x, best_y = walk_check(house)
+        house.update(best_x, best_y)
+        visualisation.main(district.buildings, "test", "test", top_score, True)
 
-    if not oplap:
-        value = helpers.calculate_score(buildings)
 
-    if value > top_value:
-        top_value = value
-        best_x = x
-        best_y = y
+    visualisation.main(district.buildings, "test", "test", top_score, True)
 
-    return top_value, best_x, best_y
 
-def greedy_check(edifice, buildings):
 
-    buildings = buildings
+def check_possible(building):
 
-    # bouw en plaats het huis helemaal onderin de kaart met de linkerhoek op (0,0)
-    buildings.append(edifice)
+    for build in district.buildings:
 
-    # de hoogste waarde van het gebouw
-    top_value = 0
+        if build == building:
+            continue
 
-    # check hem de eerste keer, voordat je hem gaat bewegen, in de while-loop
-    top_value, best_x, best_y = value(buildings, top_value, edifice)
+        olap = overlap(build, building)
 
-    # zet de direction op 1 ofwel: naar rechts, want het huis begint links
-    # begin met bewegen, check hem bij elke stop
+        if olap:
+            return False
+
+    if not olap:
+        return True
+
+def walk_check(building):
+
+    # zet direction op: naar rechts lopen
     direction = 1
+    top_score = 0
+    best_x = 0
+    best_y = 0
+    best_scores = {}
+    # begin met lopen
     while True:
-        helpers.move(edifice, direction, 1)
-        top_value, best_x, best_y = value(buildings, top_value, edifice)
 
-    # Als einde x-as bereikt met rechterkant huis, een stapje omhoog en naar links gaan bewegen, dus direction == -1
-        if edifice.right_bottom[0] == X_DIMENSION:
-            # zet 1 stap naar boven
-            helpers.move(edifice, 2, 1)
-            # check de waarde van deze locatie
-            top_value, best_x, best_y = value(buildings, top_value, edifice)
-            # -1 want moet naar links gaan lopen
+        move(building, direction, 1)
+
+        if building.right_top[0] >= 360:
+            move(building, 2, 1)
             direction = -1
+            continue
 
-    # Als begin X-as bereikt met linkerkant huis, 1 stapje omhoog en weer naar recht dus direction == 1
-        if edifice.left_bottom[0] == 0:
-            # zet 1 stap naar boven
-            helpers.move(edifice, 2, 1)
-            # check de waarde van deze locatie
-            top_value, best_x, best_y = value(buildings, top_value, edifice)
-            # 1, want hij moet naar rechts gaan lopen
+        if building.left_bottom[0] <= 0:
+            move(building, 2, 1)
             direction = 1
+            continue
 
-        # de hoogste waarde op de map is 320, dat is een even getal, hij bereikt de even getallen aan de linkerkant (x = 0 kant)
-        # of wel de eerste keer dat hij 320 bereikt is aan de linkerkant niet aan de rechter!
-        # dus als hij op 320 is, moet hij nog naar de x = 360 kant om alles gehad te hebben.
-        # dus als y = 320 en x = 360, dan heeft hij alles gehad
-        if edifice.left_top[0] == 320 and edifice.right_top[0] == 360:
-            top_value, best_x, best_y = value(buildings, top_value, edifice)
-            break
+        possible = check_possible(building)
+        if possible:
+            score = district.score()
+            # print score
+            if score > top_score:
+                # print value
+                top_score = score
+                # print "top value", top_value
 
-    # verplaats huis naar best_x, best_y
+                best_x = building.left_bottom[0]
 
-    return buildings
+                best_y = building.left_bottom[1]
+                # print "beste: ", best_x, best_y
+
+        # bij 360, pakt hij hem niet. Later naar kijken, voor nu 359
+        if building.right_top[1] >= 320 and building.right_top[0] >= 359:
+            print "return: ", best_x, best_y
+            return top_score, best_x, best_y

@@ -67,26 +67,26 @@ def set_initial_map(total_houses):
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] >= district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, -1 , 10)
-                    bungalow = move(bungalow, 2, 10)
+                    bungalow = move(bungalow, -1 , 20)
+                    bungalow = move(bungalow, 2, 20)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] <= district.width / 2) and (bungalow.left_bottom[1] < district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, -1, 10)
-                    bungalow = move(bungalow, -2, 10)
+                    bungalow = move(bungalow, -1, 20)
+                    bungalow = move(bungalow, -2, 20)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] <= district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, 1, 10)
+                    bungalow = move(bungalow, 1, 20)
                     bungalow = move(bungalow, -2, 10)
                     olap = overlap(bungalow, building)
 
             if (bungalow.left_bottom[0] > district.width / 2) and (bungalow.left_bottom[1] > district.height / 2) and olap:
                 while olap:
-                    bungalow = move(bungalow, 1, 10)
-                    bungalow = move(bungalow, 2, 10)
+                    bungalow = move(bungalow, 1, 20)
+                    bungalow = move(bungalow, 2, 20)
                     olap = overlap(bungalow, building)
 
         district.buildings.append(bungalow)

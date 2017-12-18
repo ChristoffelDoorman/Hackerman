@@ -7,6 +7,7 @@
 
 from algorithms import *
 from helpers import calculate_score, print_txt
+import helpers
 import visualisation.canvas_visualisation as visualisation
 
 
@@ -16,14 +17,14 @@ if __name__ == "__main__":
     water_type = input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]")
 
     while total_houses < 7:
-        
+
         total_houses = input("Choose an integer number greater than 7: ")
 
     algorithm_choice = input("Which algorithm? [0: own input file] [1: random], [2: hillclimber], [3: expanding universe], [4: greedy algorithm], [5: collapsing universe]: ")
 
     if algorithm_choice == 0:
 
-        district, map_score = load_district.main()
+        district, map_score = helpers.load_district.main()
         algorithm = "hillclimber"
 
         choice = input("Which hillclimber method do you want: [1: random], [2: systematic], [3: Move, rotate, swap]")
@@ -116,9 +117,9 @@ if __name__ == "__main__":
 
     elif algorithm_choice == 4:
 
-        algorithm = "try_greedy"
+        algorithm = "greedy"
 
-        try_greedy.main(total_houses)
+        greedy_algorithm.main(total_houses)
 
     elif algorithm_choice == 5:
 
