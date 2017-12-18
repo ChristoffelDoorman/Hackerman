@@ -74,10 +74,6 @@ def main(iterations, district, map_score, water_type):
 
     end_time = time.time() - start_time
 
-    # if no improvements are found after all iterations return last best district
-    if not best_district.buildings:
-        return district, map_score, end_time
-
     return best_district, total_score, end_time
 
 def hill_move(building, district, map_score):
