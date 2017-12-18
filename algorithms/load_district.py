@@ -1,24 +1,18 @@
-# import files
-from helpers import h_build, b_build, m_build, calculate_score, move, overlap, check_move
-import visualisation
-import visualisation.canvas_visualisation as visualisation
 
 # import modules
-import matplotlib.pyplot as plt
-import random
-import pdb
-import numpy as np
-import math
 import classes
 import time
-import helpers
-
-district = classes.Map(360, 320, 2)
+import os
+from os import path
 
 def main():
 
  ###############
-    with open('greedy-40.txt', 'r') as f:
+    district = classes.Map(360, 320, 0)
+
+    outpath = 'input_files'
+
+    with open(path.join(outpath,'20.txt'), 'r') as f:
         data = f.readlines()
 
     for line in data:
@@ -27,13 +21,13 @@ def main():
         x = int(words[1])
         y = int(words[2])
 
-        if build == 'mais':
+        if build == 'maison':
             maison = classes.Maison(x, y)
             district.buildings.append(maison)
-        elif build == 'bung':
+        elif build == 'bungalow':
             bungalow = classes.Bungalow(x, y)
             district.buildings.append(bungalow)
-        elif build == 'hous':
+        elif build == 'house':
             house = classes.House(x, y)
             district.buildings.append(house)
 ##############
@@ -41,4 +35,4 @@ def main():
 
     value = district.score()
 
-    return district.buildings, value
+    return district, value

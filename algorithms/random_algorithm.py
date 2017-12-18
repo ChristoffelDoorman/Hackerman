@@ -26,6 +26,7 @@ def main(total_houses, iterations, water_type):
     # best_district.add_water(1)
     for i in range(iterations):
 
+        print i
         district = classes.Map(360, 320, water_type)
 
         # set number of each building type
@@ -36,8 +37,13 @@ def main(total_houses, iterations, water_type):
         # create counters to count number of each building
         h_counter, b_counter, m_counter = 0, 0, 0
 
+        timeout = time.time() + 1
         # build houses until maximum is reached
         while len(district.buildings) < total_houses:
+
+            if time.time() > timeout:
+                print "timed out"
+                break
             # print district.buildings
 	        # choose random building type
             building_type = random.randint(1, 3)

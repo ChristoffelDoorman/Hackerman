@@ -13,6 +13,9 @@ import numpy as np
 import locale
 import timeit
 import math
+import os
+from os import path
+from datetime import datetime
 
 import classes
 
@@ -289,8 +292,8 @@ def check_position(building, district, x_direction, y_direction, x_stepsize, y_s
     move(building, x_direction, x_stepsize)
     move(building, y_direction, y_stepsize)
 
-    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
-        return False, 0
+    if overlap_canvas(building):
+		return False, 0
 
     olap = True
     for water in district.waters:
@@ -324,8 +327,8 @@ def check_move(building, district, direction, stepsize):
 
     move(building, direction, stepsize)
 
-    if (building.left_bottom[0] < 0) or (building.left_bottom[1] < 0) or (building.right_top[0] > X_DIMENSION) or (building.right_top[1] > Y_DIMENSION):
-        return False, 0
+    if overlap_canvas(building):
+		return False, 0
 
     olap = True
     for water in district.waters:
@@ -384,18 +387,31 @@ def check_move(building, district, direction, stepsize):
 #         move(building, -direction, stepsize)
 #         return True, score
 
-def print_txt(buildings):
+def print_txt(district, algorithm, total_houses, variation):
 
-    text_file = open("1m-beste.txt", "w+")
+    time_stamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 
-    for building in buildings:
+    if variation == 0:
+        outpath = ("output/{}/{}".format(algorithm, total_houses))
+    else:
+        outpath = ("output/{}/{}/{}".format(algorithm, variation, total_houses))
+
+    if not os.path.exists(outpath):
+        os.makedirs(outpath)
+
+    text_file = open(path.join(outpath,"{}_{}_{}_{}.txt".format(algorithm, total_houses, time_stamp, variation)), "w+")
+
+    for building in district.buildings:
         if building.name == 'maison':
-            build = "mais"
+            build = "maison"
         elif building.name == 'bungalow':
-            build = "bung"
+            build = "bungalow"
         elif building.name == 'house':
-            build = "hous"
-
+            build = "house"
         text_file.write("{} {} {}\n".format(build, building.left_bottom[0], building.left_bottom[1]))
+
+    for water in district.waters:
+        build = 'water'
+        text_file.write("{} {} {}\n".format(build, water.left_bottom[0], water.left_bottom[1]))
 
     text_file.close()
