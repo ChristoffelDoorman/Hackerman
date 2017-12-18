@@ -58,7 +58,10 @@
         def h_build, b_build, m_build
                 Kent het gevraagde huis een random plek op de map toe, vraagt aan de functie overlap
                 of er overlap is, zo niet dan append hij het huis.
-         
+        
+        def distance_to_edge
+                returnt de korste afstand tot de randen van de map
+                
         def closest_distance
                 Kijkt voor alle gebouwen in de array, welk gebouw het dichtst in de buurt staat
                 of te wel hoeveel vrije ruimte dat gebouw heeft. Met behulp van def pythagoras
@@ -77,6 +80,17 @@
                 direction 2 == naar boven.
                 direction -2 == naar beneden.
         
+        def check_position
+                kjadfskjlfs
+                
+        def check_move
+                Kijkt of een move in een bepaalde richting met een bepaalde stapgrote zorgt voor overlap.
+                als dat zo is moved hij het gebouw terug in de tegengestelde richting en returnt hij een False
+                en een 0 als de 'move score'.
+                Als er geen overlap is berekent hij de score en returnt hij de move score.
+        
+                
+        
 **Visualisatie**    
         
       canvas.visualisation.py
@@ -94,9 +108,12 @@
                 De kleur is afhankelijk van wat hij meekrijgt.
        
        Def main
-                De hoofdfunctie van visualisation. Deze roept main.py op.       
+                De hoofdfunctie van visualisation. Deze roept main.py aan.       
                 Roept draw_canvas op om de map te maken. 
-                Roept voor alle gebouwen in de list drawBuilding op, geeft kleur mee.
+                Als er een variant is op het algoritme (meegegeven door gebruiker), 
+                voegt hij de waarde, hoeveel iteraties, en de tijd die het algoritme er over heeft gedaan toe aan het figuur.
+                Vervolgens maakt het een outpath, dit is het pad dat gevolgd zal worden naar waar het figuur wordt opgeslagen.
+                Het roept voor alle gebouwen in de list drawBuilding aan, geeft kleur mee.
                 Voor een House de kleur rood, een Bungalow de kleur zwart en een Maison de kleur groen.
                 Slaat het getekende plaatje op in een png bestand in de bijbehorende map (afhankelijk van het
                 algoritme en de huizenvariant) geeft een datum + tijd van printen mee. 
@@ -110,7 +127,8 @@
         hillclimber_random.py
         hillclimber_rotate_move_swap_algorithm.py
         expanding_universe_algorithm.py
-        greedy_algorithm.py     
+        collapsing_universe.py
+        greedy_algorithm.py
         
         Voor meer informatie over de Algoritmen, zie in mapje algorithms: readme.md.
     

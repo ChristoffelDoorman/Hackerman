@@ -60,6 +60,7 @@ def overlap_canvas(building):
 
 	return olap
 
+# builds a house and appends it to the district.buildings
 def h_build(district, h_counter):
 
 	# choose random position for x and y (left bottom), inside the canvas
@@ -96,6 +97,7 @@ def h_build(district, h_counter):
 
 	return district, h_counter
 
+# builds a bungalow and appends it to the district.buildings
 def b_build(district, b_counter):
 
 	# choose random position for x and y (left bottom), inside the canvas
@@ -140,6 +142,7 @@ def b_build(district, b_counter):
 
 	return district, b_counter
 
+# builds a maison and appends it to the district.buildings
 def m_build(district, m_counter):
 
 	# choose random position for x and y (left bottom), inside the canvas
@@ -185,6 +188,7 @@ def m_build(district, m_counter):
 
 	return district, m_counter
 
+# returns the colest distance to the bounds of the canvas
 def distance_to_edge(current_building):
 	# distance until left, upper, right, or lower bound of canvas
 	distance_left = current_building.left_bottom[0]
@@ -196,6 +200,7 @@ def distance_to_edge(current_building):
 	distance = min(distance_left, distance_up, distance_right, distance_down)
 	return distance
 
+# returns the closest distance to the nearest building
 def closest_distance(current_building, buildings):
 
 	# initialize the distance to high value
@@ -292,6 +297,7 @@ def calculate_score(buildings):
 
 	return total_value
 
+# moves buildings in direction with stepsize
 def move(building, direction, step):
 
 	# left direction with given stepsize
@@ -316,7 +322,7 @@ def move(building, direction, step):
         building.right_top[0] += step
         building.right_bottom[0] += step
 
-	# down direction with given stepsize 
+	# down direction with given stepsize
     if direction == -2:
         building.left_bottom[1] -= step
         building.left_top[1] -= step
@@ -325,7 +331,9 @@ def move(building, direction, step):
 
     return building
 
+# NOG INVULLEN STOF
 def check_position(building, district, x_direction, y_direction, x_stepsize, y_stepsize):
+
     move(building, x_direction, x_stepsize)
     move(building, y_direction, y_stepsize)
 
@@ -360,22 +368,29 @@ def check_position(building, district, x_direction, y_direction, x_stepsize, y_s
             move(building, - y_direction, y_stepsize)
             return True, score
 
+# checks if move if possible and if so returns the move score
+# if not possible a False is returned and a 0 for the move score
 def check_move(building, district, direction, stepsize):
 
+	# move building with stepsize in direction
     move(building, direction, stepsize)
 
+	# check overlap with canvas
     if overlap_canvas(building):
         return False, 0
 
     olap = True
+	# check overlap with water
     for water in district.waters:
         olap = overlap(building, water)
 
         if olap:
+			# if overlap move in opposite direction
             move(building, -direction, stepsize)
             return False, 0
 
     olap = True
+	# check overlap with buildings
     for build in district.buildings:
 
         if build == building:
@@ -384,27 +399,35 @@ def check_move(building, district, direction, stepsize):
         olap = overlap(build, building)
 
         if olap:
+			# if overlap move in opposite direction
             move(building, -direction, stepsize)
             return False, 0
 
     if not olap:
+		# calculate score and return True
         score = district.score()
         return True, score
 
+# prints the buildings and water to a txt file for later use
 def print_txt(district, algorithm, total_houses, variation):
 
+	# create time stamp for unique file name
     time_stamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 
+	# if no variation of a algorithm don't add it to the outpath
     if variation == 0:
         outpath = ("output/{}/{}".format(algorithm, total_houses))
     else:
         outpath = ("output/{}/{}/{}".format(algorithm, variation, total_houses))
 
+	# if path doesn't exist already, create it
     if not os.path.exists(outpath):
         os.makedirs(outpath)
 
+	# open a txt file at outpath position in folders
     text_file = open(path.join(outpath,"{}_{}_{}_{}.txt".format(algorithm, total_houses, time_stamp, variation)), "w+")
 
+	# write in txt file the buildings
     for building in district.buildings:
         if building.name == 'maison':
             build = "maison"
@@ -414,6 +437,7 @@ def print_txt(district, algorithm, total_houses, variation):
             build = "house"
         text_file.write("{} {} {}\n".format(build, building.left_bottom[0], building.left_bottom[1]))
 
+	# write water in txt file
     for water in district.waters:
         build = 'water'
         text_file.write("{} {} {}\n".format(build, water.left_bottom[0], water.left_bottom[1]))
