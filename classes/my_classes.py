@@ -148,12 +148,12 @@ class Map:
 			self.waters.append(water)
 
 		# one block of water in ratio of the map in the middle of the map
-		if water_type == 1:
+		elif water_type == 1:
 			water = Water(100, 88.5, 161, 143)
 			self.waters.append(water)
 
 		# one water stroke in the middle of the map
-		if water_type == 2:
+		elif water_type == 2:
 			water = Water(28, 122, 304, 76)
 			self.waters.append(water)
 
@@ -180,7 +180,11 @@ class Map:
 		    self.waters.append(water1)
 		    water2 = Water(66, 189, 81, 72)
 		    self.waters.append(water2)
-		    water3 = Water(162, 59, 81, 72)
+		    water3 = Water(213, 59, 81, 72)
 		    self.waters.append(water3)
-		    water4 = Water(162, 189, 81, 72)
+		    water4 = Water(213, 189, 81, 72)
 		    self.waters.append(water4)
+
+		else:
+			water = Water(320, 360, 0, 0)
+			self.waters.append(water)
