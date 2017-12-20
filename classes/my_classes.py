@@ -147,19 +147,24 @@ class Map:
 			water = Water(320, 360, 0, 0)
 			self.waters.append(water)
 
-		# one water stroke in the middle of the map
+		# one block of water in ratio of the map in the middle of the map
 		if water_type == 1:
 			water = Water(100, 88.5, 161, 143)
 			self.waters.append(water)
 
+		# one water stroke in the middle of the map
+		if water_type == 2:
+			water = Water(28, 122, 304, 76)
+			self.waters.append(water)
+
 		# two strokes of water parralel positioned at 1/4 of the length from the top and bottom
-		elif water_type == 2:
-			water1 = Water(70, 217.3, 220, 55)
-			water2 = Water(70, 52.5, 220, 55)
+		elif water_type == 3:
+			water1 = Water(72, 71, 215, 54)
+			water2 = Water(72, 195, 215, 54)
 			self.waters.extend((water1, water2))
 
 		# two horizontal and two vertical strokes of water parralel positioned of one another
-		elif water_type == 3:
+		elif water_type == 4:
 		    water1 = Water(104, 40, 151.789, 37.947)
 		    self.waters.append(water1)
 		    water2 = Water(104, 243, 151.789, 37.947)
@@ -167,4 +172,15 @@ class Map:
 		    water3 = Water(50, 89, 40.232, 143.045)
 		    self.waters.append(water3)
 		    water4 = Water(270, 89, 40.232, 143.045)
+		    self.waters.append(water4)
+
+		# four rectangles in the ratio of the canvas inside the corners of the map
+		elif water_type == 5:
+		    water1 = Water(66, 59, 81, 72)
+		    self.waters.append(water1)
+		    water2 = Water(66, 189, 81, 72)
+		    self.waters.append(water2)
+		    water3 = Water(162, 59, 81, 72)
+		    self.waters.append(water3)
+		    water4 = Water(162, 189, 81, 72)
 		    self.waters.append(water4)
