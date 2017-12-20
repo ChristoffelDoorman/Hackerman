@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     total_houses = eval(input("Total number of houses?: "))
 
-    water_type = eval(input("Choose your water type? [0: no water], [1: one big pool], [2: two horizontal strokes], [3: two horizontal and two vertical strokes]"))
+    water_type = eval(input("Choose your water type? [0: no water], [1: one big pool], [2: one long stroke], [3: two horizontal strokes], [4: two horizontal and two vertical strokes], [5: four blocks near the corners]"))
 
     while total_houses < 7:
 
