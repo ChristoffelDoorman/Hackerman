@@ -21,7 +21,7 @@ def main():
     # outputfile
     outpath = 'input_files'
 
-    with open(path.join(outpath,'random_20_2017-12-18-21-40-51_0.txt'), 'r') as f:
+    with open(path.join(outpath,'20.txt'), 'r') as f:
         data = f.readlines()
 
     # manipulate data to format
