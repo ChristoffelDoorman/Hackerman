@@ -21,15 +21,19 @@ def main():
     # outputfile
     outpath = 'input_files'
 
+<<<<<<< HEAD
     with open(path.join(outpath,'60.txt'), 'r') as f:
+=======
+    with open(path.join(outpath,'hillclimber_20_2017-12-21-11-30-13_random.txt'), 'r') as f:
+>>>>>>> 8aac176e29c09a8d772db26bbfc39f327423377d
         data = f.readlines()
 
     # manipulate data to format
     for line in data:
         words = line.split()
         build = words[0]
-        x = int(words[1])
-        y = int(words[2])
+        x = float(words[1])
+        y = float(words[2])
 
         if build == 'maison':
             maison = classes.Maison(x, y)
